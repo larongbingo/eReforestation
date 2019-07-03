@@ -23,10 +23,13 @@
     "@nestjs/common": "^6.0.0",
     "@nestjs/core": "^6.0.0",
     "@nestjs/platform-express": "^6.0.0",
+    "mysql2": "^1.6.5",
     "nest-router": "^1.0.9",
-    "reflect-metadata": "^0.1.12",
+    "reflect-metadata": "^0.1.13",
     "rimraf": "^2.6.2",
-    "rxjs": "^6.3.3"
+    "rxjs": "^6.3.3",
+    "sequelize": "^5.9.2",
+    "sequelize-typescript": "^0.6.11"
   },
   "devDependencies": {
     "@nestjs/testing": "^6.0.0",
