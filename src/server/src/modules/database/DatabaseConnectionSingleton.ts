@@ -1,4 +1,4 @@
-import { Injectable, Inject } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { Sequelize } from "sequelize-typescript";
 
 import { ContactPerson } from "./models/ContactPerson.Model";
@@ -8,7 +8,7 @@ import { DatabaseConnectionConfig } from "./DatabaseConnectionConfig";
 
 @Injectable()
 export class DatabaseConnectionSingleton {
-  constructor(@Inject() private dbConnConfig: DatabaseConnectionConfig) {}
+  constructor(private dbConnConfig: DatabaseConnectionConfig) {}
 
   private databaseConnection: Sequelize;
 
