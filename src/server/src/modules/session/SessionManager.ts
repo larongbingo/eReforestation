@@ -49,3 +49,8 @@ export const SessionManagerProvider: Provider<ISessionManager> = {
   provide: ISessionManager,
   useClass: SessionManager,
 };
+
+export const SessionValidatorProvider: Provider<ISessionValidator> = {
+  provide: ISessionValidator,
+  useClass: SessionManager,
+};
