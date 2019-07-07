@@ -45,7 +45,7 @@ export class SessionManager implements ISessionManager, ISessionValidator {
   }
 }
 
-export const SessionManagerProvider: Provider = {
+export const SessionManagerProvider: Provider<ISessionManager> = {
   provide: ISessionManager,
   useClass: SessionManager,
 };
