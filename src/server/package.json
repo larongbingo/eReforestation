@@ -36,8 +36,8 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^2.6.2",
     "rxjs": "^6.3.3",
-    "sequelize": "^5.9.2",
-    "sequelize-typescript": "^0.6.11"
+    "sequelize": "4.43.2",
+    "sequelize-typescript": "0.6.10"
   },
   "devDependencies": {
     "@nestjs/testing": "^6.0.0",
