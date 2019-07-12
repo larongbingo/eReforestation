@@ -18,7 +18,6 @@ import { ISessionManager } from "../../../../interfaces/services/ISessionService
 import { IpAddress } from "./decorators/IpAddress.Decorator";
 import { UserAgent } from "./decorators/UserAgent.Decorator";
 import { CredentialsDto } from "./dto/credentials.dto";
-import { LogInValidationPipe } from "./pipes/login-validation.pipe";
 
 @Controller("auth")
 export class AuthController {
@@ -41,7 +40,6 @@ export class AuthController {
   }
 
   @Post()
-  @UsePipes(new LogInValidationPipe())
   public async login(
     @Body() credentialDto: CredentialsDto,
     @IpAddress() ipAddress: string,
