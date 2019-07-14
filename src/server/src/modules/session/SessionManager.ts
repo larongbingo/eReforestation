@@ -14,7 +14,7 @@ export class SessionManager implements ISessionManager, ISessionValidator {
 
   private readonly JWT_PRIVATE_KEY = process.env.JWT_PRIVATE_KEY || "Supercalifragilisticexpialidocious";
 
-  private readonly sessions: ISession[];
+  private readonly sessions: ISession[] = [];
 
   private JwtGeneratorTokenFunc: (data: any) => string = (data) => sign(data, this.JWT_PRIVATE_KEY);
   public get JwtGeneratorToken() { return this.JwtGeneratorTokenFunc; }
@@ -41,7 +41,14 @@ export class SessionManager implements ISessionManager, ISessionValidator {
   }
 
   destroySession(token: string): boolean {
-    throw new Error("Method not implemented.");
+    let isTokenDestroyed = false;
+    this.sessions.forEach((sessionToken, i) => {
+      if (token === sessionToken.token) {
+        isTokenDestroyed = true;
+        this.sessions.splice(i, 1);
+      }
+    });
+    return isTokenDestroyed;
   }
 }
 
