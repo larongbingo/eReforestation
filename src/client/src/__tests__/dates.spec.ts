@@ -1,6 +1,4 @@
-import "jest";
-
-import { isDateToday } from "./dates";
+import { isDateToday } from "../libs/dates";
 
 describe("Dates Module", () => {
   describe("isDateToday", () => {

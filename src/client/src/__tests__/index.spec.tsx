@@ -1,12 +1,11 @@
 import React from "react";
 import { render } from "react-dom";
-import "jest";
 
-import { Events } from "./events";
+import { Index } from "../pages/index";
 
-describe("Events Page", () => {
+describe("Index/Root Page", () => {
   it("should render without crashing", () => {
     const div = document.createElement("div");
-    render(<Events/>, div);
+    render(<Index/>, div);
   });
 });
