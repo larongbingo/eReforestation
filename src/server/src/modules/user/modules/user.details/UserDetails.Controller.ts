@@ -2,7 +2,7 @@ import { Controller, UseGuards, Get, Post, Put, Inject, Body } from "@nestjs/com
 import { AuthGuard } from "@nestjs/passport";
 
 import { UserEntity } from "../../../../decorators/User-Entity.Decorator";
-import { User } from "../../../database/models/User.Model";
+import { IUser } from "../../../../../../interfaces/models/IUser";
 import { IUserDetailsService } from "../../../../../../interfaces/services/IUserDetailsService";
 
 import { UserDetailsCreateDto } from "./dto/UserDetailsCreate.Dto";
@@ -16,21 +16,21 @@ export class UserDetailsController {
 
   @Get()
   @UseGuards(AuthGuard("bearer"))
-  public async getDetails(@UserEntity() user: User) {
+  public async getDetails(@UserEntity() user: IUser) {
     const userDetails = this.userDetailsService.getDetails(user.id);
     return {iat: Date.now(), userDetails};
   }
 
   @Post()
   @UseGuards(AuthGuard("bearer"))
-  public async updateDetails(@Body() userDetailsUpdateDto: UserDetailsUpdateDto, @UserEntity() user: User) {
+  public async updateDetails(@Body() userDetailsUpdateDto: UserDetailsUpdateDto, @UserEntity() user: IUser) {
     const userDetails = this.userDetailsService.updateDetails(userDetailsUpdateDto, user.id);
     return {iat: Date.now(), userDetails};
   }
 
   @Put()
   @UseGuards(AuthGuard("bearer"))
-  public async createDetails(@Body() userDetailsCreateDto: UserDetailsCreateDto, @UserEntity() user: User) {
+  public async createDetails(@Body() userDetailsCreateDto: UserDetailsCreateDto, @UserEntity() user: IUser) {
     const userDetails = this.userDetailsService.createDetails(userDetailsCreateDto, user.id);
     return {iat: Date.now(), userDetails};
   }
