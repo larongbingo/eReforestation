@@ -10,10 +10,10 @@ import { UserDetailsUpdateDto } from "./dto/UserDetailsUpdate.Dto";
 
 @Controller("/user/details")
 export class UserDetailsController {
-  constructor(    
+  constructor(
     @Inject(IUserDetailsService) private readonly userDetailsService: IUserDetailsService,
   ) {}
-  
+
   @Get()
   @UseGuards(AuthGuard("bearer"))
   public async getDetails(@UserEntity() user: User) {
