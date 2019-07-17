@@ -6,7 +6,7 @@ import { Event } from "./models/Event.Model";
 import { User } from "./models/User.Model";
 import { DatabaseConnectionConfig } from "./DatabaseConnectionConfig";
 
-export const DatabaseConnection_Key = "DatabaseConnection";
+export const DatabaseConnectionKey = "DatabaseConnection";
 export const DatabaseConnection = new Sequelize(new DatabaseConnectionConfig());
 
 DatabaseConnection.addModels([
@@ -16,6 +16,6 @@ DatabaseConnection.addModels([
 ]);
 
 export const DatabaseConnectionProvider: Provider = {
-  provide: DatabaseConnection_Key,
+  provide: DatabaseConnectionKey,
   useValue: DatabaseConnection,
 };
