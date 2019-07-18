@@ -19,7 +19,7 @@ export class UserContoller {
   @Post()
   public async createUser(@Body() createUserDto: CreateUserDto) {
     const user = await this.userService.createUser(createUserDto);
-    return {iat: Date.now(), user};
+    return {iat: Date.now(), id: user.id};
   }
 
   @Delete()
