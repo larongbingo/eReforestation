@@ -7,8 +7,7 @@ import { User } from "../database/models/User.Model";
 @Injectable()
 export class UserService implements IUserService {
   public async createUser(details: IUser): Promise<IUser> {
-    const user = await User.find({where: {username: details.username}});
-    return user;
+    return await User.create(details);
   }
 
   public async destroyUser(userId: string): Promise<boolean> {
