@@ -21,12 +21,13 @@ export class SessionManager implements ISessionManager, ISessionValidator {
   public set JwtGeneratorToken(func: (data: any) => string) { this.JwtGeneratorTokenFunc = func; }
 
   public validateSession(token: string): string {
+    let userId = null;
     for (const session of this.sessions) {
       if (token === session.token) {
-        return session.userId;
+        userId = session.userId;
       }
     }
-    return null;
+    return userId ;
   }
 
   public createSession(userId: string, reqMetadata: {userAgent: string, ipAddress: string}): string {
