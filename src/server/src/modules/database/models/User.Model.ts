@@ -37,7 +37,7 @@ export class User extends Model<User> implements IUser {
       where: { username: instance.username },
     });
 
-    if (sameUsername) {
+    if (sameUsername.length !== 0) {
       throw new Error(`${instance.username} is already used`);
     }
   }
@@ -52,16 +52,16 @@ export class User extends Model<User> implements IUser {
 
   @BeforeCreate
   private static async generateUniqueId(instance: User) {
-    // tslint:disable-next-line:prefer-const
+    let user: User;
     let id: string;
-    let sameId: User;
 
     do {
       id = this.idGenerationTemplate(generate(this.idGenerationOptions));
-      sameId = await this.findOne({ where: { id } });
-    } while (id === sameId.id);
-
-    instance.id = id;
+      user = await User.findOne({ where: { id } });
+      if (!user) {
+        instance.id = id;
+      }
+    } while (user);
   }
 
   public static setIdGenerationTemplate(templateFn: (id: string) => string) {
