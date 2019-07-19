@@ -18,8 +18,14 @@ export class UserContoller {
 
   @Post()
   public async createUser(@Body() createUserDto: CreateUserDto) {
-    const user = await this.userService.createUser(createUserDto);
-    return {iat: Date.now(), id: user.id};
+    try {
+      const user = await this.userService.createUser(createUserDto);
+      return {iat: Date.now(), id: user.id};
+    } catch (err) {
+      if (err.message.match(/(is already taken)?/)) {
+        return {iat: Date.now(), message: "Username is already taken"};
+      }
+    }
   }
 
   @Delete()
