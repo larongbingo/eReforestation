@@ -13,7 +13,7 @@ import {
 import { AuthGuard } from "@nestjs/passport";
 
 import { ICredentialsVerify } from "../../../../interfaces/services/IAuthService";
-import { ISessionManager } from "../../../../interfaces/services/ISessionService";
+import { ISessionService } from "../../../../interfaces/services/ISessionService";
 
 import { IpAddress } from "./decorators/IpAddress.Decorator";
 import { UserAgent } from "./decorators/UserAgent.Decorator";
@@ -23,7 +23,7 @@ import { CredentialsDto } from "./dto/credentials.dto";
 export class AuthController {
   constructor(
     @Inject(ICredentialsVerify) private readonly credentialsVerificationService: ICredentialsVerify,
-    @Inject(ISessionManager) private readonly sessionManagerService: ISessionManager,
+    @Inject(ISessionService) private readonly sessionManagerService: ISessionService,
   ) {}
 
   @Get("verify")

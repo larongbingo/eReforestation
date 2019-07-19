@@ -1,13 +1,13 @@
 import { Injectable, Inject, Provider } from "@nestjs/common";
 import { sign } from "jsonwebtoken";
 
-import { ISessionManager, ISessionValidator } from "../../../../interfaces/services/ISessionService";
+import { ISessionService } from "../../../../interfaces/services/ISessionService";
 import { IUser } from "../../../../interfaces/models/IUser";
 import { ISession } from "../../../../interfaces/models/ISession";
 import { IUserService } from "../../../../interfaces/services/IUserService";
 
 @Injectable()
-export class SessionManager implements ISessionManager, ISessionValidator {
+export class SessionManager implements ISessionService {
   constructor(
     @Inject(IUserService) private readonly userService: IUserService,
   ) {}
@@ -53,12 +53,7 @@ export class SessionManager implements ISessionManager, ISessionValidator {
   }
 }
 
-export const SessionManagerProvider: Provider<ISessionManager> = {
-  provide: ISessionManager,
-  useClass: SessionManager,
-};
-
-export const SessionValidatorProvider: Provider<ISessionValidator> = {
-  provide: ISessionValidator,
+export const SessionServiceProvider: Provider<ISessionService> = {
+  provide: ISessionService,
   useClass: SessionManager,
 };
