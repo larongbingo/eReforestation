@@ -2,12 +2,12 @@ import { AuthService } from "../auth.service";
 
 import { IAuthenticatedUsersArray, PasswordPlainText } from "./constants/IAuthenticatedUsersArray";
 import { IUserServiceImpl } from "./mocks/IUserServiceImpl";
-import { ISessionValidatorImpl } from "./mocks/ISessionValidatorImpl";
+import { ISessionServiceImpl } from "./mocks/ISessionServiceImpl";
 
 describe("AuthService (Unit)", () => {
   const sut = new AuthService(
     new IUserServiceImpl(),
-    new ISessionValidatorImpl(),
+    new ISessionServiceImpl(),
   );
 
   describe("validateUser", () => {

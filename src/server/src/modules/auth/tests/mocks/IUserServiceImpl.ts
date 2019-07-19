@@ -28,4 +28,16 @@ export class IUserServiceImpl implements IUserService {
 
     return sameId;
   }
+
+  public async createUser(details: IUser): Promise<IUser> {
+    throw new Error("Method not implemented.");
+  }
+
+  public async destroyUser(userId: string): Promise<boolean> {
+    throw new Error("Method not implemented.");
+  }
+
+  public async updateUser(userId: string, newDetails: Partial<IUser>): Promise<IUser> {
+    throw new Error("Method not implemented.");
+  }
 }

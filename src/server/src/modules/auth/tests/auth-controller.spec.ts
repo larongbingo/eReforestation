@@ -4,7 +4,7 @@ import { AuthController } from "../auth.controller";
 
 import { IAuthenticatedUsersArray, PasswordPlainText } from "./constants/IAuthenticatedUsersArray";
 import { IUserServiceImpl } from "./mocks/IUserServiceImpl";
-import { ISessionValidatorImpl } from "./mocks/ISessionValidatorImpl";
+import { ISessionServiceImpl } from "./mocks/ISessionServiceImpl";
 
 describe("AuthController (Unit)", () => {
   describe("logOut", () => {
@@ -14,7 +14,7 @@ describe("AuthController (Unit)", () => {
     const sut = new AuthController(
       new AuthService(
         new IUserServiceImpl(),
-        new ISessionValidatorImpl(),
+        new ISessionServiceImpl(),
       ),
       sessionManager,
     );
@@ -35,7 +35,7 @@ describe("AuthController (Unit)", () => {
     const sut = new AuthController(
       new AuthService(
         new IUserServiceImpl(),
-        new ISessionValidatorImpl(),
+        new ISessionServiceImpl(),
       ),
       new SessionManager(new IUserServiceImpl()),
     );
