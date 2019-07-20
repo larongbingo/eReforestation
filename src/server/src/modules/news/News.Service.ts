@@ -18,7 +18,7 @@ export class NewsService implements INewsService {
   }
 
   public async getNews(num?: number): Promise<INews[]> {
-    return News.findAll({limit: num ? num : 1});
+    return News.findAll({limit: num ? num : null});
   }
 
   public async createNews(userId: string, details: INews): Promise<INews> {
