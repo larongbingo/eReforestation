@@ -1,4 +1,4 @@
-import { Injectable, Inject, UnauthorizedException } from "@nestjs/common";
+import { Injectable, Inject, UnauthorizedException, Provider } from "@nestjs/common";
 
 import { IPermissionService } from "../../../../interfaces/services/IPermissionService";
 import { INewsService } from "../../../../interfaces/services/INewsService";
@@ -45,3 +45,8 @@ export class NewsService implements INewsService {
   }
 
 }
+
+export const NewsServiceProvider: Provider<INewsService> = {
+  provide: INewsService,
+  useClass: NewsService,
+};
