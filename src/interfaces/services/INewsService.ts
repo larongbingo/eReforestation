@@ -1,5 +1,6 @@
 import { INews } from "../models/INews";
 
+export const INewsService = "INewsService";
 export interface INewsService {
   getNews(num?: number): Promise<INews[]>;
 
