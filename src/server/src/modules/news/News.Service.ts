@@ -21,6 +21,17 @@ export class NewsService implements INewsService {
     return News.findAll({limit: num ? num : null});
   }
 
+  public async getNewsById(id: string): Promise<INews> {
+    return News.findOne({where: {id}});
+  }
+
+  public async getNewsByPage(page: number, pageSize: number = 10): Promise<INews[]> {
+    const offset = pageSize * page;
+    const limit = offset + pageSize;
+
+    return News.findAll({limit, offset});
+  }
+
   public async createNews(userId: string, details: INews): Promise<INews> {
     await this.checkPermissions(userId);
     return News.create(details);
