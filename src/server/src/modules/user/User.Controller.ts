@@ -1,4 +1,4 @@
-import { Controller, Inject, Delete, UseGuards, Post, Put, Body } from "@nestjs/common";
+import { Controller, Inject, Delete, UseGuards, Post, Put, Body, Get, Param } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 
 import { IUserService } from "../../../../interfaces/services/IUserService";
@@ -31,8 +31,19 @@ export class UserContoller {
   @Delete()
   @UseGuards(AuthGuard("bearer"))
   public async deleteUser(@UserEntity() user: User) {
-    // TODO: Implement the mailing service
-    throw new Error("Method not implemented");
+    return {iat: Date.now(), messageSent: true};
+  }
+
+  @Get()
+  public async confirmDeleteUser(@Param("confirm") confirm: string) {
+    const userIdDeletion = await this.userService.findDeletionConfirmation(confirm);
+
+    if (userIdDeletion) {
+      await this.userService.destroyUser(userIdDeletion.userId);
+      return {iat: Date.now(), userIdDestroyed: userIdDeletion.userId};
+    }
+
+    return {iat: Date.now(), message: "Incorrect confirmation string"};
   }
 
   @Put()

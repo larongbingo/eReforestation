@@ -1,11 +1,21 @@
-import { Injectable, Provider, BadRequestException } from "@nestjs/common";
+import { Injectable, Provider, BadRequestException, Inject } from "@nestjs/common";
+import { generate } from "randomstring";
 
+import { IMailService } from "../../../../interfaces/services/IMailService";
+import { IUserConfirmDelete } from "../../../../interfaces/models/IUserConfirmDelete";
 import { IUserService } from "../../../../interfaces/services/IUserService";
 import { IUser } from "../../../../interfaces/models/IUser";
 import { User } from "../database/models/User.Model";
+import { UserConfirmDelete } from "../database/models/UserConfirmDelete.Model";
+import { IUserDetailsService } from "../../../../interfaces/services/IUserDetailsService";
 
 @Injectable()
 export class UserService implements IUserService {
+  constructor(
+    @Inject(IMailService) private readonly mailService: IMailService,
+    @Inject(IUserDetailsService) private readonly userDetailsService: IUserDetailsService,
+  ) {}
+
   public async createUser(details: IUser): Promise<IUser> {
     return await User.create(details);
   }
@@ -30,6 +40,27 @@ export class UserService implements IUserService {
 
   public async findOneByUsername(username: string): Promise<IUser> {
     return await User.findOne({where: {username}});
+  }
+
+  // TODO: Move findDeletionConfirmation to other class
+  public async findDeletionConfirmation(confirmationString: string): Promise<IUserConfirmDelete> {
+    return UserConfirmDelete.findOne({where: {confirmationString}});
+  }
+
+  // TODO: Move sendConfirmationOfDeletion to other class
+  // TODO: Refactor sendConfirmationOfDeletion (superman function/method)
+  // TODO: Create a config that returns the hostname of the server
+  public async sendConfirmationOfDeletion(userId: string): Promise<any> {
+    const confirmationString = generate({charset: "alphanumeric", length: 60});
+    await UserConfirmDelete.create({userId, confirmationString});
+
+    const userDetails = await this.userDetailsService.getDetails(userId);
+    const info = await this.mailService.sendMail({
+      to: userDetails.emailAddress,
+      title: "Confirmation of Deletion of Account",
+      message: `Click here to confirm the deletion of your account localhost:3000/user/?confirm=${confirmationString}`,
+    });
+    return info;
   }
 }
 
