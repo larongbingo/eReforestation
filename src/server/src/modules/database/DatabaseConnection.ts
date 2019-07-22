@@ -7,6 +7,7 @@ import { Log } from "./models/Log.Model";
 import { News } from "./models/News.Model";
 import { Permission } from "./models/Permission.Model";
 import { User } from "./models/User.Model";
+import { UserConfirmDelete } from "./models/UserConfirmDelete.Model";
 import { UserDetails } from "./models/UserDetails.Model";
 import { DatabaseConnectionConfig } from "./DatabaseConnectionConfig";
 
@@ -20,6 +21,7 @@ DatabaseConnection.addModels([
   News,
   Permission,
   User,
+  UserConfirmDelete,
   UserDetails,
 ]);
 
