@@ -24,7 +24,7 @@ export class UserDetailsController {
   @Post()
   @UseGuards(AuthGuard("bearer"))
   public async updateDetails(@Body() userDetailsUpdateDto: UserDetailsUpdateDto, @UserEntity() user: IUser) {
-    const userDetails = this.userDetailsService.updateDetails(userDetailsUpdateDto, user.id);
+    const userDetails = await this.userDetailsService.updateDetails(userDetailsUpdateDto, user.id);
     return {iat: Date.now(), userDetails};
   }
 
