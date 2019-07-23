@@ -19,13 +19,13 @@ export class UserDetailsService implements IUserDetailsService {
   }
 
   public async getDetails(id: string): Promise<IUserDetails> {
-    const userDetails =  await UserDetails.findOne({where: {id}});
+    const userDetails =  await UserDetails.findOne({where: {userId: id}});
     const sanitizedUserDetails: IUserDetails = this.sanitizeUserDetails(userDetails);
     return sanitizedUserDetails;
   }
 
   public async updateDetails(newDetails: Partial<IUserDetails>, id: string): Promise<IUserDetails> {
-    const userDetailsInstance = await UserDetails.findOne({where: {id}});
+    const userDetailsInstance = await UserDetails.findOne({where: {userId: id}});
     for (const newDetailsKey in newDetails) {
       if (newDetailsKey) {
         userDetailsInstance[newDetailsKey] = newDetails[newDetailsKey];
@@ -37,7 +37,7 @@ export class UserDetailsService implements IUserDetailsService {
   }
 
   public async createDetails(newDetails: IUserDetails, id: string): Promise<IUserDetails> {
-    const newUserDetailsInstance = await UserDetails.create(newDetails);
+    const newUserDetailsInstance = await UserDetails.create({...newDetails, userId: id});
     const sanitizedUserDetails = this.sanitizeUserDetails(newUserDetailsInstance);
     return sanitizedUserDetails;
   }
