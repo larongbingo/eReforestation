@@ -31,6 +31,7 @@ export class UserDetailsService implements IUserDetailsService {
         userDetailsInstance[newDetailsKey] = newDetails[newDetailsKey];
       }
     }
+    userDetailsInstance.save();
     const sanitizedUserDetails: IUserDetails = this.sanitizeUserDetails(userDetailsInstance);
     return sanitizedUserDetails;
   }
