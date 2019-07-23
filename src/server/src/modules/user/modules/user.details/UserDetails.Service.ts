@@ -16,7 +16,7 @@ export class UserDetailsService implements IUserDetailsService {
       phoneNumber: userDetailsInstance.phoneNumber,
       emailAddress: userDetailsInstance.emailAddress,
     };
-  };
+  }
 
   public async getDetails(id: string): Promise<IUserDetails> {
     const userDetails =  await UserDetails.findOne({where: {id}});
@@ -26,7 +26,11 @@ export class UserDetailsService implements IUserDetailsService {
 
   public async updateDetails(newDetails: Partial<IUserDetails>, id: string): Promise<IUserDetails> {
     const userDetailsInstance = await UserDetails.findOne({where: {id}});
-    for(const newDetailsKey in newDetails) { userDetailsInstance[newDetailsKey] = newDetails[newDetailsKey]; }
+    for (const newDetailsKey in newDetails) {
+      if (newDetailsKey) {
+        userDetailsInstance[newDetailsKey] = newDetails[newDetailsKey];
+      }
+    }
     const sanitizedUserDetails: IUserDetails = this.sanitizeUserDetails(userDetailsInstance);
     return sanitizedUserDetails;
   }
