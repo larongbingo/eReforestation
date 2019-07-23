@@ -6,5 +6,6 @@ import { ContactPersonController } from "./ContactPerson.Controller";
 @Module({
   controllers: [ContactPersonController],
   providers: [ContactPersonServiceProvider],
+  exports: [ContactPersonServiceProvider],
 })
 export class ContactPersonModule {}
