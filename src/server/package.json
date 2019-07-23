@@ -40,7 +40,8 @@
     "rimraf": "^2.6.2",
     "rxjs": "^6.3.3",
     "sequelize": "4.43.2",
-    "sequelize-typescript": "0.6.10"
+    "sequelize-typescript": "0.6.10",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "@nestjs/testing": "^6.0.0",
