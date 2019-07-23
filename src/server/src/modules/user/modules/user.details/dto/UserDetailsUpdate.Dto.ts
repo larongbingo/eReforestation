@@ -1,24 +1,26 @@
-import { IsDate, IsEmail, ValidateIf } from "class-validator";
+import { IsDate, IsEmail, IsOptional } from "class-validator";
 
 import { IUserDetails } from "../../../../../../../interfaces/models/IUserDetails";
 
 export class UserDetailsUpdateDto {
-  
+  @IsOptional()
   public readonly firstName?: string;
 
+  @IsOptional()
   public readonly middleName?: string;
 
+  @IsOptional()
   public readonly lastName?: string;
 
-  @ValidateIf(o => o !== "")
-  @IsDate()
+  @IsOptional()
   public readonly dateOfBirth?: Date;
 
+  @IsOptional()
   public readonly address?: string;
 
+  @IsOptional()
   public readonly phoneNumber?: string;
 
-  @ValidateIf(o => o !== "")
-  @IsEmail()
+  @IsOptional()
   public readonly emailAddress?: string;
-} 
+}
