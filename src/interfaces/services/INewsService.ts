@@ -8,6 +8,8 @@ export interface INewsService {
 
   getNewsByPage(page: number, pageSize?: number): Promise<INews[]>;
 
+  getNewsPages(pageSize: number): Promise<number>;
+
   createNews(userId: string, details: INews): Promise<INews>;
 
   updateNews(userId: string, newsId: string, newDetails: Partial<INews>): Promise<INews>;

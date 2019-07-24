@@ -32,6 +32,12 @@ export class NewsController {
     return {iat: Date.now(), newsList};
   }
 
+  @Get("/pages")
+  public async getPageLength(@Query("pageSize") pageSize: number = 10) {
+    const length = await this.newsService.getNewsPages(pageSize);
+    return {iat: Date.now(), length};
+  }
+
   @Post()
   @UseGuards(AuthGuard("bearer"))
   public async createNews(@UserEntity() user: IUser, @Body() createNewsDto: CreateNewsDto) {

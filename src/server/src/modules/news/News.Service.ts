@@ -32,6 +32,11 @@ export class NewsService implements INewsService {
     return News.findAll({limit, offset});
   }
 
+  public async getNewsPages(pageSize: number): Promise<number> {
+    const newsCount = await News.count();
+    return Math.ceil(newsCount / pageSize);
+  }
+
   public async createNews(userId: string, details: INews): Promise<INews> {
     await this.checkPermissions(userId);
     return News.create(details);
