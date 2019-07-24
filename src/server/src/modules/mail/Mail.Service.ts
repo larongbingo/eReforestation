@@ -34,7 +34,7 @@ export class MailService implements IMailService {
       from: process.env.MAIL_USERNAME,
       to: mail.to,
       subject: mail.title,
-      text: mail.message,
+      html: mail.message,
     });
 
     return info;
