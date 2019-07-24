@@ -31,6 +31,7 @@ export class UserContoller {
   @Delete()
   @UseGuards(AuthGuard("bearer"))
   public async deleteUser(@UserEntity() user: User) {
+    await this.userService.sendConfirmationOfDeletion(user.id);
     return {iat: Date.now(), messageSent: true};
   }
 
