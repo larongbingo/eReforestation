@@ -7,6 +7,8 @@ dependencies:
   bcrypt: 3.0.6
   class-transformer: 0.2.3
   class-validator: 0.9.1
+  cors: 2.8.5
+  helmet: 3.19.0
   jsonwebtoken: 8.5.1
   mysql2: 1.6.5
   nest-router: 1.0.9
@@ -24,7 +26,9 @@ dependencies:
 devDependencies:
   '@nestjs/testing': 6.4.1_50158f7d3232c59d7294ca9095e251e0
   '@types/bcrypt': 3.0.0
+  '@types/cors': 2.8.5
   '@types/express': 4.17.0
+  '@types/helmet': 0.0.43
   '@types/jest': 23.3.14
   '@types/jsonwebtoken': 8.3.2
   '@types/node': 10.14.12
@@ -511,6 +515,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-aRnpPa7ysx3aNW60hTiCtLHlQaIFsXFCgQlpakNgDNVFzbtusSY8PwjAQgRWfSk0ekNoBjO51eQRB6upA9uuyw==
+  /@types/cors/2.8.5:
+    dependencies:
+      '@types/express': 4.17.0
+    dev: true
+    resolution:
+      integrity: sha512-GmK8AKu8i+s+EChK/uZ5IbrXPcPaQKWaNSGevDT/7o3gFObwSUQwqb1jMqxuo+YPvj0ckGzINI+EO7EHcmJjKg==
   /@types/express-serve-static-core/4.16.7:
     dependencies:
       '@types/node': 10.14.12
@@ -530,6 +540,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-Xqg/lIZMrUd0VRmSRbCAewtwGZiAk3mEUDvV4op1tGl+LvyPcb/MIOSxTl9z+9+J+R4/vpjiCAT4xeKzH9ji1w==
+  /@types/helmet/0.0.43:
+    dependencies:
+      '@types/express': 4.17.0
+    dev: true
+    resolution:
+      integrity: sha512-45cU1ZW3L6ZxPQzAB597nl7OfUr14ceUWaQRoiByGFAjZlCQRvaEFC4Vv84lLWsFCYVWLU+raz+bIHrVBNTdRw==
   /@types/istanbul-lib-coverage/2.0.1:
     dev: true
     resolution:
@@ -1134,6 +1150,10 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
+  /camelize/1.0.0:
+    dev: false
+    resolution:
+      integrity: sha1-FkpUg+Yw+kMh5a8HAg5TGDGyYJs=
   /capture-exit/2.0.0:
     dependencies:
       rsvp: 4.8.5
@@ -1383,6 +1403,10 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha512-ExO0774ikEObIAEV9kDo50o+79VCUdEB6n6lzKgGwupcVeRlhrj3qGAfwq8G6uBJjkqLrhT0qEYFcWng8z1z0g==
+  /content-security-policy-builder/2.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-j+Nhmj1yfZAikJLImCvPJFE29x/UuBi+/MWqggGGc515JKaZrjuei2RhULJmy0MsstW3E3htl002bwmBNMKr7w==
   /content-type/1.0.4:
     dev: false
     engines:
@@ -1492,6 +1516,10 @@ packages:
       node: '>=0.10'
     resolution:
       integrity: sha1-hTz6D3y+L+1d4gMmuN1YEDX24vA=
+  /dasherize/2.0.0:
+    dev: false
+    resolution:
+      integrity: sha1-bYCcnNDPe7iVLYD8hPoT1H3bEwg=
   /data-urls/1.1.0:
     dependencies:
       abab: 2.0.0
@@ -1607,6 +1635,12 @@ packages:
       node: '>= 0.6'
     resolution:
       integrity: sha1-m81S4UwJd2PnSbJ0xDRu0uVgtak=
+  /depd/2.0.0:
+    dev: false
+    engines:
+      node: '>= 0.8'
+    resolution:
+      integrity: sha512-g7nH6P6dyDioJogAAGprGpCtVImJhpPk/roCzdb3fIh61/s/nPsfR6onyMwkCAR/OlC3yBC0lESvUoQEAssIrw==
   /destroy/1.0.4:
     dev: false
     resolution:
@@ -1653,12 +1687,24 @@ packages:
       node: '>=0.3.1'
     resolution:
       integrity: sha512-A46qtFgd+g7pDZinpnwiRJtxbC1hpgf0uzP3iG89scHk0AUC7A1TGxf5OiiOUv/JMZR8GOt8hL900hV0bOy5xA==
+  /dns-prefetch-control/0.2.0:
+    dev: false
+    engines:
+      node: '>=4.0.0'
+    resolution:
+      integrity: sha512-hvSnros73+qyZXhHFjx2CMLwoj3Fe7eR9EJsFsqmcI1bB2OBWL/+0YzaEaKssCHnj/6crawNnUyw74Gm2EKe+Q==
   /domexception/1.0.1:
     dependencies:
       webidl-conversions: 4.0.2
     dev: true
     resolution:
       integrity: sha512-raigMkn7CJNNo6Ihro1fzG7wr3fHuYVytzquZKX5n0yizGsTcYgzdIUwj1X9pK0VvjeihV+XiclP+DjwbsSKug==
+  /dont-sniff-mimetype/1.1.0:
+    dev: false
+    engines:
+      node: '>=4.0.0'
+    resolution:
+      integrity: sha512-ZjI4zqTaxveH2/tTlzS1wFp+7ncxNZaIEWYg3lzZRHkKf5zPT/MnEG6WL0BhHMJUabkh8GeU5NL5j+rEUCb7Ug==
   /dot-prop/4.2.0:
     dependencies:
       is-obj: 1.0.1
@@ -1888,6 +1934,12 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-t3c14xXOMPa27/D4OwQVGiJEliI=
+  /expect-ct/0.2.0:
+    dev: false
+    engines:
+      node: '>=4.0.0'
+    resolution:
+      integrity: sha512-6SK3MG/Bbhm8MsgyJAylg+ucIOU71/FzyFalcfu5nY19dH8y/z0tBJU0wrNBXD4B27EoQtqPF/9wqH0iYAd04g==
   /expect/24.8.0:
     dependencies:
       '@jest/types': 24.8.0
@@ -2007,6 +2059,12 @@ packages:
     dev: true
     resolution:
       integrity: sha1-VOmr99+i8mzZsWNsWIwa/AXeXVg=
+  /feature-policy/0.3.0:
+    dev: false
+    engines:
+      node: '>=4.0.0'
+    resolution:
+      integrity: sha512-ZtijOTFN7TzCujt1fnNhfWPFPSHeZkesff9AXZj+UEjYBynWNUIYpC87Ve4wHzyexQsImicLu7WsC2LHq7/xrQ==
   /fecha/2.3.3:
     dev: false
     resolution:
@@ -2099,6 +2157,12 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-QpD60n8T6Jvn8zeZxrxaCr//DRk=
+  /frameguard/3.1.0:
+    dev: false
+    engines:
+      node: '>=4.0.0'
+    resolution:
+      integrity: sha512-TxgSKM+7LTA6sidjOiSZK9wxY0ffMPY3Wta//MqwmX0nZuEHc8QrkV8Fh3ZhMJeiH+Uyh/tcaarImRy8u77O7g==
   /fresh/0.5.2:
     dev: false
     engines:
@@ -2351,6 +2415,49 @@ packages:
       node: '>= 0.4.0'
     resolution:
       integrity: sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
+  /helmet-crossdomain/0.4.0:
+    dev: false
+    engines:
+      node: '>=4.0.0'
+    resolution:
+      integrity: sha512-AB4DTykRw3HCOxovD1nPR16hllrVImeFp5VBV9/twj66lJ2nU75DP8FPL0/Jp4jj79JhTfG+pFI2MD02kWJ+fA==
+  /helmet-csp/2.7.1:
+    dependencies:
+      camelize: 1.0.0
+      content-security-policy-builder: 2.0.0
+      dasherize: 2.0.0
+      platform: 1.3.5
+    dev: false
+    resolution:
+      integrity: sha512-sCHwywg4daQ2mY0YYwXSZRsgcCeerUwxMwNixGA7aMLkVmPTYBl7gJoZDHOZyXkqPrtuDT3s2B1A+RLI7WxSdQ==
+  /helmet/3.19.0:
+    dependencies:
+      depd: 2.0.0
+      dns-prefetch-control: 0.2.0
+      dont-sniff-mimetype: 1.1.0
+      expect-ct: 0.2.0
+      feature-policy: 0.3.0
+      frameguard: 3.1.0
+      helmet-crossdomain: 0.4.0
+      helmet-csp: 2.7.1
+      hide-powered-by: 1.1.0
+      hpkp: 2.0.0
+      hsts: 2.2.0
+      ienoopen: 1.1.0
+      nocache: 2.1.0
+      referrer-policy: 1.2.0
+      x-xss-protection: 1.2.0
+    dev: false
+    engines:
+      node: '>=4.0.0'
+    resolution:
+      integrity: sha512-l58Q3unSpYatlurvFzkCbTRQ8oWUmdXbOs7h+pnwQbFJRhRJDjER6UMyqHxp9iFtWPcVA05VLcUGSi0EXIv7GA==
+  /hide-powered-by/1.1.0:
+    dev: false
+    engines:
+      node: '>=4.0.0'
+    resolution:
+      integrity: sha512-Io1zA2yOA1YJslkr+AJlWSf2yWFkKjvkcL9Ni1XSUqnGLr/qRQe2UI3Cn/J9MsJht7yEVCe0SscY1HgVMujbgg==
   /hoek/5.0.4:
     deprecated: 'This version has been deprecated in accordance with the hapi support policy (hapi.im/support). Please upgrade to the latest version to get the best features, bug fixes, and security patches. If you are unable to upgrade at this time, paid support is available for older versions (hapi.im/commercial).'
     dev: true
@@ -2367,6 +2474,18 @@ packages:
     dev: true
     resolution:
       integrity: sha512-7T/BxH19zbcCTa8XkMlbK5lTo1WtgkFi3GvdWEyNuc4Vex7/9Dqbnpsf4JMydcfj9HCg4zUWFTL3Za6lapg5/w==
+  /hpkp/2.0.0:
+    dev: false
+    resolution:
+      integrity: sha1-EOFCJk52IVpdMMROxD3mTe5tFnI=
+  /hsts/2.2.0:
+    dependencies:
+      depd: 2.0.0
+    dev: false
+    engines:
+      node: '>=4.0.0'
+    resolution:
+      integrity: sha512-ToaTnQ2TbJkochoVcdXYm4HOCliNozlviNsg+X2XQLQvZNI/kCHR9rZxVYpJB3UPcHz80PgxRyWQ7PdU1r+VBQ==
   /html-encoding-sniffer/1.0.2:
     dependencies:
       whatwg-encoding: 1.0.5
@@ -2415,6 +2534,12 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==
+  /ienoopen/1.1.0:
+    dev: false
+    engines:
+      node: '>=4.0.0'
+    resolution:
+      integrity: sha512-MFs36e/ca6ohEKtinTJ5VvAJ6oDRAYFdYXweUnGY9L9vcoqFOU4n2ZhmJ0C4z/cwGZ3YIQRSB3XZ1+ghZkY5NQ==
   /ignore-by-default/1.0.1:
     dev: true
     resolution:
@@ -3884,6 +4009,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-Z3sfYEkLFzFmL8KY6xnSJLRxwQwYBjOXi/24lb62ZnZiGA0JUzGGTI6TBIgfCSMIDl9Jlu8SRmHNACLTemDHww==
+  /nocache/2.1.0:
+    dev: false
+    engines:
+      node: '>=4.0.0'
+    resolution:
+      integrity: sha512-0L9FvHG3nfnnmaEQPjT9xhfN4ISk0A8/2j4M37Np4mcDesJjHgEUfgPhdCyZuFI954tjokaIj/A3NdpFNdEh4Q==
   /node-fetch/2.6.0:
     engines:
       node: 4.x || >=6.0.0
@@ -4353,6 +4484,10 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-/E57AYkoeQ25qkxMj5PBOVgF8Kiu/h7cYS30Z5+R7WaiCCBfLq58ZI/dSeaEKb9WVJV5n/03QwrN3IeWIFllvw==
+  /platform/1.3.5:
+    dev: false
+    resolution:
+      integrity: sha512-TuvHS8AOIZNAlE77WUDiR4rySV/VMptyMfcfeoMgs4P8apaZM3JrnbzBiixKUv+XR6i+BXrQh8WAnjaSPFO65Q==
   /pn/1.1.0:
     dev: true
     resolution:
@@ -4567,6 +4702,12 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-wlgPA6cCIIg9gKz0fgAPjnzh4yR/LnXovwuo9hvyGvx3h8nX4+/iLZplfUWasXpqD8BdnGnP5njOFjkUwPzvjA==
+  /referrer-policy/1.2.0:
+    dev: false
+    engines:
+      node: '>=4.0.0'
+    resolution:
+      integrity: sha512-LgQJIuS6nAy1Jd88DCQRemyE3mS+ispwlqMk3b0yjZ257fI1v9c+/p6SD5gP5FGyXUIgrNOAfmyioHwZtYv2VA==
   /reflect-metadata/0.1.13:
     resolution:
       integrity: sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==
@@ -5848,6 +5989,12 @@ packages:
     dev: true
     resolution:
       integrity: sha512-jaHFD6PFv6UgoIVda6qZllptQsMlDEJkTQcybzzXDYM1XO9Y8em691FGMPmM46WGyLU4z9KMgQN+qrux/nhlHA==
+  /x-xss-protection/1.2.0:
+    dev: false
+    engines:
+      node: '>=4.0.0'
+    resolution:
+      integrity: sha512-xN0kV+8XfOQM2OPPBdEbGtbvJNNP1pvZR7sE6d44cjJFQG4OiGDdienPg5iOUGswBTiGbBvtYDURd30BMJwwqg==
   /xdg-basedir/3.0.0:
     dev: true
     engines:
@@ -5919,7 +6066,9 @@ specifiers:
   '@nestjs/platform-express': ^6.0.0
   '@nestjs/testing': ^6.0.0
   '@types/bcrypt': ^3.0.0
+  '@types/cors': ^2.8.5
   '@types/express': ^4.16.0
+  '@types/helmet': ^0.0.43
   '@types/jest': ^23.3.13
   '@types/jsonwebtoken': ^8.3.2
   '@types/node': ^10.12.18
@@ -5934,6 +6083,8 @@ specifiers:
   class-transformer: ^0.2.3
   class-validator: ^0.9.1
   concurrently: ^4.1.0
+  cors: ^2.8.5
+  helmet: ^3.19.0
   jest: ^24.8.0
   jsonwebtoken: ^8.5.1
   mysql2: ^1.6.5
