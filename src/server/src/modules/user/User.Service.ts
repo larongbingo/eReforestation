@@ -24,6 +24,7 @@ export class UserService implements IUserService {
     const user = await User.findOne({where: {id: userId}});
     if (!user) { return false; }
     await user.destroy();
+    UserConfirmDelete.destroy({where: {userId}});
     return true;
   }
 
