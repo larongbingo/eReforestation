@@ -1,4 +1,4 @@
-import { Controller, Inject, Delete, UseGuards, Post, Put, Body, Get, Param } from "@nestjs/common";
+import { Controller, Inject, Delete, UseGuards, Post, Put, Body, Get, Query } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 
 import { IUserService } from "../../../../interfaces/services/IUserService";
@@ -36,7 +36,7 @@ export class UserContoller {
   }
 
   @Get()
-  public async confirmDeleteUser(@Param("confirm") confirm: string) {
+  public async confirmDeleteUser(@Query("confirm") confirm: string) {
     const userIdDeletion = await this.userService.findDeletionConfirmation(confirm);
 
     if (userIdDeletion) {
