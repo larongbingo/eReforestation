@@ -11,7 +11,7 @@ export const ContactPerson: FunctionComponent<ContactPersonProps> = ({contactPer
       <Col>Last Name: {contactPerson.lastName}</Col>
     </Row>
     <Row>
-      Address: {contactPerson.address}
+      <Col>Address: {contactPerson.address}</Col>
     </Row>
     <Row>
       <Col>Phone Number: {contactPerson.phoneNumber}</Col>

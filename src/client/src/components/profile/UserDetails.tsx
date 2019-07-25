@@ -9,10 +9,12 @@ export const UserDetails: FunctionComponent<UserDetailsProps> = ({userDetails}) 
       <Col>First Name: {userDetails.firstName}</Col>
       <Col>Middle Name: {userDetails.middleName}</Col>
       <Col>Last Name: {userDetails.lastName}</Col>
-      <Col>Date of Birth: {userDetails.dateOfBirth.toISOString()}</Col>
     </Row>
     <Row>
-      Address: {userDetails.address}
+      <Col>Date of Birth: {userDetails.dateOfBirth.toLocaleDateString()}</Col>
+    </Row>
+    <Row>
+      <Col>Address: {userDetails.address}</Col>
     </Row>
     <Row>
       <Col>Phone Number: {userDetails.phoneNumber}</Col>
