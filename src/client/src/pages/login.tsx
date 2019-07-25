@@ -11,8 +11,8 @@ export const LogIn: FunctionComponent = () => {
   const [showError, setShowError] = useState(false);
 
   const submitCredentials = () => {
-    fetch(APIS_ENDPOINTS.login, {
-      method: "POST",
+    fetch(APIS_ENDPOINTS.auth.login.route, {
+      method: APIS_ENDPOINTS.auth.login.method,
       body: JSON.stringify({username, password}),
     })
     .then()
