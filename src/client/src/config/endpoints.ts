@@ -7,5 +7,9 @@ export const APIS_ENDPOINTS = {
       route: `${APIS_ENDPOINT_ROOT}/auth/login`,
       method: "POST",
     },
+    verifySession: {
+      route: `${APIS_ENDPOINT_ROOT}/auth/verify`,
+      method: "GET"
+    }
   }
 };
