@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 
+import { AccountNavbarSection } from "./AccountNavbarSection";
+
 export const PageNavbar: FunctionComponent = () => (
   <Navbar bg="dark" variant="dark" expand="lg">
     <Container>
@@ -10,7 +12,9 @@ export const PageNavbar: FunctionComponent = () => (
         <Nav className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/events">Events</Nav.Link>
+          <Nav.Link>News</Nav.Link>
         </Nav>
+        <AccountNavbarSection />
       </Navbar.Collapse>
     </Container>
   </Navbar>
