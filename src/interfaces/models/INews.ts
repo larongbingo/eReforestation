@@ -9,6 +9,8 @@ export interface INews {
 
   content: string;
 
+  createdAt?: string;
+
   /**
    * A foreign key to the Users Table/Model
    */
