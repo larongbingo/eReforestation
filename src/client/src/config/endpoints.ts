@@ -11,5 +11,19 @@ export const APIS_ENDPOINTS = {
       route: `${APIS_ENDPOINT_ROOT}/auth/verify`,
       method: "GET"
     }
+  },
+  news: {
+    pages: {
+      route: `${APIS_ENDPOINT_ROOT}/news`,
+      method: "GET"
+    },
+    newest: {
+      route: `${APIS_ENDPOINT_ROOT}/news/newest`,
+      method: "GET",
+    },
+    newDetails: {
+      route: `${APIS_ENDPOINT_ROOT}/news/details`,
+      method: "GET",
+    },
   }
 };
