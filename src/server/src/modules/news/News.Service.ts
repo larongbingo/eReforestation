@@ -39,6 +39,7 @@ export class NewsService implements INewsService {
 
   public async createNews(userId: string, details: INews): Promise<INews> {
     await this.checkPermissions(userId);
+    details.author = userId;
     return News.create(details);
   }
 

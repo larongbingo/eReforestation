@@ -1,8 +1,6 @@
 import { IsString, IsNotEmpty } from "class-validator";
 
-import { INews } from "../../../../../interfaces/models/INews";
-
-export class CreateNewsDto implements INews {
+export class CreateNewsDto {
   @IsNotEmpty()
   @IsString()
   headline: string;
@@ -10,8 +8,4 @@ export class CreateNewsDto implements INews {
   @IsNotEmpty()
   @IsString()
   content: string;
-
-  @IsNotEmpty()
-  @IsString()
-  author?: string;
 }

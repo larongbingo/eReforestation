@@ -1,8 +1,9 @@
-import { Model, Table, Column, DataType, ForeignKey } from "sequelize-typescript";
+import { Model, Table, Column, DataType, ForeignKey, BeforeCreate } from "sequelize-typescript";
 
 import { INews } from "../../../../../interfaces/models/INews";
 
 import { User } from "./User.Model";
+import { UserDetails } from "./UserDetails.Model";
 
 @Table({
   tableName: "news",
@@ -10,6 +11,18 @@ import { User } from "./User.Model";
   timestamps: true,
 })
 export class News extends Model<News> implements INews {
+
+  @BeforeCreate
+  private static async assignAuthorName(instance: News) {
+    const author = await UserDetails.findOne({where: {id: instance.author}});
+
+    if (!author) {
+      throw new Error("User does not exist/User does not have details");
+    }
+
+    instance.author = `${author.firstName} ${author.middleName} ${author.lastName}`;
+  }
+
   @Column(DataType.STRING)
   headline: string;
 
