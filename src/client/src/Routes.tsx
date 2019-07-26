@@ -9,6 +9,7 @@ import  { ProfilePage } from "./pages/profilePage";
 import { NewsListPage } from "./pages/news";
 import { NewsDetailsPage } from "./pages/newsDetails";
 import { EventDetailsPage } from "./pages/eventsDetails";
+import { Register } from "./pages/register";
 
 export const Routes: FunctionComponent = () => (
   <BrowserRouter>
@@ -18,6 +19,7 @@ export const Routes: FunctionComponent = () => (
     <Route path="/events/:eventId" component={EventDetailsPage} exact />
     <Route path="/news" component={NewsListPage} exact />
     <Route path="/news/:newsId" component={NewsDetailsPage} exact />
+    <Route path="/register" component={Register} />
     <Route path="/" component={Index} exact />
   </BrowserRouter>
 );
