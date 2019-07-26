@@ -4,7 +4,7 @@ export const APIS_ENDPOINT_ROOT = "http://localhost:8080";
 export const APIS_ENDPOINTS = {
   auth: {
     login: {
-      route: `${APIS_ENDPOINT_ROOT}/auth/login`,
+      route: `${APIS_ENDPOINT_ROOT}/auth`,
       method: "POST",
     },
     verifySession: {
@@ -25,5 +25,15 @@ export const APIS_ENDPOINTS = {
       route: `${APIS_ENDPOINT_ROOT}/news/details`,
       method: "GET",
     },
+  },
+  user: {
+    register: {
+      route: `${APIS_ENDPOINT_ROOT}/user`,
+      method: "POST",
+    },
+    userDetailsCreation: {
+      route: `${APIS_ENDPOINT_ROOT}/user/details`,
+      method: "POST",
+    }
   }
 };
