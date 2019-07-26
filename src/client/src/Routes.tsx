@@ -8,12 +8,14 @@ import { LogIn } from "./pages/login";
 import  { ProfilePage } from "./pages/profilePage";
 import { NewsListPage } from "./pages/news";
 import { NewsDetailsPage } from "./pages/newsDetails";
+import { EventDetailsPage } from "./pages/eventsDetails";
 
 export const Routes: FunctionComponent = () => (
   <BrowserRouter>
     <PrivateRoute path="/profile" component={ProfilePage} exact />
     <Route path="/login" component={LogIn} exact />
     <Route path="/events" component={Events} exact />
+    <Route path="/events/:eventId" component={EventDetailsPage} exact />
     <Route path="/news" component={NewsListPage} exact />
     <Route path="/news/:newsId" component={NewsDetailsPage} exact />
     <Route path="/" component={Index} exact />
