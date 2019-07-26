@@ -12,7 +12,7 @@ export const PageNavbar: FunctionComponent = () => (
         <Nav className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/events">Events</Nav.Link>
-          <Nav.Link>News</Nav.Link>
+          <Nav.Link href="/news">News</Nav.Link>
         </Nav>
         <AccountNavbarSection />
       </Navbar.Collapse>
