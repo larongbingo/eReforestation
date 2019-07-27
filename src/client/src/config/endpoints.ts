@@ -33,7 +33,7 @@ export const APIS_ENDPOINTS = {
     },
     userDetailsCreation: {
       route: `${APIS_ENDPOINT_ROOT}/user/details`,
-      method: "POST",
+      method: "PUT",
     }
   }
 };
