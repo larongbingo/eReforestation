@@ -17,10 +17,13 @@ export const Register: FunctionComponent = () => {
   const [middleName, setMiddleName] = useState("");
   const [lastName, setLastName] = useState("");
   const [address, setAddress] = useState("");
-  const [email, setEmail] = useState("");
+  const [emailAddress, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [dateOfBirth, setDOB] = useState("");
 
-  const submitButtonHandler = async () => {
+  const submitButtonHandler = async (e: any) => {
+    e.preventDefault();
+
     // Submit to create user
     const userRes = await fetch(APIS_ENDPOINTS.user.register.route, {
       method: APIS_ENDPOINTS.user.register.method,
@@ -30,24 +33,46 @@ export const Register: FunctionComponent = () => {
       }
     });
 
-    console.log(username, password);
-
     const user = await userRes.json();
-
+    
+    console.log(dateOfBirth);
+    console.log(user);
     if (user.id) {
       // Login
       const loginRes = await fetch(APIS_ENDPOINTS.auth.login.route, {
         method: APIS_ENDPOINTS.auth.login.method,
         body: JSON.stringify({username, password}),
+        headers: {
+          "Content-Type": "application/json",
+        },
       });
 
       const login = await loginRes.json();
 
       console.log(login);
-    }
-    console.log(user);
     
-    // Submit to create details
+      // Submit to create details
+      const detailsRes = await fetch(APIS_ENDPOINTS.user.userDetailsCreation.route, {
+        method: APIS_ENDPOINTS.user.userDetailsCreation.method,
+        body: JSON.stringify({
+          firstName,
+          middleName,
+          lastName,
+          address,
+          emailAddress,
+          phoneNumber,
+          dateOfBirth,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${login.token}`
+        }
+      });
+
+      const details = await detailsRes.json();
+
+      console.log(details);
+    }
   };
 
   return (
@@ -61,6 +86,9 @@ export const Register: FunctionComponent = () => {
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Enter password" onChange={(e: any) => setPassword(e.target.value)} />
         </Form.Group>
+
+        <hr/>
+
         <Row>
           <Col sm={12} md={4}>
             <Form.Group controlId="FirstName">
@@ -78,6 +106,14 @@ export const Register: FunctionComponent = () => {
             <Form.Group controlId="LastName">
               <Form.Label>Last Name</Form.Label>
               <Form.Control type="text" placeholder="Enter Last Name" onChange={(e: any) => setLastName(e.target.value)} />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Group>
+              <Form.Label>Date of Birth</Form.Label>
+              <Form.Control type="date" onChange={(e: any) => setDOB(e.target.value)} />
             </Form.Group>
           </Col>
         </Row>
@@ -99,9 +135,12 @@ export const Register: FunctionComponent = () => {
             </Form.Group>
           </Col>
         </Row>
+
+        <hr/>
+
         <Row>
           <Col>
-            <Button onClick={submitButtonHandler} block>Register</Button>
+            <Button type="submit" onSubmit={submitButtonHandler} onClick={submitButtonHandler} block>Register</Button>
           </Col>
         </Row>
       </Form>
