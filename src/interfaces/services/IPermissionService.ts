@@ -9,4 +9,10 @@ export interface IPermissionService {
   isUserSuperUser(userId: string): Promise<boolean>;
 
   getPermission(userId: string): Promise<UserPermissions>;
+
+  setParticipantPermission(userId: string): Promise<boolean>;
+  
+  setAdminPermission(userId: string): Promise<boolean>;
+  
+  setSuperUserPermission(userId: string): Promise<boolean>;
 }

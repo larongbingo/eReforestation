@@ -26,6 +26,20 @@ export class PermissionService implements IPermissionService {
     return assignedPermission.permission;
   }
 
+  public async setParticipantPermission(userId: string): Promise<boolean> {
+    const permission = await Permission.create({userId, permission: UserPermissions.Participant});
+    return !!permission;
+  }
+
+  public async setAdminPermission(userId: string): Promise<boolean> {
+    const permission = await Permission.create({userId, permission: UserPermissions.Admin});
+    return !!permission;
+  }
+
+  public async setSuperUserPermission(userId: string): Promise<boolean> {
+    const permission = await Permission.create({userId, permission: UserPermissions.Superuser});
+    return !!permission;
+  }
 }
 
 export const PermissionServiceProvider: Provider<PermissionService> = {
