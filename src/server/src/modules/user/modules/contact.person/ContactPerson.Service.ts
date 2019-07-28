@@ -17,13 +17,13 @@ export class ContactPersonService implements IContactPersonService {
   });
 
   public async getContactPerson(id: string): Promise<IContactPerson> {
-    const contactPerson = await ContactPerson.findOne({where: {id}});
+    const contactPerson = await ContactPerson.findOne({where: {userId: id}});
     if (!contactPerson) { throw new BadRequestException("Please fill up your contact person form"); }
     return this.sanitizeContactPerson(contactPerson);
   }
 
   public async createContactPerson(personDetails: IContactPerson, id: string): Promise<IContactPerson> {
-    if (!await ContactPerson.findOne({where: {id}})) { 
+    if (!await ContactPerson.findOne({where: {userId: id}})) { 
       throw new BadRequestException("An existing contact person details is already present"); 
     }
     const contactPerson = await ContactPerson.create({id, ...personDetails});
@@ -31,7 +31,7 @@ export class ContactPersonService implements IContactPersonService {
   }
 
   public async updateContactPerson(personDetails: IContactPerson, id: string): Promise<IContactPerson> {
-    const contactPerson = await ContactPerson.findOne({where: {id}});
+    const contactPerson = await ContactPerson.findOne({where: {userId: id}});
     if (!contactPerson) { throw new BadRequestException("Please fill up your contact person form"); }
     return this.sanitizeContactPerson(contactPerson);
   }
