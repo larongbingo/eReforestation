@@ -22,3 +22,13 @@ export function verifySessionKey() {
     },
   })
 }
+
+export function logIn(username: string, password: string) {
+  return fetch(APIS_ENDPOINTS.auth.login.route, {
+    method: APIS_ENDPOINTS.auth.login.method,
+    body: JSON.stringify({username, password}),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+}
