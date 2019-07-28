@@ -23,7 +23,7 @@ export class ContactPersonService implements IContactPersonService {
   }
 
   public async createContactPerson(personDetails: IContactPerson, id: string): Promise<IContactPerson> {
-    if (!await ContactPerson.findOne({where: {userId: id}})) { 
+    if (await ContactPerson.findOne({where: {userId: id}})) { 
       throw new BadRequestException("An existing contact person details is already present"); 
     }
     const contactPerson = await ContactPerson.create({id, ...personDetails});
