@@ -2,7 +2,7 @@ import React, { FunctionComponent, FormEventHandler, useState } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 
 import { DismissibleAlert } from "../components/DismissibleAlert";
-import { APIS_ENDPOINTS } from "../config/endpoints";
+import { logIn } from "../libs/session";
 
 // TODO: Alert for incorrect password
 export const LogIn: FunctionComponent = () => {
@@ -11,10 +11,7 @@ export const LogIn: FunctionComponent = () => {
   const [showError, setShowError] = useState(false);
 
   const submitCredentials = () => {
-    fetch(APIS_ENDPOINTS.auth.login.route, {
-      method: APIS_ENDPOINTS.auth.login.method,
-      body: JSON.stringify({username, password}),
-    })
+    logIn(username, password)
     .then()
     .catch((err) => {
       console.error(err);
