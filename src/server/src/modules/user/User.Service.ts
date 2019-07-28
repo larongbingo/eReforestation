@@ -8,16 +8,20 @@ import { IUser } from "../../../../interfaces/models/IUser";
 import { User } from "../database/models/User.Model";
 import { UserConfirmDelete } from "../database/models/UserConfirmDelete.Model";
 import { IUserDetailsService } from "../../../../interfaces/services/IUserDetailsService";
+import { IPermissionService } from "../../../../interfaces/services/IPermissionService";
 
 @Injectable()
 export class UserService implements IUserService {
   constructor(
     @Inject(IMailService) private readonly mailService: IMailService,
     @Inject(IUserDetailsService) private readonly userDetailsService: IUserDetailsService,
+    @Inject(IPermissionService) private readonly permissionService: IPermissionService,
   ) {}
 
   public async createUser(details: IUser): Promise<IUser> {
-    return await User.create(details);
+    const user = await await User.create(details);
+    this.permissionService.setParticipantPermission(user.id);
+    return user;
   }
 
   public async destroyUser(userId: string): Promise<boolean> {
