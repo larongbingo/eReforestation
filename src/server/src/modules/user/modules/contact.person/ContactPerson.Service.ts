@@ -26,7 +26,7 @@ export class ContactPersonService implements IContactPersonService {
     if (await ContactPerson.findOne({where: {userId: id}})) { 
       throw new BadRequestException("An existing contact person details is already present"); 
     }
-    const contactPerson = await ContactPerson.create({id, ...personDetails});
+    const contactPerson = await ContactPerson.create({userId: id, ...personDetails});
     return this.sanitizeContactPerson(contactPerson);
   }
 
