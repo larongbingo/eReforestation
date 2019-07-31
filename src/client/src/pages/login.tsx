@@ -2,7 +2,7 @@ import React, { FunctionComponent, FormEventHandler, useState } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 
 import { DismissibleAlert } from "../components/DismissibleAlert";
-import { logIn } from "../libs/session";
+import { logIn, storeSessionKey } from "../libs/session";
 
 // TODO: Alert for incorrect password
 export const LogIn: FunctionComponent = () => {
@@ -12,7 +12,11 @@ export const LogIn: FunctionComponent = () => {
 
   const submitCredentials = () => {
     logIn(username, password)
-    .then()
+    .then(res => res.json())
+    .then(val => {
+      storeSessionKey(val.token);
+      window.location.replace("/");
+    })
     .catch((err) => {
       console.error(err);
       setShowError(true);
