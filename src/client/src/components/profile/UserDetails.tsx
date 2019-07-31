@@ -11,7 +11,7 @@ export const UserDetails: FunctionComponent<UserDetailsProps> = ({userDetails}) 
       <Col>Last Name: {userDetails.lastName}</Col>
     </Row>
     <Row>
-      <Col>Date of Birth: {userDetails.dateOfBirth.toLocaleDateString()}</Col>
+      <Col>Date of Birth: {userDetails.dateOfBirth}</Col>
     </Row>
     <Row>
       <Col>Address: {userDetails.address}</Col>
