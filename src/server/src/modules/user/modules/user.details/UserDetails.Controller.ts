@@ -17,7 +17,7 @@ export class UserDetailsController {
   @Get()
   @UseGuards(AuthGuard("bearer"))
   public async getDetails(@UserEntity() user: IUser) {
-    const userDetails = this.userDetailsService.getDetails(user.id);
+    const userDetails = await this.userDetailsService.getDetails(user.id);
     return {iat: Date.now(), userDetails};
   }
 
@@ -31,7 +31,7 @@ export class UserDetailsController {
   @Put()
   @UseGuards(AuthGuard("bearer"))
   public async createDetails(@Body() userDetailsCreateDto: UserDetailsCreateDto, @UserEntity() user: IUser) {
-    const userDetails = this.userDetailsService.createDetails(userDetailsCreateDto, user.id);
+    const userDetails = await this.userDetailsService.createDetails(userDetailsCreateDto, user.id);
     return {iat: Date.now(), userDetails};
   }
 }
