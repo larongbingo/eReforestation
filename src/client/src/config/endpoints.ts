@@ -39,5 +39,13 @@ export const APIS_ENDPOINTS = {
       route: `${APIS_ENDPOINT_ROOT}/user/contact-person`,
       method: "PUT",
     },
+    getUserDetails: {
+      route: `${APIS_ENDPOINT_ROOT}/user/details`,
+      method: "GET",
+    },
+    getContactPerson: {
+      route: `${APIS_ENDPOINT_ROOT}/user/contact-person`,
+      method: "GET",
+    }
   }
 };
