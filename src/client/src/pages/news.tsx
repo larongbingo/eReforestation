@@ -1,47 +1,32 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 
 import { INews } from "../../../interfaces/models/INews";
 import { APIS_ENDPOINTS } from "../config/endpoints";
 import { NewsList } from "../components/news";
 
-function getNewsPage(): INews[] {
-  return [
-    {
-      headline: "Lorem Ip",
-      content: "content: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maxime quam, iure voluptatibus minima vitae, facere ullam nisi dignissimos tempora eos esse magni ut cum reprehenderit numquam porro possimus velit assumenda?",
-      createdAt: "7/26/2019",
-      id: "LoremIp:123",
-    },
-    {
-      headline: "Lorem Ip",
-      content: "content: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maxime quam, iure voluptatibus minima vitae, facere ullam nisi dignissimos tempora eos esse magni ut cum reprehenderit numquam porro possimus velit assumenda?",
-      createdAt: "7/26/2019",
-      id: "LoremIp:123",
-    },
-    {
-      headline: "Lorem Ip",
-      content: "content: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maxime quam, iure voluptatibus minima vitae, facere ullam nisi dignissimos tempora eos esse magni ut cum reprehenderit numquam porro possimus velit assumenda?",
-      createdAt: "7/26/2019",
-      id: "LoremIp:123",
-    },
-    {
-      headline: "Lorem Ip",
-      content: "content: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maxime quam, iure voluptatibus minima vitae, facere ullam nisi dignissimos tempora eos esse magni ut cum reprehenderit numquam porro possimus velit assumenda?",
-      createdAt: "7/26/2019",
-      id: "LoremIp:123",
-    },
-    {
-      headline: "Lorem Ip",
-      content: "content: Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maxime quam, iure voluptatibus minima vitae, facere ullam nisi dignissimos tempora eos esse magni ut cum reprehenderit numquam porro possimus velit assumenda?",
-      createdAt: "7/26/2019",
-      id: "LoremIp:123",
-    },
-  ]
+// TODO: Add pagination
+
+async function getNewsPage(): Promise<INews[]> {
+  const newsListRes = await fetch(APIS_ENDPOINTS.news.pages.route, {
+    method: APIS_ENDPOINTS.news.pages.method,
+  });
+
+  const newsList = await newsListRes.json();
+
+  return newsList.newsList;
 }
 
-export const NewsListPage: FunctionComponent = () => (
-  <Container>
-    <NewsList newsList={getNewsPage()} />
-  </Container>
-);
+export const NewsListPage: FunctionComponent = () => {
+  const [newsList, setNewsList] = useState<INews[]>([]);
+
+  useEffect(() => {
+    getNewsPage().then(fetchedNews => setNewsList(fetchedNews))
+  }, []);
+
+  return (
+    <Container>
+      <NewsList newsList={newsList} />
+    </Container>
+  );
+};
