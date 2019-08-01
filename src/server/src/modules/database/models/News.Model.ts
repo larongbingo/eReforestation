@@ -29,7 +29,6 @@ export class News extends Model<News> implements INews {
   @Column(DataType.STRING)
   content: string;
 
-  @ForeignKey(() => User)
   @Column(DataType.STRING)
   author?: string;
 }
