@@ -3,14 +3,14 @@ import { Module } from "@nestjs/common";
 import { PermissionModule } from "../permissions/Permission.Module";
 
 import { NewsController } from "./News.Controller";
-import { NewsService } from "./News.Service";
+import { NewsServiceProvider } from "./News.Service";
 
 @Module({
   imports: [
     PermissionModule,
   ],
   providers: [
-    NewsService,
+    NewsServiceProvider,
   ],
   controllers: [
     NewsController,
