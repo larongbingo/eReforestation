@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import { PageNavbar } from "./components/PageNavbar";
 import { Routes } from "./Routes";
+import { Footer } from "./components/Footer";
 
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -11,6 +12,7 @@ export const Root: FunctionComponent = () => (
   <>
     <PageNavbar />
     <Routes />
+    <Footer />
   </>
 );
 
