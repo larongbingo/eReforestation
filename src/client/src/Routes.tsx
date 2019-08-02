@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { Route, BrowserRouter } from "react-router-dom";
+import { Route, BrowserRouter, Switch } from "react-router-dom";
 
 import { PrivateRoute } from "./components/PrivateRoute";
 import { Index } from "./pages/index";
@@ -15,15 +15,17 @@ import { Page404 } from "./pages/Page404";
 
 export const Routes: FunctionComponent = () => (
   <BrowserRouter>
-    <PrivateRoute path="/profile" component={ProfilePage} exact />
-    <Route path="/login" component={LogIn} exact />
-    <Route path="/logout" component={LogOut} exact />
-    <Route path="/events" component={Events} exact />
-    <Route path="/events/:eventId" component={EventDetailsPage} exact />
-    <Route path="/news" component={NewsListPage} exact />
-    <Route path="/news/:newsId" component={NewsDetailsPage} exact />
-    <Route path="/register" component={Register} />
-    <Route path="/" component={Index} exact />
-    <Route component={Page404} />
+    <Switch>
+      <PrivateRoute path="/profile" component={ProfilePage} exact />
+      <Route path="/login" component={LogIn} exact />
+      <Route path="/logout" component={LogOut} exact />
+      <Route path="/events" component={Events} exact />
+      <Route path="/events/:eventId" component={EventDetailsPage} exact />
+      <Route path="/news" component={NewsListPage} exact />
+      <Route path="/news/:newsId" component={NewsDetailsPage} exact />
+      <Route path="/register" component={Register} />
+      <Route path="/" component={Index} exact />
+      <Route component={Page404} />
+    </Switch>
   </BrowserRouter>
 );
