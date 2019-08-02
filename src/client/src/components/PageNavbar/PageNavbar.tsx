@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
+import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 
 import { AccountNavbarSection } from "./AccountNavbarSection";
 
@@ -11,8 +11,17 @@ export const PageNavbar: FunctionComponent = () => (
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/events">Events</Nav.Link>
-          <Nav.Link href="/news">News</Nav.Link>
+          <NavDropdown title="About" id="about-dropdown">
+            <NavDropdown.Item href="/about/us">About Us</NavDropdown.Item>
+            <NavDropdown.Item href="/about/achievements">Achievements</NavDropdown.Item>
+            <NavDropdown.Item href="/about/affiliations">Affiliations</NavDropdown.Item>
+            <NavDropdown.Item href="/about/faqs">FAQs</NavDropdown.Item>
+            <NavDropdown.Item href="/about/contacts">Contacts</NavDropdown.Item>
+          </NavDropdown>
+          <NavDropdown title="Media" id="news-dropdown">
+            <NavDropdown.Item>News</NavDropdown.Item>
+            <NavDropdown.Item>Gallery</NavDropdown.Item>
+          </NavDropdown>
         </Nav>
         <AccountNavbarSection />
       </Navbar.Collapse>
