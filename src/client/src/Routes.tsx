@@ -11,6 +11,7 @@ import { NewsDetailsPage } from "./pages/newsDetails";
 import { EventDetailsPage } from "./pages/eventsDetails";
 import { Register } from "./pages/register";
 import { LogOut } from "./pages/logOut";
+import { Page404 } from "./pages/Page404";
 
 export const Routes: FunctionComponent = () => (
   <BrowserRouter>
@@ -23,5 +24,6 @@ export const Routes: FunctionComponent = () => (
     <Route path="/news/:newsId" component={NewsDetailsPage} exact />
     <Route path="/register" component={Register} />
     <Route path="/" component={Index} exact />
+    <Route component={Page404} />
   </BrowserRouter>
 );
