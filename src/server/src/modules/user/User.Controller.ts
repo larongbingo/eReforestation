@@ -1,11 +1,14 @@
 import { Controller, Inject, Delete, UseGuards, Post, Put, Body, Get, Query } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 
+import { IPermissionService } from "../../../../interfaces/services/IPermissionService";
+import { IUserDetailsService } from "../../../../interfaces/services/IUserDetailsService";
 import { IUserService } from "../../../../interfaces/services/IUserService";
 import { UserEntity } from "../../decorators/User-Entity.Decorator";
 import { IUser } from "../../../../interfaces/models/IUser";
 import { User } from "../database/models/User.Model";
 
+import { CreateUserAndDetailsDto } from "./dto/CreateUserAndDetails.Dto";
 import { CreateUserDto } from "./dto/CreateUser.Dto";
 import { UpdateUserDto } from "./dto/UpdateUser.Dto";
 
@@ -14,6 +17,8 @@ export class UserContoller {
 
   constructor(
     @Inject(IUserService) private readonly userService: IUserService,
+    @Inject(IPermissionService) private readonly permissionService: IPermissionService,
+    @Inject(IUserDetailsService) private readonly userDetailsService: IUserDetailsService,
   ) {}
 
   @Post()
@@ -26,6 +31,14 @@ export class UserContoller {
         return {iat: Date.now(), message: "Username is already taken"};
       }
     }
+  }
+
+  @Post("/new")
+  public async createUserAndDetails(@Body() createUserAndDetails: CreateUserAndDetailsDto) {
+    const user = await this.userService.createUser(createUserAndDetails);
+    this.userDetailsService.createDetails(createUserAndDetails, user.id);
+    this.permissionService.setParticipantPermission(user.id);
+    return {iat: Date.now(), userId: user.id};
   }
 
   @Delete()
