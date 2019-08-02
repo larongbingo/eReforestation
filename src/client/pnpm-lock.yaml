@@ -13,11 +13,13 @@ dependencies:
 devDependencies:
   '@types/enzyme': 3.10.3
   '@types/enzyme-adapter-react-16': 1.0.5
+  '@types/holderjs': 2.9.0
   '@types/react-bootstrap': 0.32.19
   '@types/react-router-dom': 4.3.4
   '@types/react-test-renderer': 16.8.2
   enzyme: 3.10.0
   enzyme-adapter-react-16: 1.14.0_50388ec39d1f87daf268823c988ea94c
+  holderjs: 2.9.6
   jest-enzyme: 7.0.2_enzyme@3.10.0+react@16.8.6
   react-test-renderer: 16.8.6_react@16.8.6
 lockfileVersion: 5.1
@@ -1917,6 +1919,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-ui3WwXmjTaY73fOQ3/m3nnajU/Orhi6cEu5rzX+BrAAJxa3eITXZ5ch9suPqtM03OWhAHhPSyBGCN4UKoxO20Q==
+  /@types/holderjs/2.9.0:
+    dev: true
+    resolution:
+      integrity: sha512-pFtFFeOVsmgbey8BPURI4vW61w0fyBJuLHBw1K6FvCy3tM5NCCmrD+LBX7vUgSzDUGKefTNJfuITSxhfhBaPkw==
   /@types/istanbul-lib-coverage/2.0.1:
     resolution:
       integrity: sha512-hRJD2ahnnpLgsj6KWMYSrmXkM3rm2Dl1qkx6IOFD5FnuNPXJIG5L0dhgKXCYTRMGzU4n0wImQ/xfmRc4POUFlg==
@@ -4320,7 +4326,6 @@ packages:
     resolution:
       integrity: sha512-qZryBOJjV//LaxLTV6UC//WewneB3LcXOL9NP++ozKVXsIIIpm/2c13UDiD9Jp2eThsecw9m3jPqDwTyobcdbg==
   /escape-html/1.0.3:
-    dev: false
     resolution:
       integrity: sha1-Aljq5NPQwJdN4cFpGI7wBR0dGYg=
   /escape-string-regexp/1.0.5:
@@ -5383,6 +5388,12 @@ packages:
     dev: false
     resolution:
       integrity: sha512-0XsbTXxgiaCDYDIWFcwkmerZPSwywfUqYmwT4jzewKTQSWoE6FCMoUVOeBJWK3E/CrWbxRG3m5GzY4lnIwGRBA==
+  /holderjs/2.9.6:
+    dependencies:
+      shaven: 0.8.1
+    dev: true
+    resolution:
+      integrity: sha512-Onb0GLcFDH6VT40dtBC5Zdjm+8R1xr2V3R9HSByBn1s5kFhX6XowWFFW/ACEYWR9KcyHjE92ebx67De/UwJ7+A==
   /hosted-git-info/2.7.1:
     resolution:
       integrity: sha512-7T/BxH19zbcCTa8XkMlbK5lTo1WtgkFi3GvdWEyNuc4Vex7/9Dqbnpsf4JMydcfj9HCg4zUWFTL3Za6lapg5/w==
@@ -9821,6 +9832,14 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-oeXreoKR/SyNJtRJMAKPDSvd28OqEwG4eR/xc856cRGBII7gX9lvAqDxusPm0846z/w/hWYjI1NpKwJ00NHzRA==
+  /shaven/0.8.1:
+    dependencies:
+      escape-html: 1.0.3
+    dev: true
+    engines:
+      node: ~0.12.2
+    resolution:
+      integrity: sha1-D0LU+zLEBINJ/57pwpb17/styq8=
   /shebang-command/1.2.0:
     dependencies:
       shebang-regex: 1.0.0
@@ -11337,6 +11356,7 @@ packages:
 specifiers:
   '@types/enzyme': ^3.10.3
   '@types/enzyme-adapter-react-16': ^1.0.5
+  '@types/holderjs': ^2.9.0
   '@types/jest': 24.0.15
   '@types/node': 12.0.10
   '@types/react': 16.8.22
@@ -11347,6 +11367,7 @@ specifiers:
   bootstrap: ^4.3.1
   enzyme: ^3.10.0
   enzyme-adapter-react-16: ^1.14.0
+  holderjs: ^2.9.6
   jest-enzyme: ^7.0.2
   react: ^16.8.6
   react-bootstrap: ^1.0.0-beta.9
