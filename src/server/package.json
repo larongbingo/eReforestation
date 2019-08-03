@@ -42,7 +42,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^2.6.2",
     "rxjs": "^6.3.3",
-    "sequelize": "4.43.2",
+    "sequelize": "5.3.0",
     "sequelize-typescript": "0.6.10",
     "winston": "^3.2.1"
   },
