@@ -14,7 +14,7 @@ export class News extends Model<News> implements INews {
 
   @BeforeCreate
   private static async assignAuthorName(instance: News) {
-    const author = await UserDetails.findOne({where: {id: instance.author}});
+    const author = await UserDetails.findOne({where: {userId: instance.author}});
 
     if (!author) {
       throw new Error("User does not exist/User does not have details");
