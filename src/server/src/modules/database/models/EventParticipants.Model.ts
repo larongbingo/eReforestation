@@ -28,6 +28,6 @@ export class EventParticipants extends Model<EventParticipants> implements IEven
   @Column(DataType.STRING)
   eventId: string;
 
-  @Column(DataType.STRING)
+  @Column(DataType.BOOLEAN)
   confirmed: boolean;
 }
