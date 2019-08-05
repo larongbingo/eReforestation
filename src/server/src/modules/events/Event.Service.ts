@@ -10,6 +10,10 @@ export class EventService implements IEventService {
     return Event.findAll();
   }
 
+  public async findOneById(id: string): Promise<IEvent> {
+    return Event.findOne({where: {id}});
+  }
+
   public async createEvent(eventDetails: IEvent): Promise<IEvent> {
     return Event.create(eventDetails);
   }
