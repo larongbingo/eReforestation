@@ -7,6 +7,7 @@ import { EventService } from "./Event.Service";
 
 @Module({
   imports: [PermissionModule],
+  controllers: [EventController],
   providers: [EventService],
 })
 export class EventModule {}
