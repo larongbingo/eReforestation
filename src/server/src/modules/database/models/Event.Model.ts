@@ -4,9 +4,10 @@ import {
   Column,
   DataType,
   AllowNull,
+  Default,
 } from "sequelize-typescript";
 
-import { IEvent } from "../../../../../interfaces/models/IEvent";
+import { IEvent, EventStatus } from "../../../../../interfaces/models/IEvent";
 
 @Table({
   tableName: "events",
@@ -29,6 +30,10 @@ export class Event extends Model<Event> implements IEvent {
   @AllowNull(false)
   @Column(DataType.STRING)
   public description: string;
+
+  @Default(EventStatus.Go)
+  @Column(DataType.STRING)
+  public status: EventStatus;
 }
 
 export default Event;
