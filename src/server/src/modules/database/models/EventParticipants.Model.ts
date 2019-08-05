@@ -1,4 +1,4 @@
-import { Model, Table, Column, DataType, ForeignKey, PrimaryKey, BeforeCreate } from "sequelize-typescript";
+import { Model, Table, Column, DataType, ForeignKey, PrimaryKey, BeforeCreate, Default } from "sequelize-typescript";
 import { generate } from "randomstring";
 
 import { IEventParticipants } from "../../../../../interfaces/models/IEventParticipants";
@@ -28,6 +28,7 @@ export class EventParticipants extends Model<EventParticipants> implements IEven
   @Column(DataType.STRING)
   eventId: string;
 
+  @Default(false)
   @Column(DataType.BOOLEAN)
   confirmed: boolean;
 }
