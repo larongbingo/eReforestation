@@ -3,6 +3,7 @@ import { Sequelize } from "sequelize-typescript";
 
 import { ContactPerson } from "./models/ContactPerson.Model";
 import { Event } from "./models/Event.Model";
+import { EventParticipants } from "./models/EventParticipants.Model";
 import { Log } from "./models/Log.Model";
 import { News } from "./models/News.Model";
 import { Permission } from "./models/Permission.Model";
@@ -17,6 +18,7 @@ export const DatabaseConnection = new Sequelize(new DatabaseConnectionConfig());
 DatabaseConnection.addModels([
   ContactPerson,
   Event,
+  EventParticipants,
   Log,
   News,
   Permission,
