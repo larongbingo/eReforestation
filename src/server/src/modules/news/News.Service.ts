@@ -12,7 +12,7 @@ export class NewsService implements INewsService {
   ) {}
 
   private async checkPermissions(userId: string) {
-    if (!(await this.permissionService.isUserAdmin(userId) || await this.permissionService.isUserSuperUser(userId))) {
+    if (!await this.permissionService.isUserAdminOrSuperUser(userId)) {
       throw new UnauthorizedException("You are not authorized to create a news");
     }
   }
