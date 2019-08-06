@@ -6,6 +6,7 @@ import { AuthModule } from "./modules/auth/Auth.Module";
 import { SessionModule } from "./modules/session/Session.Module";
 import { UserModule } from "./modules/user/User.Module";
 import { NewsModule } from "./modules/news/News.Module";
+import { EventModule } from "./modules/events/Event.Module";
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { NewsModule } from "./modules/news/News.Module";
     SessionModule,
     UserModule,
     NewsModule,
+    EventModule,
   ],
   providers: [
     {
