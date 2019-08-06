@@ -7,6 +7,7 @@ import { SessionModule } from "./modules/session/Session.Module";
 import { UserModule } from "./modules/user/User.Module";
 import { NewsModule } from "./modules/news/News.Module";
 import { EventModule } from "./modules/events/Event.Module";
+import { HealthModule } from "./modules/health/Health.Module";
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { EventModule } from "./modules/events/Event.Module";
     UserModule,
     NewsModule,
     EventModule,
+    HealthModule,
   ],
   providers: [
     {
