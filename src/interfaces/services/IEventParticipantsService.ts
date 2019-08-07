@@ -1,3 +1,4 @@
+import { IEventParticipants } from "../models/IEventParticipants";
 
 export const IEventParticipantsService = "IEventParticipantsService";
 export interface IEventParticipantsService {
@@ -14,4 +15,8 @@ export interface IEventParticipantsService {
    * @throws eventId does not have any object assigned or eventId is falsy
    */
   leaveEvent(userId: string, eventId: string): Promise<void>;
+
+  findOneById(confirmationId: string): Promise<IEventParticipants>;
+
+  updateOneById(confirmationId: string, newDetails: Partial<IEventParticipants>): Promise<IEventParticipants>;
 }
