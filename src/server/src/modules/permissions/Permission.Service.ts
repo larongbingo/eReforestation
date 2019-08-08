@@ -23,8 +23,10 @@ export class PermissionService implements IPermissionService {
 
   public async isUserAdminOrSuperUser(userId: string): Promise<boolean> {
     const assignedPermission = await Permission.findOne({where: {id: userId}});
-    return assignedPermission.permission === UserPermissions.Admin ||
-      assignedPermission.permission === UserPermissions.Superuser;
+    const permission = assignedPermission.permission === UserPermissions.Admin ||
+    assignedPermission.permission === UserPermissions.Superuser;
+    if (!permission) { throw new Error("User does not have permission"); }
+    return permission;
   }
 
   public async getPermission(userId: string): Promise<UserPermissions> {
