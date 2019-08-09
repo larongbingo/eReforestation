@@ -8,8 +8,7 @@ dependencies:
   react-bootstrap: 1.0.0-beta.9_react-dom@16.8.6+react@16.8.6
   react-dom: 16.8.6_react@16.8.6
   react-router-dom: 5.0.1_react@16.8.6
-  react-scripts: 3.0.1_typescript@3.5.2
-  typescript: 3.5.2
+  react-scripts: 3.0.1_typescript@3.4.5
 devDependencies:
   '@types/enzyme': 3.10.3
   '@types/enzyme-adapter-react-16': 1.0.5
@@ -22,6 +21,7 @@ devDependencies:
   holderjs: 2.9.6
   jest-enzyme: 7.0.2_enzyme@3.10.0+react@16.8.6
   react-test-renderer: 16.8.6_react@16.8.6
+  typescript: 3.4.5
 lockfileVersion: 5.1
 packages:
   /@babel/code-frame/7.0.0:
@@ -2021,14 +2021,14 @@ packages:
   /@types/yargs/12.0.12:
     resolution:
       integrity: sha512-SOhuU4wNBxhhTHxYaiG5NY4HBhDIDnJF60GU+2LqHAdKKer86//e4yg69aENCtQ04n0ovz+tq2YPME5t5yp4pw==
-  /@typescript-eslint/eslint-plugin/1.6.0_eslint@5.16.0+typescript@3.5.2:
+  /@typescript-eslint/eslint-plugin/1.6.0_eslint@5.16.0+typescript@3.4.5:
     dependencies:
-      '@typescript-eslint/parser': 1.6.0_eslint@5.16.0+typescript@3.5.2
-      '@typescript-eslint/typescript-estree': 1.6.0_typescript@3.5.2
+      '@typescript-eslint/parser': 1.6.0_eslint@5.16.0+typescript@3.4.5
+      '@typescript-eslint/typescript-estree': 1.6.0_typescript@3.4.5
       eslint: 5.16.0
       requireindex: 1.2.0
-      tsutils: 3.14.0_typescript@3.5.2
-      typescript: 3.5.2
+      tsutils: 3.14.0_typescript@3.4.5
+      typescript: 3.4.5
     dev: false
     engines:
       node: ^6.14.0 || ^8.10.0 || >=9.10.0
@@ -2037,13 +2037,13 @@ packages:
       typescript: '*'
     resolution:
       integrity: sha512-U224c29E2lo861TQZs6GSmyC0OYeRNg6bE9UVIiFBxN2MlA0nq2dCrgIVyyRbC05UOcrgf2Wk/CF2gGOPQKUSQ==
-  /@typescript-eslint/parser/1.6.0_eslint@5.16.0+typescript@3.5.2:
+  /@typescript-eslint/parser/1.6.0_eslint@5.16.0+typescript@3.4.5:
     dependencies:
-      '@typescript-eslint/typescript-estree': 1.6.0_typescript@3.5.2
+      '@typescript-eslint/typescript-estree': 1.6.0_typescript@3.4.5
       eslint: 5.16.0
       eslint-scope: 4.0.3
       eslint-visitor-keys: 1.0.0
-      typescript: 3.5.2
+      typescript: 3.4.5
     dev: false
     engines:
       node: ^6.14.0 || ^8.10.0 || >=9.10.0
@@ -2052,11 +2052,11 @@ packages:
       typescript: '*'
     resolution:
       integrity: sha512-VB9xmSbfafI+/kI4gUK3PfrkGmrJQfh0N4EScT1gZXSZyUxpsBirPL99EWZg9MmPG0pzq/gMtgkk7/rAHj4aQw==
-  /@typescript-eslint/typescript-estree/1.6.0_typescript@3.5.2:
+  /@typescript-eslint/typescript-estree/1.6.0_typescript@3.4.5:
     dependencies:
       lodash.unescape: 4.0.1
       semver: 5.5.0
-      typescript: 3.5.2
+      typescript: 3.4.5
     dev: false
     engines:
       node: '>=6.14.0'
@@ -4348,8 +4348,8 @@ packages:
       integrity: sha512-JwiqFD9KdGVVpeuRa68yU3zZnBEOcPs0nKW7wZzXky8Z7tffdYUHbe11bPCV5jYlK6DVdKLWLm0f5I/QlL0Kmw==
   /eslint-config-react-app/4.0.1_47d904b597a9fef680fd995ac05a13f9:
     dependencies:
-      '@typescript-eslint/eslint-plugin': 1.6.0_eslint@5.16.0+typescript@3.5.2
-      '@typescript-eslint/parser': 1.6.0_eslint@5.16.0+typescript@3.5.2
+      '@typescript-eslint/eslint-plugin': 1.6.0_eslint@5.16.0+typescript@3.4.5
+      '@typescript-eslint/parser': 1.6.0_eslint@5.16.0+typescript@3.4.5
       babel-eslint: 10.0.1_eslint@5.16.0
       confusing-browser-globals: 1.0.7
       eslint: 5.16.0
@@ -8005,9 +8005,9 @@ packages:
   /pn/1.1.0:
     resolution:
       integrity: sha512-2qHaIQr2VLRFoxe2nASzsV6ef4yOOH+Fi9FBOVH6cqeSgUnoyySPZkxzLuzd+RYOQTRpROA0ztTMqxROKSb/nA==
-  /pnp-webpack-plugin/1.2.1_typescript@3.5.2:
+  /pnp-webpack-plugin/1.2.1_typescript@3.4.5:
     dependencies:
-      ts-pnp: 1.1.2_typescript@3.5.2
+      ts-pnp: 1.1.2_typescript@3.4.5
     dev: false
     engines:
       node: '>=6'
@@ -9147,12 +9147,12 @@ packages:
       react: '>=15'
     resolution:
       integrity: sha512-EM7suCPNKb1NxcTZ2LEOWFtQBQRQXecLxVpdsP4DW4PbbqYWeRiLyV/Tt1SdCrvT2jcyXAXmVTmzvSzrPR63Bg==
-  /react-scripts/3.0.1_typescript@3.5.2:
+  /react-scripts/3.0.1_typescript@3.4.5:
     dependencies:
       '@babel/core': 7.4.3
       '@svgr/webpack': 4.1.0
-      '@typescript-eslint/eslint-plugin': 1.6.0_eslint@5.16.0+typescript@3.5.2
-      '@typescript-eslint/parser': 1.6.0_eslint@5.16.0+typescript@3.5.2
+      '@typescript-eslint/eslint-plugin': 1.6.0_eslint@5.16.0+typescript@3.4.5
+      '@typescript-eslint/parser': 1.6.0_eslint@5.16.0+typescript@3.4.5
       babel-eslint: 10.0.1_eslint@5.16.0
       babel-jest: 24.8.0_@babel+core@7.4.3
       babel-loader: 8.0.5_@babel+core@7.4.3+webpack@4.29.6
@@ -9182,7 +9182,7 @@ packages:
       jest-watch-typeahead: 0.3.0
       mini-css-extract-plugin: 0.5.0_webpack@4.29.6
       optimize-css-assets-webpack-plugin: 5.0.1_webpack@4.29.6
-      pnp-webpack-plugin: 1.2.1_typescript@3.5.2
+      pnp-webpack-plugin: 1.2.1_typescript@3.4.5
       postcss-flexbugs-fixes: 4.1.0
       postcss-loader: 3.0.0
       postcss-normalize: 7.0.1
@@ -9195,7 +9195,7 @@ packages:
       semver: 6.0.0
       style-loader: 0.23.1
       terser-webpack-plugin: 1.2.3_webpack@4.29.6
-      ts-pnp: 1.1.2_typescript@3.5.2
+      ts-pnp: 1.1.2_typescript@3.4.5
       url-loader: 1.1.2_webpack@4.29.6
       webpack: 4.29.6_webpack@4.29.6
       webpack-dev-server: 3.2.1_webpack@4.29.6
@@ -10507,9 +10507,9 @@ packages:
     dev: false
     resolution:
       integrity: sha512-tdzBRDGWcI1OpPVmChbdSKhvSVurznZ8X36AYURAcl+0o2ldlCY2XPzyXNNxwJwwyIU+rIglTCG4kxtNKBQH7Q==
-  /ts-pnp/1.1.2_typescript@3.5.2:
+  /ts-pnp/1.1.2_typescript@3.4.5:
     dependencies:
-      typescript: 3.5.2
+      typescript: 3.4.5
     dev: false
     engines:
       node: '>=6'
@@ -10524,10 +10524,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==
-  /tsutils/3.14.0_typescript@3.5.2:
+  /tsutils/3.14.0_typescript@3.4.5:
     dependencies:
       tslib: 1.10.0
-      typescript: 3.5.2
+      typescript: 3.4.5
     dev: false
     engines:
       node: '>= 6'
@@ -10575,13 +10575,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
-  /typescript/3.5.2:
-    dev: false
+  /typescript/3.4.5:
     engines:
       node: '>=4.2.0'
     hasBin: true
     resolution:
-      integrity: sha512-7KxJovlYhTX5RaRbUdkAXN1KUZ8PwWlTzQdHV6xNqvuFOs7+WBo10TQUqT19Q/Jz2hk5v9TQDIhyLhhJY4p5AA==
+      integrity: sha512-YycBxUb49UUhdNMU5aJ7z5Ej2XGmaIBL0x34vZ82fn3hGvD+bgrMrVDpatgz2f7YxUMJxMkbWxJZeAvDxVe7Vw==
   /ua-parser-js/0.7.20:
     dev: false
     resolution:
@@ -11375,4 +11374,4 @@ specifiers:
   react-router-dom: ^5.0.1
   react-scripts: 3.0.1
   react-test-renderer: ^16.8.6
-  typescript: 3.5.2
+  typescript: '3.4'
