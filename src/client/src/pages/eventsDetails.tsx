@@ -12,6 +12,7 @@ export const EventDetailsPage: FunctionComponent<EventDetailsPageProps> = ({matc
       location: "This is a test",
       date: new Date("07/26/2019"),
       description: "This is a testing description",
+      status: "Go",
     };
   }
 

@@ -5,7 +5,7 @@ export interface IEvent {
   location: string;
   date: Date;
   description: string;
-  status: EventStatus;
+  status: EventStatus | string;
 }
 
 export enum EventStatus {
