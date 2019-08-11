@@ -4,6 +4,8 @@ import { PermissionModule } from "../permissions/Permission.Module";
 import { LogModule } from "../log/Log.Module";
 
 import { AdminModule } from "./modules/admin/Admin.Module";
+import { SuperUserController } from "./SuperUser.Controller";
+import { SuperUserServiceProvider } from "./SuperUser.Service";
 
 @Module({
   imports: [
@@ -11,5 +13,7 @@ import { AdminModule } from "./modules/admin/Admin.Module";
     LogModule,
     PermissionModule,
   ],
+  controllers: [SuperUserController],
+  providers: [SuperUserServiceProvider],
 })
 export class SuperUserModule {}
