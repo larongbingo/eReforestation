@@ -19,8 +19,12 @@ export const PageNavbar: FunctionComponent = () => (
             <NavDropdown.Item href="/about/contacts">Contacts</NavDropdown.Item>
           </NavDropdown>
           <NavDropdown title="Media" id="news-dropdown">
-            <NavDropdown.Item>News</NavDropdown.Item>
-            <NavDropdown.Item>Gallery</NavDropdown.Item>
+            <NavDropdown.Item href="/news">News and Announcements</NavDropdown.Item>
+            <NavDropdown.Item href="/gallery">Gallery</NavDropdown.Item>
+          </NavDropdown>
+          <NavDropdown title="Services" id="services-dropdown">
+            <NavDropdown.Item href="/volunteering">Volunteer</NavDropdown.Item>
+            <NavDropdown.Item href="/events">Reforestation Events</NavDropdown.Item>
           </NavDropdown>
         </Nav>
         <AccountNavbarSection />
