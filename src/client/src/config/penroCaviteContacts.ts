@@ -10,6 +10,6 @@ export const PENRO_CAVITE_CONTACTS = {
     "denrcavite@gmail.com",
   ],
   contactNumbers: [
-    09081943573,
+    "09081943573",
   ],
 };
