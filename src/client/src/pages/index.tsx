@@ -1,6 +1,5 @@
 import React, { FunctionComponent } from "react";
 import { Container, Carousel } from "react-bootstrap";
-import "holderjs";
 
 /**
  * Needs to show

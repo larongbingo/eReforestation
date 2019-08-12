@@ -6,6 +6,7 @@ import { PageNavbar } from "./components/PageNavbar";
 import { Routes } from "./Routes";
 import { Footer } from "./components/Footer";
 
+import "holderjs";
 import "bootstrap/dist/css/bootstrap.css";
 
 export const Root: FunctionComponent = () => (
