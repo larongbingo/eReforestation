@@ -15,6 +15,7 @@ export const PageNavbar: FunctionComponent = () => (
             <NavDropdown.Item href="/about/us">About Us</NavDropdown.Item>
             <NavDropdown.Item href="/about/achievements">Achievements</NavDropdown.Item>
             <NavDropdown.Item href="/about/affiliations">Affiliations</NavDropdown.Item>
+            <NavDropdown.Item href="/about/tree-planting">Tree Planting</NavDropdown.Item>
             <NavDropdown.Item href="/about/faqs">FAQs</NavDropdown.Item>
             <NavDropdown.Item href="/about/contacts">Contacts</NavDropdown.Item>
           </NavDropdown>
