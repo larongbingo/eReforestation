@@ -14,7 +14,8 @@ describe("ContactPerson Component", () => {
       address: "test",
       phoneNumber: "test",
       emailAddress: "test",
-      dateOfBirth: new Date("01/01/1900"),
+      // @ts-ignore
+      dateOfBirth: new Date("01/01/1900").toLocaleString(),
     };
 
     const div = document.createElement("div");
