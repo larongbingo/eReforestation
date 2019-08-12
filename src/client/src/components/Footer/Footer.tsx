@@ -1,6 +1,5 @@
 import React, { FunctionComponent, CSSProperties }  from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import "holderjs";
 
 import { GovLinks } from "./GovLinks";
 import { Services } from "./Services";
