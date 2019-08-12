@@ -24,6 +24,10 @@ before_install:
   - sudo service mysql restart
   - sudo mysql -e "CREATE DATABASE thesis; ALTER DATABASE thesis CHARACTER SET utf8 COLLATE utf8_bin;" -u root -proot
   - cd src/server
+  - npm install -g pnpm
+
+install:
+  - pnpm install
 
 script:
   - npm run test:cov
