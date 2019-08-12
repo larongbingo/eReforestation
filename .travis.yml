@@ -23,7 +23,7 @@ before_install:
   - sudo mysql -e "use mysql; update user set authentication_string=PASSWORD('root') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
   - sudo mysql_upgrade -u root -proot
   - sudo service mysql restart
-  - sudo mysql -e "CREATE DATABASE enrollment_system; ALTER DATABASE enrollment_system CHARACTER SET utf8 COLLATE utf8_bin;" -u root -proot
+  - sudo mysql -e "CREATE DATABASE thesis; ALTER DATABASE thesis CHARACTER SET utf8 COLLATE utf8_bin;" -u root -proot
   - cd src/server
   - npm install
 
