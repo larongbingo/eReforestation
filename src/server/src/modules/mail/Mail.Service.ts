@@ -8,7 +8,7 @@ export class MailService implements IMailService {
   constructor() {
     if (this.isMailVariablesSet()) {
       throw new Error("Credentials for email is missing, please make sure that" +
-      " the MAIL_EMAIL, MAIL_USERNAME, MAIL_PORT and MAIL_PASSWORD is set");
+      " the MAIL_SMTP, MAIL_USERNAME, MAIL_PORT and MAIL_PASSWORD is set");
     }
   }
 
