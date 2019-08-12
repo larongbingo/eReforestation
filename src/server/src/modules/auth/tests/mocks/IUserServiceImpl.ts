@@ -1,6 +1,7 @@
 import { IUserService } from "../../../../../../interfaces/services/IUserService";
 import { IUser } from "../../../../../../interfaces/models/IUser";
 import { IAuthenticatedUsersArray } from "../constants/IAuthenticatedUsersArray";
+import { IUserConfirmDelete } from "../../../../../../interfaces/models/IUserConfirmDelete";
 
 export class IUserServiceImpl implements IUserService {
   private users: IUser[] = IAuthenticatedUsersArray;
@@ -40,4 +41,13 @@ export class IUserServiceImpl implements IUserService {
   public async updateUser(userId: string, newDetails: Partial<IUser>): Promise<IUser> {
     throw new Error("Method not implemented.");
   }
+
+  findDeletionConfirmation(confirmationString: string): Promise<IUserConfirmDelete> {
+    throw new Error("Method not implemented.");
+  }
+
+  sendConfirmationOfDeletion(userId: string): Promise<any> {
+    throw new Error("Method not implemented.");
+  }
+
 }
