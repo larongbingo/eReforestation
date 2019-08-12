@@ -16,7 +16,7 @@ addons:
       - mysql-client
 
 env:
-  - MYSQL_DATABASE_NAME=enrollment_system MYSQL_USERNAME=root MYSQL_PASSWORD=root NODE_ENV=testing JWT_PASSWORD=ThisIsATest
+  - DATABASE_NAME=thesis DATABASE_USERNAME=root DATABASE_PASSWORD=root NODE_ENV=testing JWT_PASSWORD=ThisIsATest
 
 before_install:
   - npm i -g npm@5.6.0
