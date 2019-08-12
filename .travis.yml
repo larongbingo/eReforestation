@@ -37,6 +37,6 @@ script:
   - cd ../server
   - npm run test:cov
 
-after_success:
+after_script:
   - cd ..
   - codecov
