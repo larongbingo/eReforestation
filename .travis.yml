@@ -28,8 +28,12 @@ before_install:
 
 install:
   - pnpm install
+  - cd ../client
+  - pnpm install
 
 script:
+  - npm run test -- --coverage
+  - cd ../server
   - npm run test:cov
 
 after_success:
