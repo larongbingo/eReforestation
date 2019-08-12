@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
 
-import { DismissibleAlert, DismissibleAlertProps } from "../components/DismissibleAlert";
+import { DismissibleAlert, DismissibleAlertProps } from "../../components/DismissibleAlert";
 
 describe("DismissibleAlert", () => {
   it("should render without crashing", () => {

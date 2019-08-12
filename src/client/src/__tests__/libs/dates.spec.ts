@@ -1,4 +1,4 @@
-import { isDateToday } from "../libs/dates";
+import { isDateToday } from "../../libs/dates";
 
 describe("Dates Module", () => {
   describe("isDateToday", () => {

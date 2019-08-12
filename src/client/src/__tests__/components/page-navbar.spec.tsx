@@ -1,11 +1,11 @@
 import React from "react";
 import { render } from "react-dom";
 
-import { Index } from "../pages/index";
+import { PageNavbar } from "../../components/PageNavbar";
 
-describe("Index/Root Page", () => {
+describe("Events Page", () => {
   it("should render without crashing", () => {
     const div = document.createElement("div");
-    render(<Index/>, div);
+    render(<PageNavbar/>, div);
   });
 });
