@@ -27,6 +27,7 @@ before_install:
   - npm install -g pnpm
 
 install:
+  - pnpm install -g codecov
   - pnpm install
   - cd ../client
   - pnpm install
@@ -37,4 +38,5 @@ script:
   - npm run test:cov
 
 after_success:
-  - npm run coverage
+  - cd ..
+  - codecov
