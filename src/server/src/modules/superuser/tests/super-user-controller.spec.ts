@@ -17,7 +17,7 @@ const testingUser: IUser = {
 
 // @ts-ignore
 const mockedIPermissionService: IPermissionService = {
-  isUserAdminOrSuperUser: jest.fn().mockResolvedValue(true),
+  isUserSuperUser: jest.fn().mockResolvedValue(true),
 };
 
 const mockedISuperUserService: ISuperUserService = {
@@ -36,7 +36,7 @@ describe("SuperUserController (Unit)", () => {
 
       // Arrange
       const user = {...testingUser};
-      mockedIPermissionService.isUserAdminOrSuperUser = jest.fn().mockResolvedValue(true);
+      mockedIPermissionService.isUserSuperUser = jest.fn().mockResolvedValue(true);
 
       // Act
       const result = await sut.getLogs(user);
@@ -51,7 +51,7 @@ describe("SuperUserController (Unit)", () => {
 
       // Arrange
       const user = {...testingUser};
-      mockedIPermissionService.isUserAdminOrSuperUser = jest.fn().mockResolvedValue(false);
+      mockedIPermissionService.isUserSuperUser = jest.fn().mockResolvedValue(false);
 
       // Act
       const result = await sut.getLogs(user);
@@ -66,7 +66,7 @@ describe("SuperUserController (Unit)", () => {
 
       // Arrange
       const user = {...testingUser};
-      mockedIPermissionService.isUserAdminOrSuperUser = jest.fn().mockResolvedValue(false);
+      mockedIPermissionService.isUserSuperUser = jest.fn().mockResolvedValue(false);
 
       // Act
       await sut.getLogs(user);
@@ -85,7 +85,7 @@ describe("SuperUserController (Unit)", () => {
       // Arrange
       const userId = "1testing";
       const user = {...testingUser};
-      mockedIPermissionService.isUserAdminOrSuperUser = jest.fn().mockResolvedValue(true);
+      mockedIPermissionService.isUserSuperUser = jest.fn().mockResolvedValue(true);
 
       // Act
       const result = await sut.assignAdminToUser(user, userId);
@@ -101,7 +101,7 @@ describe("SuperUserController (Unit)", () => {
       // Arrange
       const userId = "1testing";
       const user = {...testingUser};
-      mockedIPermissionService.isUserAdminOrSuperUser = jest.fn().mockResolvedValue(false);
+      mockedIPermissionService.isUserSuperUser = jest.fn().mockResolvedValue(false);
 
       // Act
       const result = await sut.assignAdminToUser(user, userId);
@@ -117,7 +117,7 @@ describe("SuperUserController (Unit)", () => {
       // Arrange
       const userId = "1testing";
       const user = {...testingUser};
-      mockedIPermissionService.isUserAdminOrSuperUser = jest.fn().mockResolvedValue(true);
+      mockedIPermissionService.isUserSuperUser = jest.fn().mockResolvedValue(true);
 
       // Act
       await sut.assignAdminToUser(user, userId);
@@ -136,7 +136,7 @@ describe("SuperUserController (Unit)", () => {
       // Arrange
       const userId = "1testing";
       const user = {...testingUser};
-      mockedIPermissionService.isUserAdminOrSuperUser = jest.fn().mockResolvedValue(true);
+      mockedIPermissionService.isUserSuperUser = jest.fn().mockResolvedValue(true);
 
       // Act
       const result = await sut.assignSudoToUser(user, userId);
@@ -152,7 +152,7 @@ describe("SuperUserController (Unit)", () => {
       // Arrange
       const userId = "testing123";
       const user = {...testingUser};
-      mockedIPermissionService.isUserAdminOrSuperUser = jest.fn().mockResolvedValue(false);
+      mockedIPermissionService.isUserSuperUser = jest.fn().mockResolvedValue(false);
 
       // Act
       const result = await sut.assignSudoToUser(user, userId);
@@ -168,7 +168,7 @@ describe("SuperUserController (Unit)", () => {
       // Arrange
       const userId = "1testing";
       const user = {...testingUser};
-      mockedIPermissionService.isUserAdminOrSuperUser = jest.fn().mockResolvedValue(true);
+      mockedIPermissionService.isUserSuperUser = jest.fn().mockResolvedValue(true);
 
       // Act
       await sut.assignSudoToUser(user, userId);
