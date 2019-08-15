@@ -52,7 +52,7 @@ describe("NewsController (Unit)", () => {
       const result = await sut.getNewestNewsList(num);
 
       // Assert
-      expect(result.newsList).toBe([{...testingNews}]);
+      expect(result.newsList).toStrictEqual([{...testingNews}]);
 
     });
 
@@ -82,7 +82,7 @@ describe("NewsController (Unit)", () => {
       const result = await sut.getNewsById(id);
 
       // Assert
-      expect(result.news).toBe({...testingNews});
+      expect(result.news).toStrictEqual({...testingNews});
 
     });
 
@@ -114,7 +114,7 @@ describe("NewsController (Unit)", () => {
       const result = await sut.getNewsListByPage(page, pageSize);
 
       // Assert
-      expect(result.newsList).toBe([{...testingNews}]);
+      expect(result.newsList).toStrictEqual([{...testingNews}]);
 
     });
 
@@ -176,7 +176,7 @@ describe("NewsController (Unit)", () => {
       const result = await sut.createNews(user, newsDetails);
 
       // Assert
-      expect(result.news).toBe({...testingNews});
+      expect(result.news).toStrictEqual({...testingNews});
 
     });
 
@@ -210,7 +210,7 @@ describe("NewsController (Unit)", () => {
       const result = await sut.updateNews(user, news, newsId);
 
       // Assert
-      expect(result.updatedNews).toBe(news);
+      expect(result.updatedNews).toStrictEqual(news);
 
     });
 
