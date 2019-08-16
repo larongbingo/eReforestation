@@ -67,6 +67,12 @@ export class UserService implements IUserService {
     });
     return info;
   }
+
+  public async restoreUser(userId: string): Promise<IUser> {
+    const user = await User.findOne({where: {id: userId}, paranoid: false});
+    user.restore();
+    return user;
+  }
 }
 
 export const UserServiceProvider: Provider<UserService> = {

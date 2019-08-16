@@ -10,4 +10,5 @@ export interface IUserService {
   createUser(details: IUser): Promise<IUser>;
   destroyUser(userId: string): Promise<boolean>;
   updateUser(userId: string, newDetails: Partial<IUser>): Promise<IUser>;
+  restoreUser(userId: string): Promise<IUser>;
 }
