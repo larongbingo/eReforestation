@@ -4,6 +4,9 @@ import { IAuthenticatedUsersArray } from "../constants/IAuthenticatedUsersArray"
 import { IUserConfirmDelete } from "../../../../../../interfaces/models/IUserConfirmDelete";
 
 export class IUserServiceImpl implements IUserService {
+  restoreUser(userId: string): Promise<IUser> {
+    throw new Error("Method not implemented.");
+  }
   private users: IUser[] = IAuthenticatedUsersArray;
 
   public async findOneByUsername(username: string): Promise<IUser> {
