@@ -22,6 +22,7 @@ export class AdminController {
     @Body() banUserDto: BanUserDto,
   ) {
     this.adminService.banUser(adminUser.id, userId, banUserDto.reason);
+    this.adminMailService.mailUserOnBan(userId);
     return {iat: Date.now()};
   }
 
@@ -29,6 +30,7 @@ export class AdminController {
   @UseGuards(AuthGuard("bearer"))
   public async adminUnbansUser(@UserEntity() adminUser: IUser, @Param("userIdToUnban") userId: string) {
     this.adminService.unbanUser(adminUser.id, userId);
+    this.adminMailService.mailUserOnUnban(userId);
     return {iat: Date.now()};
   }
 
@@ -39,6 +41,7 @@ export class AdminController {
     @Param("confirmationId") confirmationId: string,
   ) {
     const eventParticipation = await this.adminService.confirmParticipantApplication(adminUser.id, confirmationId);
+    this.adminMailService.mailUserOnSuccessfulApplication(eventParticipation.userId);
     return {iat: Date.now(), eventParticipation};
   }
 
@@ -49,6 +52,7 @@ export class AdminController {
     @Param("confirmationId") confirmationId: string,
   ) {
     const eventParticipation = await this.adminService.revokeParticipantApplication(adminUser.id, confirmationId);
+    this.adminMailService.mailUserOnFailedApplication(eventParticipation.userId);
     return {iat: Date.now(), eventParticipation};
   }
 
