@@ -80,7 +80,7 @@ describe("AdminController (Unit)", () => {
       await sut.adminUnbansUser(user, userId);
 
       // Assert
-      expect(mockedIAdminService.unbanUser).toBeCalledWith(user, userId);
+      expect(mockedIAdminService.unbanUser).toBeCalledWith(user.id, userId);
 
     });
 
