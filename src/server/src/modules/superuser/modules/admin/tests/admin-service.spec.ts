@@ -44,7 +44,7 @@ describe("AdminService (Unit)", () => {
       const t = async () => await sut.confirmParticipantApplication(adminId, confirmationId);
 
       // Assert
-      expect(t).rejects.toThrow(UnauthorizedException);
+      expect(t()).rejects.toThrow(UnauthorizedException);
 
     });
 
@@ -78,7 +78,7 @@ describe("AdminService (Unit)", () => {
       const t = async () => await sut.revokeParticipantApplication(adminId, confirmationId);
 
       // Assert
-      expect(t).rejects.toThrow(UnauthorizedException);
+      expect(t()).rejects.toThrow(UnauthorizedException);
 
     });
 
@@ -113,7 +113,7 @@ describe("AdminService (Unit)", () => {
       const t = async () => await sut.banUser(adminId, confirmationId, reason);
 
       // Assert
-      expect(t).rejects.toThrow(UnauthorizedException);
+      expect(t()).rejects.toThrow(UnauthorizedException);
 
     });
 
@@ -148,7 +148,7 @@ describe("AdminService (Unit)", () => {
       const t = async () => await sut.unbanUser(adminId, confirmationId);
 
       // Assert
-      expect(t).rejects.toThrow(UnauthorizedException);
+      expect(t()).rejects.toThrow(UnauthorizedException);
 
     });
 
