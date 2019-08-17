@@ -63,6 +63,7 @@ export class UserContoller {
   @Put()
   public async updateUser(@Body() updateUserDto: UpdateUserDto, @UserEntity() user: User) {
     Object.keys(updateUserDto).forEach(key => user[key] = updateUserDto[key]);
+    user.save();
     return {iat: Date.now()};
   }
 }
