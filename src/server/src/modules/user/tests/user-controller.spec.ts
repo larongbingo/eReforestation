@@ -161,7 +161,7 @@ describe("UserController (Unit)", () => {
 
       // Arrange
       const confirmationString = "testing";
-      mockedIUserService.findDeletionConfirmation = jest.fn().mockResolvedValue(true);
+      mockedIUserService.findDeletionConfirmation = jest.fn().mockResolvedValue({userId: testingIUser.id});
 
       // Act
       await sut.confirmDeleteUser(confirmationString);
