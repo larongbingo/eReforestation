@@ -127,11 +127,7 @@ describe("SuperUserService (Unit)", () => {
       await sut.assignUserAsSuperUser(sudoId, userId);
 
       // Assert
-      expect(mockedIPermissionService.setSuperUserPermission).toBeCalledWith(
-        "Assign SuperUser Permission",
-        `user ${sudoId} assigned superuser to user ${userId}`,
-        JSON.stringify({sudoId, userId}),
-      );
+      expect(mockedIPermissionService.setSuperUserPermission).toBeCalledWith(userId);
 
     });
 

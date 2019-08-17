@@ -44,7 +44,7 @@ describe("AdminService (Unit)", () => {
       const t = async () => await sut.confirmParticipantApplication(adminId, confirmationId);
 
       // Assert
-      expect(t).toThrow(UnauthorizedException);
+      expect(t()).rejects.toThrow(UnauthorizedException);
 
     });
 
@@ -75,10 +75,10 @@ describe("AdminService (Unit)", () => {
       mockedIPermissionService.isUserAdminOrSuperUser = jest.fn().mockResolvedValue(false);
 
       // Act
-      const t = async () => await sut.confirmParticipantApplication(adminId, confirmationId);
+      const t = async () => await sut.revokeParticipantApplication(adminId, confirmationId);
 
       // Assert
-      expect(t).toThrow(UnauthorizedException);
+      expect(t()).rejects.toThrow(UnauthorizedException);
 
     });
 
@@ -106,13 +106,14 @@ describe("AdminService (Unit)", () => {
       // Arrange
       const adminId = "testingAdmin";
       const confirmationId = "testingConfirmation";
+      const reason = "testing";
       mockedIPermissionService.isUserAdminOrSuperUser = jest.fn().mockResolvedValue(false);
 
       // Act
-      const t = async () => await sut.confirmParticipantApplication(adminId, confirmationId);
+      const t = async () => await sut.banUser(adminId, confirmationId, reason);
 
       // Assert
-      expect(t).toThrow(UnauthorizedException);
+      expect(t()).rejects.toThrow(UnauthorizedException);
 
     });
 
@@ -144,10 +145,10 @@ describe("AdminService (Unit)", () => {
       mockedIPermissionService.isUserAdminOrSuperUser = jest.fn().mockResolvedValue(false);
 
       // Act
-      const t = async () => await sut.confirmParticipantApplication(adminId, confirmationId);
+      const t = async () => await sut.unbanUser(adminId, confirmationId);
 
       // Assert
-      expect(t).toThrow(UnauthorizedException);
+      expect(t()).rejects.toThrow(UnauthorizedException);
 
     });
 
