@@ -193,7 +193,7 @@ describe("UserController (Unit)", () => {
 
       // Arrange
       const user = {...testingIUser, ...testingIUserDetails};
-      const userInstance = {save: jest.fn()};
+      const userInstance = {save: jest.fn().mockResolvedValue(null)};
 
       // Act
       // @ts-ignore
