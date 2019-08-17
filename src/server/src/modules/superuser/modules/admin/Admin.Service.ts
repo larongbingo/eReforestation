@@ -31,6 +31,7 @@ export class AdminService implements IAdminService {
 
   public async unbanUser(adminId: string, userId: string): Promise<void> {
     await this.throwErrorOnUnauthorizedAccess(adminId);
+    this.userService.restoreUser(userId);
   }
 
   private async throwErrorOnUnauthorizedAccess(userId: string) {
