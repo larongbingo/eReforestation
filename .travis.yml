@@ -37,6 +37,13 @@ script:
   - cd ../server
   - npm run test:cov
 
+deploy:
+  provider: script
+  script: netlify deploy -s $NETLIFY_SITE_ID -t $NETLIFY_ACCESS_TOKEN ./client/build
+  skip_cleanup: true
+  on:
+    branch: nextjs
+
 after_script:
   - cd ..
   - codecov
