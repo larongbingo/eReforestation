@@ -40,7 +40,7 @@ script:
 before_deploy:
   - pnpm install netlify-cli -g
   - ls
-  - cd ./client
+  - cd ../client
   - npm run build
 
 deploy:
