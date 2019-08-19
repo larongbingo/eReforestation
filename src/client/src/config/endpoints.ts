@@ -1,5 +1,6 @@
 
-export const APIS_ENDPOINT_ROOT = "http://localhost:8080";
+export const APIS_ENDPOINT_ROOT = process.env.NODE_ENV === "production" ? 
+  "https://thatonenoob.gq" : "http://localhost:8080";
 
 export const APIS_ENDPOINTS = {
   auth: {
