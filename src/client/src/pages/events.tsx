@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 
 import { EventList } from "../components/events";
 import { IEvent } from "../../../interfaces/models/IEvent";
+import { APIS_ENDPOINTS } from "../config/endpoints";
 
 export class Events extends Component<any, EventListStates> {
   constructor(props: any) {
@@ -19,48 +20,16 @@ export class Events extends Component<any, EventListStates> {
   }
 
   async getEvents(): Promise<IEvent[]> {
-    return [
-      {
-        id: "1",
-        title: "Testing Event 1",
-        location: "Test",
-        date: new Date(),
-        description: "This is a test",
-        status: "Go",
-      },
-      {
-        id: "2",
-        title: "Testing Event 2",
-        location: "Test",
-        date: new Date(),
-        description: "This is a test",
-        status: "Go",
-      },
-      {
-        id: "3",
-        title: "Testing Event 3",
-        location: "Test",
-        date: new Date(),
-        description: "This is a test",
-        status: "Go",
-      },
-      {
-        id: "4",
-        title: "Testing Uvuvwevwevwe",
-        location: "Test",
-        date: new Date("05/29/2020"),
-        description: "This is a test",
-        status: "Go",
-      },
-      {
-        id: "5",
-        title: "Testin past",
-        location: "Test123",
-        date: new Date("12/12/1998"),
-        description: "This is a test",
-        status: "Go",
-      }
-    ];
+    const res = await fetch(APIS_ENDPOINTS.events.getEvents.route, {
+      method: APIS_ENDPOINTS.events.getEvents.method
+    });
+
+    const data = await res.json();
+
+    const events: IEvent[] = data.events;
+
+    return events;
+
   }
 
   public render = () => {

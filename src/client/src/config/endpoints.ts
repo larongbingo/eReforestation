@@ -27,6 +27,12 @@ export const APIS_ENDPOINTS = {
       method: "GET",
     },
   },
+  events: {
+    getEvents: {
+      route: `${APIS_ENDPOINT_ROOT}/event`,
+      method: "GET",
+    }
+  },
   user: {
     register: {
       route: `${APIS_ENDPOINT_ROOT}/user`,
