@@ -21,7 +21,10 @@ export class Events extends Component<any, EventListStates> {
 
   async getEvents(): Promise<IEvent[]> {
     const res = await fetch(APIS_ENDPOINTS.events.getEvents.route, {
-      method: APIS_ENDPOINTS.events.getEvents.method
+      method: APIS_ENDPOINTS.events.getEvents.method,
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
 
     const data = await res.json();
