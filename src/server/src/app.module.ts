@@ -1,6 +1,7 @@
 import { Module, ValidationPipe } from "@nestjs/common";
 import { APP_PIPE } from "@nestjs/core";
 
+import { AppController } from "./app.controller";
 import { DatabaseModule } from "./modules/database/Database.Module";
 import { AuthModule } from "./modules/auth/auth.module";
 import { SessionModule } from "./modules/session/Session.Module";
@@ -26,6 +27,9 @@ import { SuperUserModule } from "./modules/superuser/SuperUser.Module";
       provide: APP_PIPE,
       useClass: ValidationPipe,
     },
+  ],
+  controllers: [
+    AppController,
   ],
 })
 export class AppModule {}
