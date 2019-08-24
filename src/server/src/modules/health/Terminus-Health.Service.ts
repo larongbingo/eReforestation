@@ -26,7 +26,6 @@ export class TerminusOptionsService implements TerminusOptionsFactory {
         async () => this.dns.pingCheck("Google", "https://google.com"),
         async () => this.memory.checkHeap("memory_heap", 200 * 1024 * 1024),
         async () => this.memory.checkRSS("memory_rss", 3000 * 1024 * 1024),
-        async () => this.disk.checkStorage("storage", {path: __dirname, threshold: 200 * 1024 * 1024}),
         async () => this.db.isHealthy("database"),
       ],
     };
