@@ -1,5 +1,9 @@
 import React, { FunctionComponent } from "react";
-import { Container, Carousel } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+
+import { IndexCarousel } from "./index/IndexCarousel";
+import { NewsCardDeck } from "./index/NewsCardDeck";
+import { EventsCardDeck } from "./index/EventsCardDeck";
 
 /**
  * Needs to show
@@ -9,32 +13,16 @@ import { Container, Carousel } from "react-bootstrap";
  */
 export const Index: FunctionComponent = () => (
   <Container>
-    <Carousel>
-      <Carousel.Item>
-        <img 
-          className="d-block w-100"
-          data-src="holder.js/300x200"
-        />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          data-src="holder.js/300x200"
-        />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          data-src="holder.js/300x200"
-        />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img 
-          className="d-block w-100"
-          data-src="holder.js/300x200"
-        />
-      </Carousel.Item>
-    </Carousel>
+    <IndexCarousel />
+
+    <h2 className="mt-5">Latest News</h2>
+    <NewsCardDeck />
+    <NewsCardDeck />
+
+    <h2 className="mt-5">Upcoming Events</h2>
+    <EventsCardDeck />
+    <EventsCardDeck />
+
     This is a test asdasdasdasda
   </Container>
 );
