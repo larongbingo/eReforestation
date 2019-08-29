@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: 2019-08-21T21:59:46Z
+  labels:
+    app: ereforestation
+  name: ereforestation-service
+  namespace: default
+  resourceVersion: "230490"
+  selfLink: /api/v1/namespaces/default/services/ereforestation-service
+  uid: fd0868ee-c45e-11e9-b6db-42010a940175
+spec:
+  clusterIP: 10.48.11.49
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 30093
+    port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: ereforestation
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - ip: 35.247.154.87
