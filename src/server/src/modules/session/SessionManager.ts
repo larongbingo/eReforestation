@@ -8,9 +8,6 @@ import { IUserService } from "../../../../interfaces/services/IUserService";
 
 @Injectable()
 export class SessionManager implements ISessionService {
-  constructor(
-    @Inject(IUserService) private readonly userService: IUserService,
-  ) {}
 
   private readonly JWT_PRIVATE_KEY = process.env.JWT_PRIVATE_KEY || "Supercalifragilisticexpialidocious";
 
