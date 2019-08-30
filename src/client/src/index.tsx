@@ -12,7 +12,9 @@ import "bootstrap/dist/css/bootstrap.css";
 export const Root: FunctionComponent = () => (
   <>
     <PageNavbar />
-    <Routes />
+    <div style={{minHeight: "150vh"}}>
+      <Routes />
+    </div>
     <Footer />
   </>
 );
