@@ -53,6 +53,10 @@ export const APIS_ENDPOINTS = {
     getContactPerson: {
       route: `${APIS_ENDPOINT_ROOT}/user/contact-person`,
       method: "GET",
+    },
+    registerCredentialsAndDetails: {
+      route: `${APIS_ENDPOINT_ROOT}/user/new`,
+      method: "POST",
     }
   }
 };

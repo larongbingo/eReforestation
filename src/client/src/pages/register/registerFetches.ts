@@ -34,3 +34,15 @@ export function createUserAccount(username: string, password: string) {
     }
   });
 }
+
+export function createUserAccountWithUserDetails(
+  accountAndDetails: IUserDetails & { username: string, password: string },
+) {
+  return fetch(APIS_ENDPOINTS.user.registerCredentialsAndDetails.route, {
+    method: APIS_ENDPOINTS.user.registerCredentialsAndDetails.method,
+    body: JSON.stringify(accountAndDetails),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}

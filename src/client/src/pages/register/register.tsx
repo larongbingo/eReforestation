@@ -5,7 +5,7 @@ import { IUserDetails } from "../../../../interfaces/models/IUserDetails";
 import { APIS_ENDPOINTS } from "../../config/endpoints";
 import { logIn, storeSessionKey,  } from "../../libs/session";
 
-import { createUserAccount, createUserDetails, createContactPerson } from "./registerFetches";
+import { createUserAccount, createUserDetails, createContactPerson, createUserAccountWithUserDetails } from "./registerFetches";
 import { IContactPerson } from "../../../../interfaces/models/IContactPerson";
 
 // TODO: Add validations
@@ -34,58 +34,48 @@ export const Register: FunctionComponent = () => {
   const [contactPhoneNumber, setContactPhoneNumber] = useState("");
   const [contactEmailAddress, setContactEmailAddress] = useState("");
 
+//#region User Details
+  const getUserDetailsData: () => IUserDetails = () => ({
+    firstName,
+    middleName,
+    lastName,
+    address,
+    emailAddress,
+    phoneNumber,
+    // @ts-ignore
+    dateOfBirth,
+  });
+
+  const getContactPersonData: () => IContactPerson = () => ({
+    firstName: contactFirstName,
+    middleName: contactMiddleName,
+    lastName: contactLastName,
+    address: contactAddress,
+    phoneNumber: contactPhoneNumber,
+    emailAddress: contactEmailAddress,
+  });
+//#endregion
+
   const submitButtonHandler = async (e: any) => {
     e.preventDefault();
+    const userDetails: IUserDetails = getUserDetailsData();
+    const contactPersonDetails: IContactPerson = getContactPersonData();
 
-    // Submit to create user
-    const userRes = await createUserAccount(username, password);
+    const accountRes = await createUserAccountWithUserDetails({...userDetails, username, password});
+    const account = await accountRes.json();
 
-    const user = await userRes.json();
-    
-    console.log(dateOfBirth);
-    console.log(user);
-    if (user.id) {
-      // Login
+    if (account.userId) {
       const loginRes = await logIn(username, password);
       const login = await loginRes.json();
-
       storeSessionKey(login.token)
 
       if (login.token) {
-        // Submit to create details
-        const userDetails: IUserDetails = {
-          firstName,
-          middleName,
-          lastName,
-          address,
-          emailAddress,
-          phoneNumber,
-          // @ts-ignore
-          dateOfBirth,
-        };
-        const detailsRes = await createUserDetails(userDetails);
-        const details = await detailsRes.json();
+        const contactPersonRes = await createContactPerson(contactPersonDetails);
+        const contactPerson = await contactPersonRes.json();
 
-        if (details.userDetails) {
-          // Submit to create contact person
-          const contactPersonDetails: IContactPerson = {
-            firstName: contactFirstName,
-            middleName: contactMiddleName,
-            lastName: contactLastName,
-            address: contactAddress,
-            phoneNumber: contactPhoneNumber,
-            emailAddress: contactEmailAddress,
-          };
-
-          const contactPersonRes = await createContactPerson(contactPersonDetails);
-          const contactPerson = await contactPersonRes.json();
-
-          console.log(contactPerson);
-
-          if (contactPerson.contactPersonDetails) {
-            console.log("registered");
-            setIsRegistered(true);
-          }
+        if (contactPerson.contactPersonDetails) {
+          window.location.replace("/");
+          setIsRegistered(true);
         }
       }
     }
