@@ -52,7 +52,7 @@ export class AuthController {
 
     if (!user) { return new UnprocessableEntityException("Incorrect Username/Password"); }
 
-    const token = this.sessionManagerService.createSession(user.id, {ipAddress, userAgent});
+    const token = await this.sessionManagerService.createSession(user.id, {ipAddress, userAgent});
     return { iat: Date.now(), token };
   }
 }

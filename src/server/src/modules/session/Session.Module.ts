@@ -1,11 +1,10 @@
 import { Module } from "@nestjs/common";
 
-import { UserModule } from "../user/User.Module";
-
+import { SessionModelServiceProvider } from "./Session.Model.Service";
 import { SessionServiceProvider } from "./SessionManager";
 
 @Module({
-  providers: [SessionServiceProvider],
+  providers: [SessionServiceProvider, SessionModelServiceProvider],
   exports: [SessionServiceProvider],
 })
 export class SessionModule {}

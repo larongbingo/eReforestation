@@ -14,7 +14,7 @@ export class AuthService implements ICredentialsVerify, ISessionVerify {
   ) {}
 
   public async validateUser(token: string): Promise<IUser> {
-    const userId = this.sessionValidationService.validateSession(token);
+    const userId = await this.sessionValidationService.validateSession(token);
     return await this.userService.findOneById(userId);
   }
 

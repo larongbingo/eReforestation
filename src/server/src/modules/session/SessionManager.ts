@@ -2,34 +2,31 @@ import { Injectable, Inject, Provider } from "@nestjs/common";
 import { sign } from "jsonwebtoken";
 
 import { ISessionService } from "../../../../interfaces/services/ISessionService";
-import { IUser } from "../../../../interfaces/models/IUser";
-import { ISession } from "../../../../interfaces/models/ISession";
-import { IUserService } from "../../../../interfaces/services/IUserService";
+import { ISessionModelService } from "../../../../interfaces/services/ISessionModelService";
+import { Session } from "../database/models/Session.Model";
 
 @Injectable()
 export class SessionManager implements ISessionService {
 
-  private readonly JWT_PRIVATE_KEY = process.env.JWT_PRIVATE_KEY || "Supercalifragilisticexpialidocious";
+  constructor(
+    @Inject(ISessionModelService)
+    private readonly sessionModelService: ISessionModelService,
+  ) {}
 
-  private readonly sessions: ISession[] = [];
+  private readonly JWT_PRIVATE_KEY = process.env.JWT_PRIVATE_KEY || "Supercalifragilisticexpialidocious";
 
   private JwtGeneratorTokenFunc: (data: any) => string = (data) => sign(data, this.JWT_PRIVATE_KEY);
   public get JwtGeneratorToken() { return this.JwtGeneratorTokenFunc; }
   public set JwtGeneratorToken(func: (data: any) => string) { this.JwtGeneratorTokenFunc = func; }
 
-  public validateSession(token: string): string {
-    let userId = null;
-    for (const session of this.sessions) {
-      if (token === session.token) {
-        userId = session.userId;
-      }
-    }
-    return userId ;
+  public async validateSession(token: string): Promise<string> {
+    const session =  await this.sessionModelService.findOneByToken(token);
+    return session.userId;
   }
 
-  public createSession(userId: string, reqMetadata: {userAgent: string, ipAddress: string}): string {
+  public async createSession(userId: string, reqMetadata: {userAgent: string, ipAddress: string}): Promise<string> {
     const token = this.JwtGeneratorTokenFunc({userId, ...reqMetadata});
-    this.sessions.push({
+    this.sessionModelService.createSession({
       userId,
       userAgent: reqMetadata.userAgent,
       ipAddress: reqMetadata.ipAddress,
@@ -38,15 +35,9 @@ export class SessionManager implements ISessionService {
     return token;
   }
 
-  destroySession(token: string): boolean {
-    let isTokenDestroyed = false;
-    this.sessions.forEach((sessionToken, i) => {
-      if (token === sessionToken.token) {
-        isTokenDestroyed = true;
-        this.sessions.splice(i, 1);
-      }
-    });
-    return isTokenDestroyed;
+  public async destroySession(token: string): Promise<boolean> {
+    this.sessionModelService.destroySessionByToken(token);
+    return true;
   }
 }
 
