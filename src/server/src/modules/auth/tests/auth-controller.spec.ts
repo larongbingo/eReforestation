@@ -8,8 +8,8 @@ import { ISessionServiceImpl } from "./mocks/ISessionServiceImpl";
 
 describe("AuthController (Unit)", () => {
   describe("logOut", () => {
-    const sessionManager = new SessionManager(new IUserServiceImpl());
-    sessionManager.destroySession = jest.fn(sessionManager.destroySession);
+    const sessionManager = new SessionManager(null);
+    sessionManager.destroySession = jest.fn();
 
     const sut = new AuthController(
       new AuthService(
@@ -37,7 +37,11 @@ describe("AuthController (Unit)", () => {
         new IUserServiceImpl(),
         new ISessionServiceImpl(),
       ),
-      new SessionManager(new IUserServiceImpl()),
+      {
+        destroySession: jest.fn(),
+        createSession: jest.fn().mockResolvedValue({token: "testing"}),
+        validateSession: jest.fn(),
+      },
     );
 
     it("should return an object with a property token when given valid credentials", async () => {
