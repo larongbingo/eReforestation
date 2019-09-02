@@ -26,7 +26,7 @@ export class SessionManager implements ISessionService {
 
   public async createSession(userId: string, reqMetadata: {userAgent: string, ipAddress: string}): Promise<string> {
     const token = this.JwtGeneratorTokenFunc({userId, ...reqMetadata});
-    this.sessionModelService.createSession({
+    await this.sessionModelService.createSession({
       userId,
       userAgent: reqMetadata.userAgent,
       ipAddress: reqMetadata.ipAddress,
