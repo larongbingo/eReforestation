@@ -1,6 +1,7 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect } from "react";
 import ReactDOM from 'react-dom';
 
+import { verifySessionKey, destroySessionKey } from "./libs/session";
 import * as serviceWorker from './serviceWorker';
 import { PageNavbar } from "./components/PageNavbar";
 import { Routes } from "./Routes";
@@ -9,15 +10,27 @@ import { Footer } from "./components/Footer";
 import "holderjs";
 import "bootstrap/dist/css/bootstrap.css";
 
-export const Root: FunctionComponent = () => (
-  <>
-    <PageNavbar />
-    <div style={{minHeight: "150vh"}}>
-      <Routes />
-    </div>
-    <Footer />
-  </>
-);
+export const Root: FunctionComponent = () => {
+  useEffect(() => {
+    verifySessionKey()
+    .then((res) => res.json())
+    .then((obj) => {
+      if(!obj.isSessionValid) {
+        destroySessionKey();
+      }
+    }); 
+  }, []);
+
+  return (
+    <>
+      <PageNavbar />
+      <div style={{minHeight: "150vh"}}>
+        <Routes />
+      </div>
+      <Footer />
+    </>
+  );
+};
 
 ReactDOM.render(<Root />, document.getElementById('root'));
 
