@@ -17,7 +17,6 @@ export class UserContoller {
 
   constructor(
     @Inject(IUserService) private readonly userService: IUserService,
-    @Inject(IPermissionService) private readonly permissionService: IPermissionService,
     @Inject(IUserDetailsService) private readonly userDetailsService: IUserDetailsService,
   ) {}
 
@@ -37,7 +36,6 @@ export class UserContoller {
   public async createUserAndDetails(@Body() createUserAndDetails: CreateUserAndDetailsDto) {
     const user = await this.userService.createUser(createUserAndDetails);
     this.userDetailsService.createDetails(createUserAndDetails, user.id);
-    this.permissionService.setParticipantPermission(user.id);
     return {iat: Date.now(), userId: user.id};
   }
 
