@@ -26,12 +26,22 @@ export const APIS_ENDPOINTS = {
       route: `${APIS_ENDPOINT_ROOT}/news/details`,
       method: "GET",
     },
+    createNews: {
+      route: `${APIS_ENDPOINT_ROOT}/news`,
+      method: "POST",
+    },
   },
   events: {
     getEvents: {
       route: `${APIS_ENDPOINT_ROOT}/event`,
       method: "GET",
     }
+  },
+  permission: {
+    getPermission: {
+      route: `${APIS_ENDPOINT_ROOT}/permission`,
+      method: "GET",
+    },
   },
   user: {
     register: {
