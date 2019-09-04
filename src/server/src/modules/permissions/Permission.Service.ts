@@ -30,7 +30,7 @@ export class PermissionService implements IPermissionService {
   }
 
   public async getPermission(userId: string): Promise<UserPermissions> {
-    const assignedPermission = await Permission.findOne({where: {id: {userId}}});
+    const assignedPermission = await Permission.findOne({where: {userId}});
     return assignedPermission.permission;
   }
 
