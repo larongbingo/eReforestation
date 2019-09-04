@@ -23,7 +23,6 @@ export const Index: FunctionComponent = () => (
     <EventsCardDeck />
     <EventsCardDeck />
 
-    This is a test asdasdasdasda
   </Container>
 );
 
