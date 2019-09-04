@@ -3,6 +3,7 @@ import { Form, Button, Container } from "react-bootstrap";
 
 import { DismissibleAlert } from "../components/DismissibleAlert";
 import { logIn, storeSessionKey } from "../libs/session";
+import { storeUserPermission } from "../libs/permission";
 
 // TODO: Alert for incorrect password
 export const LogIn: FunctionComponent = () => {
@@ -15,6 +16,7 @@ export const LogIn: FunctionComponent = () => {
     .then(res => res.json())
     .then(val => {
       storeSessionKey(val.token);
+      setTimeout(storeUserPermission, 1000);
       window.location.replace("/");
     })
     .catch((err) => {
