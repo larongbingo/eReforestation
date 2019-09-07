@@ -4,6 +4,7 @@ import { Container, Form, Row, Col, Button } from "react-bootstrap";
 import { IUserDetails } from "../../../../interfaces/models/IUserDetails";
 import { APIS_ENDPOINTS } from "../../config/endpoints";
 import { logIn, storeSessionKey,  } from "../../libs/session";
+import { storeUserPermission } from "../../libs/permission";
 
 import { createUserAccount, createUserDetails, createContactPerson, createUserAccountWithUserDetails } from "./registerFetches";
 import { IContactPerson } from "../../../../interfaces/models/IContactPerson";
@@ -70,13 +71,10 @@ export const Register: FunctionComponent = () => {
       storeSessionKey(login.token)
 
       if (login.token) {
-        const contactPersonRes = await createContactPerson(contactPersonDetails);
-        const contactPerson = await contactPersonRes.json();
-
-        if (contactPerson.contactPersonDetails) {
-          window.location.replace("/");
-          setIsRegistered(true);
-        }
+        setTimeout(() => createContactPerson(contactPersonDetails), 1000);
+        setTimeout(storeUserPermission, 1000);
+        setIsRegistered(true);
+        setTimeout(() => window.location.replace("/"), 1500);
       }
     }
   };
