@@ -11,7 +11,11 @@ export const APIS_ENDPOINTS = {
     verifySession: {
       route: `${APIS_ENDPOINT_ROOT}/auth/verify`,
       method: "GET"
-    }
+    },
+    logout: {
+      route: `${APIS_ENDPOINT_ROOT}/auth`,
+      method: "PUT",
+    },
   },
   news: {
     pages: {

@@ -6,7 +6,7 @@ export const LogOut: FunctionComponent = () => {
   useEffect(() => {
     destroySessionKey();
     window.location.replace("/");
-  });
+  }, []);
   
   return (
     <>

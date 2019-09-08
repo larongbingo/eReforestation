@@ -11,6 +11,12 @@ export function storeSessionKey(session: string) {
 }
 
 export function destroySessionKey() {
+  fetch(APIS_ENDPOINTS.auth.logout.route, {
+    method: APIS_ENDPOINTS.auth.logout.method,
+    headers: {
+      "Authorization": `Bearer ${getSessionKey()}`,
+    },
+  });
   localStorage.removeItem(SESSION_KEY);
 }
 
