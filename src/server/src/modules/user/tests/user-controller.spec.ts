@@ -41,7 +41,7 @@ const mockedIUserDetailsService: IUserDetailsService = {
 
 describe("UserController (Unit)", () => {
 
-  const sut = new UserContoller(mockedIUserService, mockedIPermissionService, mockedIUserDetailsService);
+  const sut = new UserContoller(mockedIUserService, mockedIUserDetailsService);
 
   beforeEach(() => {
     jest.clearAllMocks();
