@@ -30,11 +30,6 @@ const mockedIUserService: IUserService = {
 };
 
 // @ts-ignore
-const mockedIPermissionService: IPermissionService = {
-  setParticipantPermission: jest.fn(),
-};
-
-// @ts-ignore
 const mockedIUserDetailsService: IUserDetailsService = {
   createDetails: jest.fn(),
 };
@@ -105,19 +100,6 @@ describe("UserController (Unit)", () => {
 
       // Assert
       expect(mockedIUserDetailsService.createDetails).toBeCalledWith(userDetails, testingIUser.id);
-
-    });
-
-    it("should call PermissionService.setParticipantPermission() with user id", async () => {
-
-      // Arrange
-      const userDetails = {...testingIUser, ...testingIUserDetails};
-
-      // Act
-      await sut.createUserAndDetails(userDetails);
-
-      // Assert
-      expect(mockedIPermissionService.setParticipantPermission).toBeCalledWith(testingIUser.id);
 
     });
 
