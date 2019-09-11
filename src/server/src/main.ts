@@ -12,6 +12,7 @@ async function bootstrap() {
   app.use(helmet());
   app.use(cors());
   app.use(compression());
-  await app.listen(8080);
+  const port = process.env.NODE_ENV === "production" ? 80 : 8080;
+  await app.listen(port);
 }
 bootstrap();
