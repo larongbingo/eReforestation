@@ -9,6 +9,8 @@ import { UserModule } from "../../../user/User.Module";
 import { AdminController } from "./Admin.Controller";
 import { AdminServiceProvider } from "./Admin.Service";
 import { AdminMailingServiceProvider } from "./AdminMailing.Service";
+import { UserListController } from "./UserList.Controller";
+import { UserListServiceProvider } from "./UserList.Service";
 
 @Module({
   imports: [
@@ -18,8 +20,8 @@ import { AdminMailingServiceProvider } from "./AdminMailing.Service";
     UserDetailsModule,
     UserModule,
   ],
-  providers: [AdminServiceProvider, AdminMailingServiceProvider],
-  controllers: [AdminController],
+  providers: [AdminServiceProvider, AdminMailingServiceProvider, UserListServiceProvider],
+  controllers: [AdminController, UserListController],
   exports: [AdminServiceProvider],
 })
 export class AdminModule {}
