@@ -18,15 +18,7 @@ import { IBackupService } from "../../../../interfaces/services/IBackupService";
 import { IUser } from "../../../../interfaces/models/IUser";
 import { IPermissionService } from "../../../../interfaces/services/IPermissionService";
 import { UserEntity } from "../../decorators/User-Entity.Decorator";
-
-type File = {
-  fieldName: string;
-  originalName: string;
-  encoding: string;
-  mimetype: string;
-  buffer: Buffer;
-  size: number;
-};
+import { File } from "../../types";
 
 @Controller("/admin")
 export class BackupController {
