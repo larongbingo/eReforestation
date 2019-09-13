@@ -58,8 +58,11 @@ export class GalleryController {
       }
     }
 
+    let fileExtensionsString = "";
+    FILE_EXTENSION_WHITELIST.forEach(ext => fileExtensionsString += ext + " ");
+
     if(!isExtensionIsInWhitelist) {
-      throw new BadRequestException("The file is not allowed. Allowed is" + JSON.stringify(FILE_EXTENSION_WHITELIST));
+      throw new BadRequestException("The file is not allowed. Allowed are: " + fileExtensionsString);
     }
   }
 
