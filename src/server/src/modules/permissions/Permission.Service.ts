@@ -7,22 +7,22 @@ import { Permission } from "../database/models/Permission.Model";
 @Injectable()
 export class PermissionService implements IPermissionService {
   public async isUserParticipant(userId: string): Promise<boolean> {
-    const assignedPermission = await Permission.findOne({where: {id: userId}});
+    const assignedPermission = await Permission.findOne({where: {userId}});
     return assignedPermission.permission === UserPermissions.Participant;
   }
 
   public async isUserAdmin(userId: string): Promise<boolean> {
-    const assignedPermission = await Permission.findOne({where: {id: userId}});
+    const assignedPermission = await Permission.findOne({where: {userId}});
     return assignedPermission.permission === UserPermissions.Admin;
   }
 
   public async isUserSuperUser(userId: string): Promise<boolean> {
-    const assignedPermission = await Permission.findOne({where: {id: userId}});
+    const assignedPermission = await Permission.findOne({where: {userId}});
     return assignedPermission.permission === UserPermissions.Superuser;
   }
 
   public async isUserAdminOrSuperUser(userId: string): Promise<boolean> {
-    const assignedPermission = await Permission.findOne({where: {id: userId}});
+    const assignedPermission = await Permission.findOne({where: {userId}});
     const permission = assignedPermission.permission === UserPermissions.Admin ||
     assignedPermission.permission === UserPermissions.Superuser;
     if (!permission) { throw new Error("User does not have permission"); }
