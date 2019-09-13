@@ -1,6 +1,6 @@
 export type File = {
   fieldName: string;
-  originalName: string;
+  originalname: string;
   encoding: string;
   mimetype: string;
   buffer: Buffer;
