@@ -10,6 +10,7 @@ import { NewsModule } from "./modules/news/News.Module";
 import { EventModule } from "./modules/events/Event.Module";
 import { HealthModule } from "./modules/health/Health.Module";
 import { SuperUserModule } from "./modules/superuser/SuperUser.Module";
+import { GalleryModule } from "./modules/gallery/Gallery.Module";
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { SuperUserModule } from "./modules/superuser/SuperUser.Module";
     EventModule,
     HealthModule,
     SuperUserModule,
+    GalleryModule,
   ],
   providers: [
     {
