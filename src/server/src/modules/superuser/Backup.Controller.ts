@@ -24,8 +24,7 @@ import { File } from "../../types";
 export class BackupController {
   constructor(
     @Inject(IBackupService) private readonly backupService: IBackupService,
-    @Inject(IPermissionService)
-    private readonly permissionService: IPermissionService
+    @Inject(IPermissionService) private readonly permissionService: IPermissionService
   ) {}
 
   @Get("/backup")
