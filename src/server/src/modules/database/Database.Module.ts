@@ -1,9 +1,10 @@
 import { Module, OnModuleDestroy, OnApplicationShutdown } from "@nestjs/common";
 import { DatabaseConnectionConfig } from "./DatabaseConnectionConfig";
 import { DatabaseConnectionProvider, DatabaseConnection } from "./DatabaseConnection";
+import { ServiceDatabaseConnectionProvider, ServiceDatabaseConnection } from "./ServiceDatabase.Connection";
 
 @Module({
-  providers: [DatabaseConnectionConfig, DatabaseConnectionProvider],
+  providers: [DatabaseConnectionConfig, DatabaseConnectionProvider, ServiceDatabaseConnectionProvider],
   exports: [DatabaseConnectionProvider],
 })
 export class DatabaseModule implements OnModuleDestroy, OnApplicationShutdown {
@@ -17,6 +18,7 @@ export class DatabaseModule implements OnModuleDestroy, OnApplicationShutdown {
   }
 
   private async closeDatabaseConnection() {
+    await ServiceDatabaseConnection.close();
     return DatabaseConnection.close();
   }
 
