@@ -32,7 +32,7 @@ export class BackupController {
   @Header("Content-Type", "text/plain")
   @UseGuards(AuthGuard("bearer"))
   public async sendSqlDump(@Res() res: Response, @UserEntity() user: IUser) {
-    if (!this.permissionService.isUserSuperUser(user.id))
+    if (!await this.permissionService.isUserSuperUser(user.id))
       return new UnauthorizedException("User does not have permission");
     const sqlDumpStream = await this.backupService.exportSqlDump();
     return sqlDumpStream.pipe(res);
@@ -42,7 +42,7 @@ export class BackupController {
   @UseInterceptors(FileInterceptor("sqlDump"))
   @UseGuards(AuthGuard("bearer"))
   public async recieveSqlDump(@UploadedFile() file: File, @Res() res: Response, @UserEntity() user: IUser) {
-    if (!this.permissionService.isUserSuperUser(user.id))
+    if (!await this.permissionService.isUserSuperUser(user.id))
       return new UnauthorizedException("User does not have permission");
     await this.backupService.importSqlDump(file.buffer);
     return {iat: Date.now()};
