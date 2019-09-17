@@ -1,27 +1,42 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState, useEffect } from "react";
 import { match } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
-import { INews } from "../../../interfaces/models/INews";
 import { NewsDetails } from "../components/NewsDetails";
+import { APIS_ENDPOINT_ROOT } from "../config/endpoints";
 
 export const NewsDetailsPage: FunctionComponent<NewsDetailsPageProps> = ({match}) => {
-  const getNewsDetails: () => INews = () => {
-    return {
-      content: "This is a test",
-      headline: "This si a test",
-      createdAt: "At the office ibbas",
-      author: "This might get removed since we use id, it would be better if we use name",
-    };
+  const [newsDetails, setNewsDetails] = useState<any>(null);
+
+  const getNewsDetails = async () => {
+    const newsDetailsRes = await fetch(APIS_ENDPOINT_ROOT + "/news/details?id=" + match.params.newsId);
+    const newsDetails = await newsDetailsRes.json();
+    return newsDetails;
   };
-  
+
+  useEffect(() => {
+    getNewsDetails().then(setNewsDetails)
+  }, []);
+
+  if(!newsDetails) {
+    return (
+      <Container>
+        <h2>Loading</h2>
+      </Container>
+    );
+  }
+
   return (
     <Container>
-      <NewsDetails newsDetails={getNewsDetails()} />
+      <NewsDetails newsDetails={newsDetails!.news} />
     </Container>
   );
 }
 
 export interface NewsDetailsPageProps {
-  match: match;
+  match: match<NewsDetailsMatch>;
 }
+
+type NewsDetailsMatch = {
+  newsId: string;
+};
