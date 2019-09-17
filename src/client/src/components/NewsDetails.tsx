@@ -7,8 +7,8 @@ export const NewsDetails: FunctionComponent<NewsDetailsProps> = ({newsDetails}) 
   <Container>
     <h2>{newsDetails.headline}</h2>
     <h5>{newsDetails.author}</h5>
-    <h6>{newsDetails.createdAt}</h6>
-    <p>{newsDetails.content}</p>
+    <h6>{new Date(newsDetails.createdAt!).toLocaleDateString()}</h6>
+    <div dangerouslySetInnerHTML={{__html: newsDetails.content}}></div>
   </Container>
 );
 
