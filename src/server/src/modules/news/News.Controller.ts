@@ -27,7 +27,7 @@ export class NewsController {
   }
 
   @Get()
-  public async getNewsListByPage(@Query("page") page: number = 1, @Query("pageSize") pageSize: number = 10) {
+  public async getNewsListByPage(@Query("page") page: number = 0, @Query("pageSize") pageSize: number = 10) {
     const newsList = await this.newsService.getNewsByPage(page, pageSize);
     return {iat: Date.now(), newsList};
   }
