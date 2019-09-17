@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useEffect } from "react";
 import ReactDOM from 'react-dom';
 
-import { verifySessionKey, destroySessionKey } from "./libs/session";
+import { verifySessionKey, destroySessionKey, getSessionKey } from "./libs/session";
 import * as serviceWorker from './serviceWorker';
 import { PageNavbar } from "./components/PageNavbar";
 import { Routes } from "./Routes";
@@ -15,7 +15,7 @@ export const Root: FunctionComponent = () => {
     verifySessionKey()
     .then((res) => res.json())
     .then((obj) => {
-      if(!obj.isSessionValid) {
+      if(!obj.isSessionValid && getSessionKey()) {
         destroySessionKey();
       }
     }); 
