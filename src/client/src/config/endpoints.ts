@@ -47,6 +47,12 @@ export const APIS_ENDPOINTS = {
       method: "GET",
     },
   },
+  gallery: {
+    upload: {
+      route: `${APIS_ENDPOINT_ROOT}/gallery/image`,
+      method: "POST",
+    }
+  },
   user: {
     register: {
       route: `${APIS_ENDPOINT_ROOT}/user`,
