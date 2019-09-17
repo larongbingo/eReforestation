@@ -5,7 +5,9 @@ import { INews } from "../../../../interfaces/models/INews";
 export const NewsListEntry: FunctionComponent<NewsListEntryProps> = ({news}) => (
   <tr>
     <td>{new Date(news.createdAt!).toLocaleDateString()}</td>
-    <td>{news.headline}</td>
+    <td>
+      <a href={"/news/" + news.id}>{news.headline}</a>
+    </td>
     <td>{news.author!}</td>
   </tr>
 );
