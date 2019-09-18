@@ -18,7 +18,7 @@ export class SuperUserController {
   @UseGuards(AuthGuard("bearer"))
   public async getLogs(@UserEntity() admin: IUser) {
     if (!await this.permissionService.isUserSuperUser(admin.id)) {
-      return new UnauthorizedException("User does not have permission");
+      throw new UnauthorizedException("User does not have permission");
     }
 
     const logs = await this.sudoService.getEventLogs(admin.id);
@@ -29,7 +29,7 @@ export class SuperUserController {
   @UseGuards(AuthGuard("bearer"))
   public async assignAdminToUser(@UserEntity() admin: IUser, @Param("userId") userId: string) {
     if (!await this.permissionService.isUserSuperUser(admin.id)) {
-      return new UnauthorizedException("User does not have permission");
+      throw new UnauthorizedException("User does not have permission");
     }
 
     this.sudoService.assignUserAsAdmin(admin.id, userId);
@@ -40,7 +40,7 @@ export class SuperUserController {
   @UseGuards(AuthGuard("bearer"))
   public async assignSudoToUser(@UserEntity() admin: IUser, @Param("userId") userId: string) {
     if (!await this.permissionService.isUserSuperUser(admin.id)) {
-      return new UnauthorizedException("User does not have permission");
+      throw new UnauthorizedException("User does not have permission");
     }
 
     this.sudoService.assignUserAsSuperUser(admin.id, userId);

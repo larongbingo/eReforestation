@@ -50,7 +50,7 @@ export class AuthController {
       credentialDto.password,
     );
 
-    if (!user) { return new UnprocessableEntityException("Incorrect Username/Password"); }
+    if (!user) { throw new UnprocessableEntityException("Incorrect Username/Password"); }
 
     const token = await this.sessionManagerService.createSession(user.id, {ipAddress, userAgent});
     return { iat: Date.now(), token };

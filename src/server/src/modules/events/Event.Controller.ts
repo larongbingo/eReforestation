@@ -27,7 +27,7 @@ export class EventController {
   @UseGuards(AuthGuard("bearer"))
   public async createEvent(@Body() createEventDto: CreateEventDto, @UserEntity() user: IUser) {
     if (!await this.permissionService.isUserAdminOrSuperUser(user.id)) {
-      return new UnauthorizedException("Your account does not have a permissions that allows to create an event");
+      throw new UnauthorizedException("Your account does not have a permissions that allows to create an event");
     }
 
     const newEvent = await this.eventService.createEvent({...createEventDto, status: EventStatus.Go});
@@ -42,7 +42,7 @@ export class EventController {
     @UserEntity() user: IUser,
   ) {
     if (!await this.permissionService.isUserAdminOrSuperUser(user.id)) {
-      return new UnauthorizedException("Your account does not permit you to create new events");
+      throw new UnauthorizedException("Your account does not permit you to create new events");
     }
 
     const updatedEvent = await this.eventService.updateEvent(updateEventDto, eventId);

@@ -40,7 +40,7 @@ export class GalleryController {
   @UseGuards(AuthGuard("bearer"))
   public async recieveImage(@UploadedFile() file: File, @UserEntity() user: IUser) {
     if (!(await this.permissionService.isUserAdminOrSuperUser(user.id))) 
-      return new UnauthorizedException("User does not have admin access");
+      throw new UnauthorizedException("User does not have admin access");
 
     const extension = this.retrieveExtensionInFilename(file.originalname);
     this.isFileFormatAllowed(extension);

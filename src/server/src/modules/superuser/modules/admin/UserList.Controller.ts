@@ -17,7 +17,7 @@ export class UserListController {
   @UseGuards(AuthGuard("bearer"))
   public async getUserList(@UserEntity() user: IUser) {
     if(this.permissionService.isUserAdminOrSuperUser(user.id))
-      return new UnauthorizedException("User does not have permission");
+      throw new UnauthorizedException("User does not have permission");
     const users = await this.userListService.getUserList();
     return {iat: Date.now(), users};
   }
@@ -26,7 +26,7 @@ export class UserListController {
   @UseGuards(AuthGuard("bearer"))
   public async getUserListByEventId(@Param("eventId") eventId: string, @UserEntity() user: IUser) {
     if(this.permissionService.isUserAdminOrSuperUser(user.id))
-      return new UnauthorizedException("User does not have permission");
+      throw new UnauthorizedException("User does not have permission");
     const users = await this.userListService.getUserListByEventId(eventId);
     return {iat: Date.now(), users};
   }

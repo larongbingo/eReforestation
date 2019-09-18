@@ -33,7 +33,7 @@ export class BackupController {
   @UseGuards(AuthGuard("bearer"))
   public async sendSqlDump(@Res() res: Response, @UserEntity() user: IUser) {
     if (!await this.permissionService.isUserSuperUser(user.id))
-      return new UnauthorizedException("User does not have permission");
+      throw new UnauthorizedException("User does not have permission");
     const sqlDumpStream = await this.backupService.exportSqlDump();
     return sqlDumpStream.pipe(res);
   }
@@ -43,7 +43,7 @@ export class BackupController {
   @UseGuards(AuthGuard("bearer"))
   public async recieveSqlDump(@UploadedFile() file: File, @Res() res: Response, @UserEntity() user: IUser) {
     if (!await this.permissionService.isUserSuperUser(user.id))
-      return new UnauthorizedException("User does not have permission");
+    throw new UnauthorizedException("User does not have permission");
     await this.backupService.importSqlDump(file.buffer);
     return {iat: Date.now()};
   }
@@ -53,7 +53,7 @@ export class BackupController {
   @UseGuards(AuthGuard("bearer"))
   public async sendImageZip(@Res() res: Response, @UserEntity() user: IUser) {
     if (!await this.permissionService.isUserSuperUser(user.id))
-      return new UnauthorizedException("User does not have permission");
+      throw new UnauthorizedException("User does not have permission");
     const imageZipReadable = await this.backupService.exportImages();
     imageZipReadable.pipe(res);
   }
@@ -63,7 +63,7 @@ export class BackupController {
   @UseGuards(AuthGuard("bearer"))
   public async importImageZip(@UploadedFile() file: File, @UserEntity() user: IUser) {
     if(!await this.permissionService.isUserSuperUser(user.id))
-      return new UnauthorizedException("User does not have permission");
+      throw new UnauthorizedException("User does not have permission");
     await this.backupService.importImages(file.buffer);
     return {iat: Date.now()};
   }
