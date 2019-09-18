@@ -3,6 +3,7 @@ import { IPermissionService } from "../../../../../interfaces/services/IPermissi
 import { IEvent } from "../../../../../interfaces/models/IEvent";
 import { IUser } from "../../../../../interfaces/models/IUser";
 import { EventController } from "../Event.Controller";
+import { async } from "rxjs/internal/scheduler/async";
 
 const testingEvent: IEvent = {
   id: "123",
@@ -70,18 +71,17 @@ describe("EventController (Unit)", () => {
 
   describe("createEvent", () => {
 
-    it("should return an UnauthorizedException when user does not have admin rights", async () => {
+    it("should throw an UnauthorizedException when user does not have admin rights", async () => {
       // Arrange
       const event = {...testingEvent};
       const user = {...testingUser};
       mockedIPermissionService.isUserAdminOrSuperUser = jest.fn().mockResolvedValue(false);
 
       // Act
-      const result = await sut.createEvent(event, user);
+      const result = async () => sut.createEvent(event, user);
 
       // Assert
-      // @ts-ignore
-      expect(result.message).not.toBeNull();
+      await expect(result()).rejects.toThrow();
     });
 
     it("should return a proper response when user does have admin rights", async () => {
@@ -157,18 +157,17 @@ describe("EventController (Unit)", () => {
 
       // Act
       // @ts-ignore
-      const result = await sut.updateEvent(event.id, event, user);
+      const result = async () => sut.updateEvent(event.id, event, user);
 
       // Assert
-      // @ts-ignore
-      expect(result.message).not.toBeNull();
+      await expect(result()).rejects.toThrow();
     });
 
     it("should return a proper response when user does have admin rights", async () => {
       // Arrange
       const event = {...testingEvent};
       const user = {...testingUser};
-      mockedIPermissionService.isUserAdminOrSuperUser = jest.fn().mockResolvedValue(false);
+      mockedIPermissionService.isUserAdminOrSuperUser = jest.fn().mockResolvedValue(true);
 
       // Act
       // @ts-ignore
@@ -176,7 +175,7 @@ describe("EventController (Unit)", () => {
 
       // Assert
       // @ts-ignore
-      expect(result.iat).not.toBeNull();
+      expect(result.iat).toBeTruthy();
     });
 
     it("should recieve the new details of the event", async () => {

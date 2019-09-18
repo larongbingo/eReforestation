@@ -5,6 +5,7 @@ import { AuthController } from "../auth.controller";
 import { IAuthenticatedUsersArray, PasswordPlainText } from "./constants/IAuthenticatedUsersArray";
 import { IUserServiceImpl } from "./mocks/IUserServiceImpl";
 import { ISessionServiceImpl } from "./mocks/ISessionServiceImpl";
+import { async } from "rxjs/internal/scheduler/async";
 
 describe("AuthController (Unit)", () => {
   describe("logOut", () => {
@@ -63,11 +64,10 @@ describe("AuthController (Unit)", () => {
       const password = "IAuthenticatedUsersArray[0].password";
 
       // Act
-      const result = await sut.login({username, password}, "testing", "testing");
+      const result = async () => sut.login({username, password}, "testing", "testing");
 
       // Assert
-      // @ts-ignore
-      expect(result.message).toBeTruthy();
+      await expect(result()).rejects.toThrow();
     });
   });
 });

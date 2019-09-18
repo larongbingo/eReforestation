@@ -47,18 +47,17 @@ describe("SuperUserController (Unit)", () => {
 
     });
 
-    it("should return an exception when user does not have permission", async () => {
+    it("should throw an exception when user does not have permission", async () => {
 
       // Arrange
       const user = {...testingUser};
       mockedIPermissionService.isUserSuperUser = jest.fn().mockResolvedValue(false);
 
       // Act
-      const result = await sut.getLogs(user);
+      const result = async () => await sut.getLogs(user);
 
       // Assert
-      // @ts-ignore
-      expect(result.message).not.toBeNull();
+      await expect(result()).rejects.toThrow();
 
     });
 
@@ -66,7 +65,7 @@ describe("SuperUserController (Unit)", () => {
 
       // Arrange
       const user = {...testingUser};
-      mockedIPermissionService.isUserSuperUser = jest.fn().mockResolvedValue(false);
+      mockedIPermissionService.isUserSuperUser = jest.fn().mockResolvedValue(true);
 
       // Act
       await sut.getLogs(user);
@@ -96,7 +95,7 @@ describe("SuperUserController (Unit)", () => {
 
     });
 
-    it("should return an exception when user does not have permission", async () => {
+    it("should throw an exception when user does not have permission", async () => {
 
       // Arrange
       const userId = "1testing";
@@ -104,11 +103,10 @@ describe("SuperUserController (Unit)", () => {
       mockedIPermissionService.isUserSuperUser = jest.fn().mockResolvedValue(false);
 
       // Act
-      const result = await sut.assignAdminToUser(user, userId);
+      const result = async () => await sut.assignAdminToUser(user, userId);
 
       // Assert
-      // @ts-ignore
-      expect(result.message).not.toBeNull();
+      await expect(result()).rejects.toThrow();
 
     });
 
@@ -147,7 +145,7 @@ describe("SuperUserController (Unit)", () => {
 
     });
 
-    it("should return an exception when user does not have permission", async () => {
+    it("should throw an exception when user does not have permission", async () => {
 
       // Arrange
       const userId = "testing123";
@@ -155,11 +153,10 @@ describe("SuperUserController (Unit)", () => {
       mockedIPermissionService.isUserSuperUser = jest.fn().mockResolvedValue(false);
 
       // Act
-      const result = await sut.assignSudoToUser(user, userId);
+      const result = async () => sut.assignSudoToUser(user, userId);
 
       // Assert
-      // @ts-ignore
-      expect(result.message).not.toBeNull();
+      await expect(result()).rejects.toThrow();
 
     });
 
