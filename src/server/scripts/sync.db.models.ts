@@ -1,7 +1,9 @@
-import { Sequelize } from "sequelize";
+// tslint:disable: tsr-detect-sql-literal-injection
+import { NestFactory } from "@nestjs/core";
 
-import { DatabaseConnection as connection } from "../src/modules/database/DatabaseConnection";
-import { ServiceDatabaseConnection as serviceConnection } from "../src/modules/database/ServiceDatabase.Connection";
+import { AppModule } from "../src/app.module";
+import { DatabaseConnection } from "../src/modules/database/DatabaseConnection";
+import { ServiceDatabaseConnection } from "../src/modules/database/ServiceDatabase.Connection";
 
 (async function() {
   if(process.env.NODE_ENV === "production") {
@@ -9,18 +11,20 @@ import { ServiceDatabaseConnection as serviceConnection } from "../src/modules/d
     process.exit(2);
   }
 
+  const app = await NestFactory.create(AppModule);
+  const mainConnection = app.get(DatabaseConnection);
+  const serviceConnection = app.get(ServiceDatabaseConnection);
+
   try {
-    await connection.query(`DROP DATABASE ${connection.options.database};`);
-    await connection.query(`CREATE DATABASE ${connection.options.database}`);
-    await connection.query(`USE ${connection.options.database}`);
+    await mainConnection.connection.query(`DROP DATABASE ${mainConnection.connection.options.database};`);
+    await mainConnection.connection.query(`CREATE DATABASE ${mainConnection.connection.options.database}`);
+    await mainConnection.connection.query(`USE ${mainConnection.connection.options.database}`);
+    await mainConnection.connection.sync({force: true});
 
-    await connection.sync({force: true});
-
-    await serviceConnection.query(`DROP DATABASE ${serviceConnection.options.database}`);
-    await serviceConnection.query(`CREATE DATABASE ${serviceConnection.options.database}`);
-    await serviceConnection.query(`USE ${serviceConnection.options.database}`);
-
-    await serviceConnection.sync({force: true});
+    await serviceConnection.connection.query(`DROP DATABASE ${serviceConnection.connection.options.database}`);
+    await serviceConnection.connection.query(`CREATE DATABASE ${serviceConnection.connection.options.database}`);
+    await serviceConnection.connection.query(`USE ${serviceConnection.connection.options.database}`);
+    await serviceConnection.connection.sync({force: true});
   }
   catch(err) {
     console.log(err);
