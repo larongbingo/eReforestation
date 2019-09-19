@@ -6,9 +6,11 @@ import cors = require("cors");
 import express from "express";
 
 import { AppModule } from "./app.module";
+import { checkEnvFile } from "./modules/config/Config.Module";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  checkEnvFile();
   app.useGlobalPipes(new ValidationPipe({ skipMissingProperties: true, transform: true }));
   app.use("/images", express.static("static"));
   app.use(express.json({limit: "100mb"}));
