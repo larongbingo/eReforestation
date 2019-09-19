@@ -8,10 +8,12 @@ import { SuperUserController } from "./SuperUser.Controller";
 import { SuperUserServiceProvider } from "./SuperUser.Service";
 import { BackupController } from "./Backup.Controller";
 import { BackupServiceProvider } from "./Backup.Service";
+import { ConfigModule } from "../config/Config.Module";
 
 @Module({
   imports: [
     AdminModule,
+    ConfigModule,
     LogModule,
     PermissionModule,
   ],

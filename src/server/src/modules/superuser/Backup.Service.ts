@@ -1,4 +1,4 @@
-import { Injectable, Provider } from "@nestjs/common";
+import { Injectable, Provider, Inject } from "@nestjs/common";
 import { spawn, execSync, exec } from "child_process";
 import { createWriteStream, createReadStream, ReadStream } from "fs";
 import { promisify, inspect } from "util";
@@ -8,18 +8,21 @@ import { Extract } from "unzip";
 import rimraf from "rimraf";
 import { join } from "path";
 
+import { IConfigService } from "../../../../interfaces/services/IConfigService";
 import { IBackupService } from "../../../../interfaces/services/IBackupService";
-import { DatabaseConnectionConfig } from "../database/DatabaseConnectionConfig";
+import { DatabaseConnectionConfig } from "../config/configs/database/DatabaseConnectionConfig";
 
 @Injectable()
 export class BackupService implements IBackupService {
+
+  constructor(
+    @Inject(IConfigService) private readonly dbConfig: DatabaseConnectionConfig,
+  ) {}
 
   private readonly DUMP_FILENAME = "dump.sql";
   private readonly EXPORT_IMAGES_FILENAME = "images.zip";
   private readonly IMAGES_TABLE = "images";
   private readonly IMAGES_TABLE_DUMP = "images.sql";
-
-  private readonly dbConfig = new DatabaseConnectionConfig();
 
   public async exportSqlDump(): Promise<Readable> {
     const mysqldump = spawn("mysqldump", [
@@ -28,7 +31,7 @@ export class BackupService implements IBackupService {
       `-p${this.dbConfig.password}`,
       "-h",
       this.dbConfig.host,
-      this.dbConfig.database
+      this.dbConfig.database,
     ]);
 
     return mysqldump.stdout;
@@ -108,5 +111,5 @@ export class BackupService implements IBackupService {
 
 export const BackupServiceProvider: Provider<BackupService> = {
   provide: IBackupService,
-  useClass: BackupService
+  useClass: BackupService,
 };
