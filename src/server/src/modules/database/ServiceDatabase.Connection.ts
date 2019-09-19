@@ -1,27 +1,30 @@
-import { Provider } from "@nestjs/common";
+import { Provider, Logger, Inject, Injectable } from "@nestjs/common";
 import { Sequelize } from "sequelize-typescript";
 
-import { DatabaseConnectionConfig } from "./DatabaseConnectionConfig";
+import { ServiceDatabaseConfig } from "../config/configs/database/ServiceDatabase.Config";
+
 import { Log } from "./models/Log.Model";
 import { Session } from "./models/Session.Model";
 
-const ServiceDatabaseConfig = new DatabaseConnectionConfig();
-ServiceDatabaseConfig.database = process.env.SERVICE_DATABASE || "thesisService";
+@Injectable()
+export class ServiceDatabaseConnection {
 
-export const ServiceDatabaseConnection = new Sequelize({...ServiceDatabaseConfig});
+  constructor(
+    @Inject() private readonly dbConfig: ServiceDatabaseConfig,
+  ) {
 
-ServiceDatabaseConnection.options.logging = function(message: string, details: any) {
-  console.log(`Executing (service): ${message.split(":")[1]}`);
+    this.connection.addModels([
+      Log,
+      Session,
+    ]);
+
+    this.connection.options.logging = ServiceDatabaseLogging;
+
+  }
+
+  public readonly connection = new Sequelize(this.dbConfig);
 }
 
-ServiceDatabaseConnection.addModels([
-  Log,
-  Session,
-]);
-
-export const ServiceDatabaseConnectionKey = "ServiceDatabaseConnectionKey";
-
-export const ServiceDatabaseConnectionProvider: Provider = {
-  provide: ServiceDatabaseConnectionKey,
-  useValue: ServiceDatabaseConnection,
-};
+function ServiceDatabaseLogging(message: string, details: any) {
+  Logger.log(`Executing (service): ${message.split(":")[1]}`);
+}

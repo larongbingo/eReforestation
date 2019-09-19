@@ -1,5 +1,7 @@
-import { Provider } from "@nestjs/common";
+import { Provider, Injectable, Inject } from "@nestjs/common";
 import { Sequelize } from "sequelize-typescript";
+
+import { DatabaseConnectionConfig } from "../config/configs/database/DatabaseConnectionConfig";
 
 import { ContactPerson } from "./models/ContactPerson.Model";
 import { Event } from "./models/Event.Model";
@@ -10,24 +12,26 @@ import { Permission } from "./models/Permission.Model";
 import { User } from "./models/User.Model";
 import { UserConfirmDelete } from "./models/UserConfirmDelete.Model";
 import { UserDetails } from "./models/UserDetails.Model";
-import { DatabaseConnectionConfig } from "./DatabaseConnectionConfig";
 
-export const DatabaseConnectionKey = "DatabaseConnection";
-export const DatabaseConnection = new Sequelize(new DatabaseConnectionConfig());
+@Injectable()
+export class DatabaseConnection {
 
-DatabaseConnection.addModels([
-  ContactPerson,
-  Event,
-  EventParticipants,
-  Image,
-  News,
-  Permission,
-  User,
-  UserConfirmDelete,
-  UserDetails,
-]);
+  constructor(
+    @Inject() private readonly dbConfig: DatabaseConnectionConfig,
+  ) {
+    this.connection.addModels([
+      ContactPerson,
+      Event,
+      EventParticipants,
+      Image,
+      News,
+      Permission,
+      User,
+      UserConfirmDelete,
+      UserDetails,
+    ]);
+  }
 
-export const DatabaseConnectionProvider: Provider = {
-  provide: DatabaseConnectionKey,
-  useValue: DatabaseConnection,
-};
+  public readonly connection = new Sequelize(this.dbConfig);
+
+}
