@@ -9,8 +9,8 @@ import { AppModule } from "./app.module";
 import { checkEnvFile } from "./modules/config/Config.Module";
 
 async function bootstrap() {
+  await checkEnvFile();
   const app = await NestFactory.create(AppModule);
-  checkEnvFile();
   app.useGlobalPipes(new ValidationPipe({ skipMissingProperties: true, transform: true }));
   app.use("/images", express.static("static"));
   app.use(express.json({limit: "100mb"}));
