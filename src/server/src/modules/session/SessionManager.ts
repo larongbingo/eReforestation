@@ -1,6 +1,7 @@
 import { Injectable, Inject, Provider } from "@nestjs/common";
 import { sign } from "jsonwebtoken";
 
+import { IConfigService } from "../../../../interfaces/services/IConfigService";
 import { ISessionService } from "../../../../interfaces/services/ISessionService";
 import { ISessionModelService } from "../../../../interfaces/services/ISessionModelService";
 import { Session } from "../database/models/Session.Model";
@@ -9,11 +10,11 @@ import { Session } from "../database/models/Session.Model";
 export class SessionManager implements ISessionService {
 
   constructor(
-    @Inject(ISessionModelService)
-    private readonly sessionModelService: ISessionModelService,
+    @Inject(ISessionModelService) private readonly sessionModelService: ISessionModelService,
+    @Inject(IConfigService) private readonly envConfig: IConfigService,
   ) {}
 
-  private readonly JWT_PRIVATE_KEY = process.env.JWT_PRIVATE_KEY || "Supercalifragilisticexpialidocious";
+  private readonly JWT_PRIVATE_KEY = this.envConfig.get("JWT_PRIVATE_KEY") || "Supercalifragilisticexpialidocious";
 
   private JwtGeneratorTokenFunc: (data: any) => string = (data) => sign(data, this.JWT_PRIVATE_KEY);
   public get JwtGeneratorToken() { return this.JwtGeneratorTokenFunc; }
