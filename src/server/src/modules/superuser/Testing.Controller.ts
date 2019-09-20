@@ -19,12 +19,13 @@ export class TestingController {
    */
   @Get("/test")
   @UseGuards(AuthGuard("bearer"))
-  public async initiateTesting(@UserEntity() user: IUser) {
-    if(!await this.permissionService.isUserSuperUser(user.id)) {
+  public async initiateTesting(@UserEntity() user: IUser, @Res() res: Response) {
+    if (!await this.permissionService.isUserSuperUser(user.id)) {
       throw new UnauthorizedException("User does not have admin access");
     }
 
     const testingSpawn = spawn("npm", ["run", "test"]);
+    testingSpawn.stdout.pipe(res);
   }
 
 }
