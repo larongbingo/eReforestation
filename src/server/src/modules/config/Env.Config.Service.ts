@@ -9,10 +9,10 @@ export class EnvConfigService implements IConfigService {
 
   private readonly envConfig: {[key: string]: string};
 
-  constructor(filePath: string) {
+  constructor() {
     Logger.log("Using .env file");
     // tslint:disable-next-line: tsr-detect-non-literal-fs-filename
-    this.envConfig = dotenv.parse(fs.readFileSync(filePath));
+    this.envConfig = dotenv.parse(fs.readFileSync(`${process.env.NODE_ENV || "development"}.env`));
   }
 
   public get(key: string): string {
@@ -23,5 +23,5 @@ export class EnvConfigService implements IConfigService {
 
 export const EnvConfigServiceProvider: Provider = {
   provide: IConfigService,
-  useValue: new EnvConfigService(`${process.env.NODE_ENV || "development"}.env`),
+  useClass:  EnvConfigService,
 };
