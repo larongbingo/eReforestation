@@ -10,7 +10,7 @@ import { Session } from "./models/Session.Model";
 export class ServiceDatabaseConnection {
 
   constructor(
-    @Inject() private readonly dbConfig: ServiceDatabaseConfig,
+    @Inject(ServiceDatabaseConfig) private readonly dbConfig: ServiceDatabaseConfig,
   ) {
 
     this.connection.addModels([

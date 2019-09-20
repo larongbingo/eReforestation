@@ -17,7 +17,7 @@ import { UserDetails } from "./models/UserDetails.Model";
 export class DatabaseConnection {
 
   constructor(
-    @Inject() private readonly dbConfig: DatabaseConnectionConfig,
+    @Inject(DatabaseConnectionConfig) private readonly dbConfig: DatabaseConnectionConfig,
   ) {
     this.connection.addModels([
       ContactPerson,
