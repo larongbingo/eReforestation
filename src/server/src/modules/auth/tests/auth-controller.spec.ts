@@ -9,7 +9,7 @@ import { async } from "rxjs/internal/scheduler/async";
 
 describe("AuthController (Unit)", () => {
   describe("logOut", () => {
-    const sessionManager = new SessionManager(null);
+    const sessionManager = new SessionManager(null, {get: jest.fn()});
     sessionManager.destroySession = jest.fn();
 
     const sut = new AuthController(
