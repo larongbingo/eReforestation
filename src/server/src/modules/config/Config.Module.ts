@@ -25,8 +25,14 @@ const ConfigProvider = IS_ENV_FILE_PRESENT ? EnvConfigServiceProvider : ProcessC
     ConfigProvider,
     DatabaseConnectionConfig,
     ServiceDatabaseConfig,
+    MailServiceConfig,
   ],
-  exports: [ConfigProvider],
+  exports: [
+    ConfigProvider,
+    DatabaseConnectionConfig,
+    ServiceDatabaseConfig,
+    MailServiceConfig,
+  ],
 })
 
 export class ConfigModule {}
