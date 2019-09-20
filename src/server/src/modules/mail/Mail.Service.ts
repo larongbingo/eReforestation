@@ -1,37 +1,28 @@
-import { Injectable, Provider } from "@nestjs/common";
+import { Injectable, Provider, Inject } from "@nestjs/common";
 import { createTransport } from "nodemailer";
 
 import { IMailService, IMail } from "../../../../interfaces/services/IMailService";
+import { MailServiceConfig } from "../config/configs/mail/Mail.Service.Config";
 
 @Injectable()
 export class MailService implements IMailService {
-  constructor() {
-    if (this.isMailVariablesSet()) {
-      throw new Error("Credentials for email is missing, please make sure that" +
-      " the MAIL_SMTP, MAIL_USERNAME, MAIL_PORT and MAIL_PASSWORD is set");
-    }
-  }
-
-  private readonly isMailVariablesSet = () => {
-    return !process.env.MAIL_PASSWORD ||
-    !process.env.MAIL_USERNAME ||
-    !process.env.MAIL_SMTP ||
-    !process.env.MAIL_PORT;
-  }
+  constructor(
+    @Inject(MailServiceConfig) private readonly mailConfig: MailServiceConfig,
+  ) {}
 
   private readonly transporter = createTransport({
-    host: process.env.MAIL_SMTP,
-    port: Number(process.env.MAIL_PORT),
+    host: this.mailConfig.MAIL_SMTP,
+    port: Number(this.mailConfig.MAIL_PORT),
     secure: true,
     auth: {
-      user: process.env.MAIL_USERNAME,
-      pass: process.env.MAIL_PASSWORD,
+      user: this.mailConfig.MAIL_USERNAME,
+      pass: this.mailConfig.MAIL_PASSWORD,
     },
   });
 
   public async sendMail(mail: IMail): Promise<any> {
     const info = await this.transporter.sendMail({
-      from: process.env.MAIL_USERNAME,
+      from: this.mailConfig.MAIL_USERNAME,
       to: mail.to,
       subject: mail.title,
       html: mail.message,
