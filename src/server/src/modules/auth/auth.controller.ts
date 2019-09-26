@@ -14,6 +14,8 @@ import { AuthGuard } from "@nestjs/passport";
 
 import { ICredentialsVerify } from "../../../../interfaces/services/IAuthService";
 import { ISessionService } from "../../../../interfaces/services/ISessionService";
+import { ITextsService } from "../../../../interfaces/services/ITextsService";
+import { TEXTS_KEYS } from "../texts/Texts.Key";
 
 import { IpAddress } from "./decorators/IpAddress.Decorator";
 import { UserAgent } from "./decorators/UserAgent.Decorator";
@@ -24,6 +26,7 @@ export class AuthController {
   constructor(
     @Inject(ICredentialsVerify) private readonly credentialsVerificationService: ICredentialsVerify,
     @Inject(ISessionService) private readonly sessionManagerService: ISessionService,
+    @Inject(ITextsService) private readonly texts: ITextsService,
   ) {}
 
   @Get("verify")
@@ -50,7 +53,11 @@ export class AuthController {
       credentialDto.password,
     );
 
-    if (!user) { throw new UnprocessableEntityException("Incorrect Username/Password"); }
+    if (!user) {
+      throw new UnprocessableEntityException(
+        this.texts.getText(TEXTS_KEYS.AUTH_INCORRECT_CREDENTIALS),
+      );
+    }
 
     const token = await this.sessionManagerService.createSession(user.id, {ipAddress, userAgent});
     return { iat: Date.now(), token };

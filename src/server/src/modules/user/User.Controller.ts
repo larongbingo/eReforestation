@@ -1,12 +1,14 @@
 import { Controller, Inject, Delete, UseGuards, Post, Put, Body, Get, Query } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 
+import { ITextsService } from "../../../../interfaces/services/ITextsService";
 import { IPermissionService } from "../../../../interfaces/services/IPermissionService";
 import { IUserDetailsService } from "../../../../interfaces/services/IUserDetailsService";
 import { IUserService } from "../../../../interfaces/services/IUserService";
 import { UserEntity } from "../../decorators/User-Entity.Decorator";
 import { IUser } from "../../../../interfaces/models/IUser";
 import { User } from "../database/models/User.Model";
+import { TEXTS_KEYS } from "../texts/Texts.Key";
 
 import { CreateUserAndDetailsDto } from "./dto/CreateUserAndDetails.Dto";
 import { CreateUserDto } from "./dto/CreateUser.Dto";
@@ -18,6 +20,7 @@ export class UserContoller {
   constructor(
     @Inject(IUserService) private readonly userService: IUserService,
     @Inject(IUserDetailsService) private readonly userDetailsService: IUserDetailsService,
+    @Inject(ITextsService) private readonly texts: ITextsService,
   ) {}
 
   @Post()
@@ -27,7 +30,7 @@ export class UserContoller {
       return {iat: Date.now(), id: user.id};
     } catch (err) {
       if (err.message.match(/(is already taken)?/)) {
-        return {iat: Date.now(), message: "Username is already taken"};
+        return {iat: Date.now(), message: this.texts.getText(TEXTS_KEYS.USER_USERNAME_TAKEN)};
       }
     }
   }
@@ -55,7 +58,7 @@ export class UserContoller {
       return {iat: Date.now(), userIdDestroyed: userIdDeletion.userId};
     }
 
-    return {iat: Date.now(), message: "Incorrect confirmation string"};
+    return {iat: Date.now(), message: this.texts.getText(TEXTS_KEYS.USER_WRONG_CONFIRM_STR)};
   }
 
   @Put()

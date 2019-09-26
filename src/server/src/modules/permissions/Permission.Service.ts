@@ -1,11 +1,18 @@
-import { Injectable, Provider } from "@nestjs/common";
+import { Injectable, Provider, Inject } from "@nestjs/common";
 
+import { ITextsService } from "../../../../interfaces/services/ITextsService";
 import { IPermissionService } from "../../../../interfaces/services/IPermissionService";
 import { UserPermissions } from "../../../../interfaces/models/IPermissions";
 import { Permission } from "../database/models/Permission.Model";
+import { TEXTS_KEYS } from "../texts/Texts.Key";
 
 @Injectable()
 export class PermissionService implements IPermissionService {
+
+  constructor(
+    @Inject(ITextsService) private readonly texts: ITextsService,
+  ) {}
+
   public async isUserParticipant(userId: string): Promise<boolean> {
     const assignedPermission = await Permission.findOne({where: {userId}});
     return assignedPermission.permission === UserPermissions.Participant;
@@ -25,7 +32,11 @@ export class PermissionService implements IPermissionService {
     const assignedPermission = await Permission.findOne({where: {userId}});
     const permission = assignedPermission.permission === UserPermissions.Admin ||
     assignedPermission.permission === UserPermissions.Superuser;
-    if (!permission) { throw new Error("User does not have permission"); }
+    if (!permission) {
+      throw new Error(
+        this.texts.getText(TEXTS_KEYS.MISSING_ADMIN_OR_SUDO_CREDENTIALS),
+      );
+    }
     return permission;
   }
 

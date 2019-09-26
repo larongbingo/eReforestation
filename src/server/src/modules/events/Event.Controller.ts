@@ -1,11 +1,13 @@
 import { Controller, Post, Put, Get, Inject, Param, Body, UseGuards, UnauthorizedException } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 
+import { ITextsService } from "../../../../interfaces/services/ITextsService";
 import { IPermissionService } from "../../../../interfaces/services/IPermissionService";
 import { IEventService } from "../../../../interfaces/services/IEventService";
 import { IUser } from "../../../../interfaces/models/IUser";
 import { EventStatus } from "../../../../interfaces/models/IEvent";
 import { UserEntity } from "../../decorators/User-Entity.Decorator";
+import { TEXTS_KEYS } from "../texts/Texts.Key";
 
 import { CreateEventDto } from "./dto/CreateEvent.Dto";
 import { UpdateEventDto } from "./dto/UpdateEvent.Dto";
@@ -15,6 +17,7 @@ export class EventController {
   constructor(
     @Inject(IEventService) private readonly eventService: IEventService,
     @Inject(IPermissionService) private readonly permissionService: IPermissionService,
+    @Inject(ITextsService) private readonly texts: ITextsService,
   ) { }
 
   @Get()
@@ -27,7 +30,11 @@ export class EventController {
   @UseGuards(AuthGuard("bearer"))
   public async createEvent(@Body() createEventDto: CreateEventDto, @UserEntity() user: IUser) {
     if (!await this.permissionService.isUserAdminOrSuperUser(user.id)) {
-      throw new UnauthorizedException("Your account does not have a permissions that allows to create an event");
+      throw new UnauthorizedException(
+        this.texts.getText(
+          TEXTS_KEYS.MISSING_ADMIN_OR_SUDO_CREDENTIALS,
+        ),
+      );
     }
 
     const newEvent = await this.eventService.createEvent({...createEventDto, status: EventStatus.Go});
@@ -42,7 +49,11 @@ export class EventController {
     @UserEntity() user: IUser,
   ) {
     if (!await this.permissionService.isUserAdminOrSuperUser(user.id)) {
-      throw new UnauthorizedException("Your account does not permit you to create new events");
+      throw new UnauthorizedException(
+        this.texts.getText(
+          TEXTS_KEYS.MISSING_ADMIN_OR_SUDO_CREDENTIALS,
+        ),
+      );
     }
 
     const updatedEvent = await this.eventService.updateEvent(updateEventDto, eventId);

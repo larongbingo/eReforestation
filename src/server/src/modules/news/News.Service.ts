@@ -1,19 +1,26 @@
 import { Injectable, Inject, UnauthorizedException, Provider } from "@nestjs/common";
 
+import { ITextsService } from "../../../../interfaces/services/ITextsService";
 import { IPermissionService } from "../../../../interfaces/services/IPermissionService";
 import { INewsService } from "../../../../interfaces/services/INewsService";
 import { INews } from "../../../../interfaces/models/INews";
 import { News } from "../database/models/News.Model";
+import { TEXTS_KEYS } from "../texts/Texts.Key";
 
 @Injectable()
 export class NewsService implements INewsService {
   constructor(
     @Inject(IPermissionService) private readonly permissionService: IPermissionService,
+    @Inject(ITextsService) private readonly texts: ITextsService,
   ) {}
 
   private async checkPermissions(userId: string) {
     if (!await this.permissionService.isUserAdminOrSuperUser(userId)) {
-      throw new UnauthorizedException("You are not authorized to create a news");
+      throw new UnauthorizedException(
+        this.texts.getText(
+          TEXTS_KEYS.MISSING_ADMIN_OR_SUDO_CREDENTIALS,
+        ),
+      );
     }
   }
 
