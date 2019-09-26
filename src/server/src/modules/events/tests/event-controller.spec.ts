@@ -43,6 +43,7 @@ describe("EventController (Unit)", () => {
   const sut = new EventController(
     mockedIEventService,
     mockedIPermissionService,
+    null,
   );
 
   describe("getEvents", () => {

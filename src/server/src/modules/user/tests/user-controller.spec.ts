@@ -36,7 +36,7 @@ const mockedIUserDetailsService: IUserDetailsService = {
 
 describe("UserController (Unit)", () => {
 
-  const sut = new UserContoller(mockedIUserService, mockedIUserDetailsService);
+  const sut = new UserContoller(mockedIUserService, mockedIUserDetailsService, {getText: jest.fn(() => "Username is already taken")});
 
   beforeEach(() => {
     jest.clearAllMocks();
