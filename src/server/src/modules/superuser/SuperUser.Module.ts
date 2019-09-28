@@ -10,6 +10,7 @@ import { SuperUserController } from "./SuperUser.Controller";
 import { SuperUserServiceProvider } from "./SuperUser.Service";
 import { BackupController } from "./Backup.Controller";
 import { BackupServiceProvider } from "./Backup.Service";
+import { TestingController } from "./Testing.Controller";
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { BackupServiceProvider } from "./Backup.Service";
     PermissionModule,
     TextsModule,
   ],
-  controllers: [SuperUserController, BackupController],
+  controllers: [SuperUserController, BackupController, TestingController],
   providers: [SuperUserServiceProvider, BackupServiceProvider],
 })
 export class SuperUserModule {}
