@@ -6,7 +6,7 @@ import { PermissionServiceProvider } from "./Permission.Service";
 import { PermissionController } from "./Permission.Controller";
 
 @Module({
-  imports: [],
+  imports: [TextsModule],
   controllers: [PermissionController],
   providers: [PermissionServiceProvider],
   exports: [PermissionServiceProvider]
