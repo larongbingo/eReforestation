@@ -1,4 +1,12 @@
-import { Controller, UseGuards, Get, Inject, UnauthorizedException, Res } from "@nestjs/common";
+import {
+  Controller,
+  UseGuards,
+  Get,
+  Inject,
+  UnauthorizedException,
+  Res,
+  InternalServerErrorException,
+} from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { spawn } from "child_process";
 import { Response } from "express";
@@ -29,8 +37,12 @@ export class TestingController {
       );
     }
 
-    const testingSpawn = spawn("npm", ["run", "test"]);
-    testingSpawn.stdout.pipe(res);
+    try {
+      const testingSpawn = spawn(/^win/.test(process.platform) ? "jest.cmd" : "jest");
+      testingSpawn.stderr.pipe(res);
+    } catch (err) {
+      throw new InternalServerErrorException();
+    }
   }
 
 }
