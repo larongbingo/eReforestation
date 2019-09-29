@@ -5,7 +5,7 @@
     },
     "backend": {
       "packages": ["src/server/package.json", "src/server/package-lock.json"],
-      "ignore": ["sequelize"]
+      "ignore": ["sequelize", "sequelize-typescript"]
     }
   }
 }
