@@ -17,10 +17,10 @@ async function bootstrap() {
     .setTitle("eReforestation")
     .setDescription("The APIs of eReforestation website")
     .setVersion("0.1")
-    .addTag("public")
-    .addTag("participant")
-    .addTag("admin")
-    .addTag("superadmin")
+    .addTag("Public")
+    .addTag("Participant")
+    .addTag("Admin")
+    .addTag("SuperUser")
     .build();
 
   const document = SwaggerModule.createDocument(app, options);
