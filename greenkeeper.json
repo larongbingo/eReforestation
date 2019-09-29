@@ -1,10 +1,10 @@
 {
   "groups": {
     "frontend": {
-      "packages": ["src/client/package.json", "src/client/package-lock.json"]
+      "packages": ["src/client/package.json"]
     },
     "backend": {
-      "packages": ["src/server/package.json", "src/server/package-lock.json"],
+      "packages": ["src/server/package.json"],
       "ignore": ["sequelize", "sequelize-typescript"]
     }
   }
