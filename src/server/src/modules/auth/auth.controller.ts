@@ -11,6 +11,7 @@ import {
   Inject,
 } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
+import { ApiCreatedResponse, ApiUseTags, ApiOperation, ApiOkResponse } from "@nestjs/swagger";
 
 import { ICredentialsVerify } from "../../../../interfaces/services/IAuthService";
 import { ISessionService } from "../../../../interfaces/services/ISessionService";
@@ -29,12 +30,18 @@ export class AuthController {
     @Inject(ITextsService) private readonly texts: ITextsService,
   ) {}
 
+  @ApiUseTags("Participant")
+  @ApiOperation({title: "Verify Session", description: "Checks if the given session string is still valid"})
+  @ApiOkResponse({description: "The session string is valid"})
   @Get("verify")
   @UseGuards(AuthGuard("bearer"))
   public async verifySession(@Headers("authorization") sessionToken: string) {
     return { iat: Date.now(), isSessionValid: true, sessionToken };
   }
 
+  @ApiUseTags("Participant")
+  @ApiOperation({title: "Log out", description: "Removes the given session string from the list of valid sessions"})
+  @ApiOkResponse({description: "The session string is now invalid"})
   @Put()
   @UseGuards(AuthGuard("bearer"))
   public async logOut(@Headers("authorization") sessionToken: string) {
@@ -42,6 +49,9 @@ export class AuthController {
     return { iat: Date.now() };
   }
 
+  @ApiUseTags("Participant")
+  @ApiOperation({title: "Log In", description: "Creates a new session string if the given credentials are valid"})
+  @ApiCreatedResponse({description: "The session string"})
   @Post()
   public async login(
     @Body() credentialDto: CredentialsDto,

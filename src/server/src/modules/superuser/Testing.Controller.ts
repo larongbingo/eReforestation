@@ -8,6 +8,7 @@ import {
   InternalServerErrorException,
 } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
+import { ApiOkResponse, ApiUseTags, ApiOperation, ApiImplicitHeader, ApiUnauthorizedResponse } from "@nestjs/swagger";
 import { spawn } from "child_process";
 import { Response } from "express";
 
@@ -28,6 +29,11 @@ export class TestingController {
   /**
    * Pipe the test results to page
    */
+  @ApiUseTags("SuperUser")
+  @ApiOperation({title: "Test Modules", description: "Runs the testing suite"})
+  @ApiImplicitHeader({name: "Authorization", required: true})
+  @ApiOkResponse({description: "The log result of the tests"})
+  @ApiUnauthorizedResponse({description: "The account must have sudo permission"})
   @Get("/test")
   @UseGuards(AuthGuard("bearer"))
   public async initiateTesting(@UserEntity() user: IUser, @Res() res: Response) {

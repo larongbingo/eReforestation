@@ -1,5 +1,6 @@
 import { Controller, Inject, UseGuards, Delete, Put, Param, Body } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
+import { ApiUseTags, ApiCreatedResponse, ApiUnauthorizedResponse, ApiImplicitHeader } from "@nestjs/swagger";
 
 import { IAdminService, IAdminMailingService } from "../../../../../../interfaces/services/IAdminService";
 import { IUser } from "../../../../../../interfaces/models/IUser";
@@ -14,6 +15,10 @@ export class AdminController {
     @Inject(IAdminMailingService) private readonly adminMailService: IAdminMailingService,
   ) {}
 
+  @ApiUseTags("Admin")
+  @ApiCreatedResponse({description: "Indicates that the user has been banned"})
+  @ApiUnauthorizedResponse({description: "The account must have an admin or sudo permission"})
+  @ApiImplicitHeader({name: "Authorization", required: true})
   @Delete("/ban/:userIdToBan")
   @UseGuards(AuthGuard("bearer"))
   public async adminBansUser(

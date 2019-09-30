@@ -12,6 +12,7 @@ import {
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { AuthGuard } from "@nestjs/passport";
+import { ApiConsumes, ApiImplicitFile, ApiImplicitHeader, ApiUseTags, ApiCreatedResponse } from "@nestjs/swagger";
 
 import { ITextsService } from "../../../../interfaces/services/ITextsService";
 import { IPermissionService } from "../../../../interfaces/services/IPermissionService";
@@ -32,12 +33,18 @@ export class GalleryController {
     @Inject(ITextsService) private readonly texts: ITextsService,
   ) {}
 
+  @ApiUseTags("Public")
+  @ApiCreatedResponse({description: "The list of all files stored"})
   @Get("/image")
   public async getAllImages() {
     const fileNames = this.galleryService.getAllImagesNames();
     return { iat: Date.now(), fileNames };
   }
 
+  @ApiUseTags("Admin")
+  @ApiConsumes("multipart/form-data")
+  @ApiImplicitHeader({name: "Authorization", required: true})
+  @ApiImplicitFile({name: "image", required: true, description: "The image that needs to be uploaded"})
   @Post("/image")
   @UseInterceptors(FileInterceptor("image"))
   @UseGuards(AuthGuard("bearer"))

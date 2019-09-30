@@ -12,6 +12,15 @@ import {
 } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
 import { FileInterceptor } from "@nestjs/platform-express";
+import {
+  ApiOperation,
+  ApiOkResponse,
+  ApiCreatedResponse,
+  ApiUnauthorizedResponse,
+  ApiUseTags,
+  ApiImplicitFile,
+  ApiImplicitHeader,
+} from "@nestjs/swagger";
 import { Readable } from "stream";
 import { Response } from "express";
 
@@ -31,6 +40,11 @@ export class BackupController {
     @Inject(ITextsService) private readonly texts: ITextsService,
   ) {}
 
+  @ApiUseTags("SuperUser")
+  @ApiOperation({title: "Export SQL Dump", description: "Exports a mysqldump file"})
+  @ApiImplicitHeader({name: "Authorization", required: true})
+  @ApiCreatedResponse({description: "The script for the mysqldump"})
+  @ApiUnauthorizedResponse({description: "The account must have a SuperUser permission"})
   @Get("/db/backup")
   @Header("Content-Type", "text/plain")
   @UseGuards(AuthGuard("bearer"))
@@ -40,6 +54,12 @@ export class BackupController {
     return sqlDumpStream.pipe(res);
   }
 
+  @ApiUseTags("SuperUser")
+  @ApiOperation({title: "Import SQL Dump", description: "Imports a mysqldump file"})
+  @ApiImplicitHeader({name: "Authorization", required: true})
+  @ApiImplicitFile({name: "sqlDump", required: true})
+  @ApiOkResponse({description: "The date and time of the import"})
+  @ApiUnauthorizedResponse({description: "The account must have a SuperUser permission"})
   @Post("/db/restore")
   @UseInterceptors(FileInterceptor("sqlDump"))
   @UseGuards(AuthGuard("bearer"))
@@ -49,6 +69,11 @@ export class BackupController {
     return {iat: Date.now()};
   }
 
+  @ApiUseTags("SuperUser")
+  @ApiOperation({title: "Export Images", description: "Exports a images zip file"})
+  @ApiImplicitHeader({name: "Authorization", required: true})
+  @ApiCreatedResponse({description: "The zip file of the images"})
+  @ApiUnauthorizedResponse({description: "The account must have a SuperUser permission"})
   @Get("/images/backup")
   @Header("Content-Type", "application/zip")
   @UseGuards(AuthGuard("bearer"))
@@ -58,6 +83,12 @@ export class BackupController {
     imageZipReadable.pipe(res);
   }
 
+  @ApiUseTags("SuperUser")
+  @ApiOperation({title: "Import Images", description: "Imports zipped image files"})
+  @ApiImplicitHeader({name: "Authorization", required: true})
+  @ApiImplicitFile({name: "sqlDump", required: true})
+  @ApiOkResponse({description: "Time and date of the import"})
+  @ApiUnauthorizedResponse({description: "The account must have a SuperUser permission"})
   @Post("/images/restore")
   @UseInterceptors(FileInterceptor("images"))
   @UseGuards(AuthGuard("bearer"))

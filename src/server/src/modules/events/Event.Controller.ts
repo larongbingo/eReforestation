@@ -1,5 +1,6 @@
 import { Controller, Post, Put, Get, Inject, Param, Body, UseGuards, UnauthorizedException } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
+import { ApiCreatedResponse, ApiUseTags, ApiUnauthorizedResponse, ApiOkResponse, ApiOperation } from "@nestjs/swagger";
 
 import { ITextsService } from "../../../../interfaces/services/ITextsService";
 import { IPermissionService } from "../../../../interfaces/services/IPermissionService";
@@ -20,12 +21,19 @@ export class EventController {
     @Inject(ITextsService) private readonly texts: ITextsService,
   ) { }
 
+  @ApiUseTags("Public")
+  @ApiOperation({title: "Get Events", description: "Gets all of the available events"})
+  @ApiOkResponse({description: "The list of events available"})
   @Get()
   public async getEvents() {
     const events = await this.eventService.getEvents();
     return {iat: Date.now(), events};
   }
 
+  @ApiUseTags("Admin")
+  @ApiOperation({title: "Create Event", description: "Creates a new event"})
+  @ApiCreatedResponse({description: "The details of the newly created event"})
+  @ApiUnauthorizedResponse({description: "Your account must have an admin or sudo permission"})
   @Post()
   @UseGuards(AuthGuard("bearer"))
   public async createEvent(@Body() createEventDto: CreateEventDto, @UserEntity() user: IUser) {
@@ -41,6 +49,10 @@ export class EventController {
     return {iat: Date.now(), newEvent};
   }
 
+  @ApiUseTags("Admin")
+  @ApiOperation({title: "Update Event", description: "Updates an event"})
+  @ApiCreatedResponse({description: "The details of the newly updated event"})
+  @ApiUnauthorizedResponse({description: "Your account must have an admin or sudo permission"})
   @Put("/:id")
   @UseGuards(AuthGuard("bearer"))
   public async updateEvent(
