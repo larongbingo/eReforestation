@@ -1,6 +1,6 @@
 import { Controller, Inject, Delete, UseGuards, Post, Put, Body, Get, Query } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
-import { ApiOperation, ApiUseTags, ApiCreatedResponse, ApiImplicitHeader, ApiImplicitQuery } from "@nestjs/swagger";
+import { ApiOperation, ApiUseTags, ApiCreatedResponse, ApiImplicitHeader, ApiImplicitQuery, ApiOkResponse } from "@nestjs/swagger";
 
 import { ITextsService } from "../../../../interfaces/services/ITextsService";
 import { IPermissionService } from "../../../../interfaces/services/IPermissionService";
@@ -72,7 +72,9 @@ export class UserContoller {
   }
 
   @ApiUseTags("Participant")
-  @ApiOperation({title: "Account Deletion"})
+  @ApiOperation({title: "Update Account Details"})
+  @ApiImplicitHeader({name: "Authorization", required: true})
+  @ApiOkResponse({description: "The time the account details was updated"})
   @Put()
   public async updateUser(@Body() updateUserDto: UpdateUserDto, @UserEntity() user: User) {
     Object.keys(updateUserDto).forEach(key => user[key] = updateUserDto[key]);

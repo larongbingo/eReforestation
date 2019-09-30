@@ -1,6 +1,6 @@
 import { Controller, Inject, UseGuards, Delete, Put, Param, Body } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
-import { ApiUseTags, ApiCreatedResponse, ApiUnauthorizedResponse, ApiImplicitHeader } from "@nestjs/swagger";
+import { ApiUseTags, ApiCreatedResponse, ApiUnauthorizedResponse, ApiImplicitHeader, ApiOperation, ApiImplicitParam } from "@nestjs/swagger";
 
 import { IAdminService, IAdminMailingService } from "../../../../../../interfaces/services/IAdminService";
 import { IUser } from "../../../../../../interfaces/models/IUser";
@@ -16,9 +16,11 @@ export class AdminController {
   ) {}
 
   @ApiUseTags("Admin")
+  @ApiOperation({title: "Ban User"})
+  @ApiImplicitParam({name: "userIdToBan", required: true})
+  @ApiImplicitHeader({name: "Authorization", required: true})
   @ApiCreatedResponse({description: "Indicates that the user has been banned"})
   @ApiUnauthorizedResponse({description: "The account must have an admin or sudo permission"})
-  @ApiImplicitHeader({name: "Authorization", required: true})
   @Delete("/ban/:userIdToBan")
   @UseGuards(AuthGuard("bearer"))
   public async adminBansUser(
@@ -31,6 +33,12 @@ export class AdminController {
     return {iat: Date.now()};
   }
 
+  @ApiUseTags("Admin")
+  @ApiOperation({title: "Unban User"})
+  @ApiImplicitParam({name: "userIdToBan", required: true})
+  @ApiImplicitHeader({name: "Authorization", required: true})
+  @ApiCreatedResponse({description: "Indicates that the user has been unbanned"})
+  @ApiUnauthorizedResponse({description: "The account must have an admin or sudo permission"})
   @Put("/ban/:userIdToUnban")
   @UseGuards(AuthGuard("bearer"))
   public async adminUnbansUser(@UserEntity() adminUser: IUser, @Param("userIdToUnban") userId: string) {
@@ -39,6 +47,12 @@ export class AdminController {
     return {iat: Date.now()};
   }
 
+  @ApiUseTags("Admin")
+  @ApiOperation({title: "Confirm Participation of User in an event"})
+  @ApiImplicitParam({name: "confirmationId", required: true})
+  @ApiImplicitHeader({name: "Authorization", required: true})
+  @ApiCreatedResponse({description: "The details of the event and user that was confirmed to join the event"})
+  @ApiUnauthorizedResponse({description: "The account must have an admin or sudo permission"})
   @Put("/application/confirm/:confirmationId")
   @UseGuards(AuthGuard("bearer"))
   public async adminConfirmsEventApplication(
@@ -50,6 +64,12 @@ export class AdminController {
     return {iat: Date.now(), eventParticipation};
   }
 
+  @ApiUseTags("Admin")
+  @ApiOperation({title: "Revoke Participation of User in an event"})
+  @ApiImplicitParam({name: "confirmationId", required: true})
+  @ApiImplicitHeader({name: "Authorization", required: true})
+  @ApiCreatedResponse({description: "The details of the event and user that was revoked to join the event"})
+  @ApiUnauthorizedResponse({description: "The account must have an admin or sudo permission"})
   @Delete("/application/revoke/:confirmationId")
   @UseGuards(AuthGuard("bearer"))
   public async adminRevokesEventConfirmation(
