@@ -9,6 +9,7 @@ import {
   Param,
   UnauthorizedException,
   BadRequestException,
+  Logger,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { AuthGuard } from "@nestjs/passport";
@@ -43,6 +44,7 @@ export class GalleryController {
       throw new UnauthorizedException("User does not have admin access");
 
     const extension = this.retrieveExtensionInFilename(file.originalname);
+    Logger.log(extension);
     this.isFileFormatAllowed(extension);
 
     const fileName = await this.galleryService.storeImage(file.buffer, extension);
@@ -53,7 +55,7 @@ export class GalleryController {
     let isExtensionIsInWhitelist = false;
 
     for(const allowedExtension of FILE_EXTENSION_WHITELIST) {
-      if(allowedExtension === extension) {
+      if(allowedExtension === extension.toLowerCase()) {
         isExtensionIsInWhitelist = true;
       }
     }
