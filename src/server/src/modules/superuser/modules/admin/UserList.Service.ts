@@ -16,7 +16,7 @@ export class UserListService implements IUserListService {
   public async getUserListByEventId(eventId: string): Promise<IUser[]> {
     const userIds = await EventParticipants.findAll({where: {eventId}});
     const users = [];
-    for(let userId of userIds) { users.push(await UserDetails.findOne({where: {userId: userId.userId}})); }
+    for(const userId of userIds) { users.push(await UserDetails.findOne({where: {userId: userId.userId}})); }
     return users;
   }
 

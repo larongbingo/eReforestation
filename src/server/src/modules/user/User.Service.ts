@@ -1,6 +1,7 @@
 import { Injectable, Provider, BadRequestException, Inject } from "@nestjs/common";
 import { generate } from "randomstring";
 
+import { ITextsService } from "../../../../interfaces/services/ITextsService";
 import { IMailService } from "../../../../interfaces/services/IMailService";
 import { IUserConfirmDelete } from "../../../../interfaces/models/IUserConfirmDelete";
 import { IUserService } from "../../../../interfaces/services/IUserService";
@@ -9,6 +10,7 @@ import { User } from "../database/models/User.Model";
 import { UserConfirmDelete } from "../database/models/UserConfirmDelete.Model";
 import { IUserDetailsService } from "../../../../interfaces/services/IUserDetailsService";
 import { IPermissionService } from "../../../../interfaces/services/IPermissionService";
+import { TEXTS_KEYS } from "../texts/Texts.Key";
 
 @Injectable()
 export class UserService implements IUserService {
@@ -16,6 +18,7 @@ export class UserService implements IUserService {
     @Inject(IMailService) private readonly mailService: IMailService,
     @Inject(IUserDetailsService) private readonly userDetailsService: IUserDetailsService,
     @Inject(IPermissionService) private readonly permissionService: IPermissionService,
+    @Inject(ITextsService) private readonly texts: ITextsService,
   ) {}
 
   public async createUser(details: IUser): Promise<IUser> {
@@ -34,7 +37,11 @@ export class UserService implements IUserService {
 
   public async updateUser(userId: string, newDetails: Partial<IUser>): Promise<IUser> {
     const user = await User.findOne({where: {id: userId}});
-    if (!user) { throw new BadRequestException("You do not have an account, please create one."); }
+    if (!user) {
+      throw new BadRequestException(
+        this.texts.getText(TEXTS_KEYS.USER_NO_ACCOUNT),
+      );
+    }
     Object.keys(newDetails).forEach(key => user[key] = newDetails[key]);
     return user.save();
   }

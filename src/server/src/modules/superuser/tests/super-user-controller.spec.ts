@@ -28,7 +28,7 @@ const mockedISuperUserService: ISuperUserService = {
 
 describe("SuperUserController (Unit)", () => {
 
-  const sut = new SuperUserController(mockedISuperUserService, mockedIPermissionService);
+  const sut = new SuperUserController(mockedISuperUserService, mockedIPermissionService, null);
 
   describe("getLogs", () => {
 

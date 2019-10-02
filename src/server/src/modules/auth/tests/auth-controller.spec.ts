@@ -18,6 +18,7 @@ describe("AuthController (Unit)", () => {
         new ISessionServiceImpl(),
       ),
       sessionManager,
+      null,
     );
 
     it("should call ISessionManager.destroySession() once when given a valid token", async () => {
@@ -43,6 +44,7 @@ describe("AuthController (Unit)", () => {
         createSession: jest.fn().mockResolvedValue({token: "testing"}),
         validateSession: jest.fn(),
       },
+      null,
     );
 
     it("should return an object with a property token when given valid credentials", async () => {
