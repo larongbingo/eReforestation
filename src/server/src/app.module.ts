@@ -1,6 +1,7 @@
 import { Module, ValidationPipe } from "@nestjs/common";
 import { APP_PIPE } from "@nestjs/core";
 
+import { checkEnvFile } from "./modules/config/Config.Module";
 import { AppController } from "./app.controller";
 import { DatabaseModule } from "./modules/database/Database.Module";
 import { AuthModule } from "./modules/auth/auth.module";
@@ -34,4 +35,12 @@ import { GalleryModule } from "./modules/gallery/Gallery.Module";
     AppController,
   ],
 })
-export class AppModule {}
+export class AppModule {
+
+  constructor() {
+    (async function() {
+      checkEnvFile();
+    })();
+  }
+
+}
