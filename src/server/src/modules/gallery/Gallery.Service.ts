@@ -21,7 +21,7 @@ export class GalleryService implements IGalleryService {
     const imageFileName = `${generate({length: 20, charset: "alphanumeric"})}.${extension}`;
 
     const imageWStream = createWriteStream(`./static/${imageFileName}`, {
-      flags:"w"
+      flags: "w",
     });
 
     const imagePipeline = promisify(pipeline);
