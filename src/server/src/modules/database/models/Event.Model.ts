@@ -19,6 +19,9 @@ export class Event extends Model<Event> implements IEvent {
   @Column(DataType.STRING)
   public title: string;
 
+  @Column(DataType.STRING)
+  featureImage: string;
+
   @AllowNull(false)
   @Column(DataType.STRING)
   public location: string;

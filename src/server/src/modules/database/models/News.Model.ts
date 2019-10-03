@@ -26,6 +26,9 @@ export class News extends Model<News> implements INews {
   @Column(DataType.STRING)
   headline: string;
 
+  @Column(DataType.STRING)
+  featureImage: string;
+
   @Column(DataType.TEXT({length: "long"}))
   content: string;
 
