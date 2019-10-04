@@ -57,38 +57,8 @@ export class GalleryController {
       );
     }
 
-    const extension = this.retrieveExtensionInFilename(file.originalname);
-    this.isFileFormatAllowed(extension);
-
-    const fileName = await this.galleryService.storeImage(file.buffer, extension);
+    const fileName = await this.galleryService.storeImage(file.buffer, file.originalname);
     return { iat: Date.now(), fileName };
-  }
-
-  private isFileFormatAllowed(extension: string) {
-    let isExtensionIsInWhitelist = false;
-
-    for(const allowedExtension of FILE_EXTENSION_WHITELIST) {
-      if(allowedExtension === extension) {
-        isExtensionIsInWhitelist = true;
-      }
-    }
-
-    let fileExtensionsString = "";
-    FILE_EXTENSION_WHITELIST.forEach(ext => fileExtensionsString += ext + " ");
-
-    if (!isExtensionIsInWhitelist) {
-      throw new BadRequestException(
-        this.texts.getText(
-          TEXTS_KEYS.GALLERY_FILE_NOT_ALLOWED_TEMPLATE.replace("%s", fileExtensionsString),
-        ),
-      );
-    }
-  }
-
-  private retrieveExtensionInFilename(fileName: string) {
-    const fileNameArray = fileName.split(".");
-    const extension = fileNameArray[fileNameArray.length - 1];
-    return extension;
   }
 
 }
