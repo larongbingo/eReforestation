@@ -20,7 +20,7 @@ export class Event extends Model<Event> implements IEvent {
   public title: string;
 
   @Column(DataType.STRING)
-  featureImage: string;
+  featureImage?: string;
 
   @AllowNull(false)
   @Column(DataType.STRING)

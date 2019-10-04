@@ -1,7 +1,7 @@
 
 export interface IEvent {
   id?: string;
-  featureImage: string;
+  featureImage?: string;
   title: string;
   location: string;
   date: Date;

@@ -8,7 +8,7 @@ export interface INews {
   /**
    * Name of the image from Gallery Model
    */
-  featureImage: string;
+  featureImage?: string;
 
   headline: string;
 
