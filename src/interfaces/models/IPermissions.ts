@@ -1,9 +1,23 @@
 
+/**
+ * The allowed content for each user
+ */
 export interface IPermissions {
+
+  /**
+   * The id of the user
+   */
   userId?: string;
+
+  /**
+   * The permission they have
+   */
   permission: UserPermissions;
 }
 
+/**
+ * The permissions for all content
+ */
 export enum UserPermissions {
 
   /**
@@ -23,4 +37,5 @@ export enum UserPermissions {
    * other users
    */
   Superuser = "Superuser",
+
 }
