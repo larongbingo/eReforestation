@@ -75,8 +75,8 @@ export class EventController {
   public async updateEvent(
     @Param("id") eventId: string,
     @Body() updateEventDto: UpdateEventDto,
-    @UploadedFile() featureImage: File,
     @UserEntity() user: IUser,
+    @UploadedFile() featureImage: File,
   ) {
     if (!await this.permissionService.isUserAdminOrSuperUser(user.id)) {
       throw new UnauthorizedException(
