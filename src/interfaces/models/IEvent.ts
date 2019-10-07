@@ -10,6 +10,11 @@ export interface IEvent {
   id?: string;
 
   /**
+   * File name of the feature image
+   */
+  featureImage?: string;
+
+  /**
    * Unique Public Identifier
    */
   title: string;

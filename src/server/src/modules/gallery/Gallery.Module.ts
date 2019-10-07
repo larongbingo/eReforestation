@@ -10,5 +10,6 @@ import { GalleryServiceProvider } from "./Gallery.Service";
   imports: [PermissionModule, TextsModule],
   providers: [GalleryServiceProvider],
   controllers: [GalleryController],
+  exports: [GalleryServiceProvider],
 })
 export class GalleryModule {}

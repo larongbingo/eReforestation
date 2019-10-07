@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
+import ReactLoading from "react-loading";
 
 import { INews } from "../../../interfaces/models/INews";
 import { APIS_ENDPOINTS } from "../config/endpoints";
@@ -23,6 +24,10 @@ export const NewsListPage: FunctionComponent = () => {
   useEffect(() => {
     getNewsPage().then(fetchedNews => setNewsList(fetchedNews))
   }, []);
+
+  if(!newsList) {
+    return <ReactLoading type={"balls"} color={"#000"} height={"20%"} width={"20%"} />;
+  }
 
   return (
     <Container>

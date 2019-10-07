@@ -10,6 +10,11 @@ export interface INews {
   id?: string;
 
   /**
+   * File name of the feature image
+   */
+  featureImage?: string;
+
+  /**
    * The title of the article
    */
   headline: string;

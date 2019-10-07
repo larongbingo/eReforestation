@@ -26,7 +26,8 @@ const mockedNewsService: INewsService = {
 };
 
 describe("NewsController (Unit)", () => {
-  const sut = new NewsController(mockedNewsService);
+  // @ts-ignore
+  const sut = new NewsController(mockedNewsService, {storeImage: jest.fn()});
 
   describe("getNewestNewsList", () => {
 
@@ -159,7 +160,8 @@ describe("NewsController (Unit)", () => {
       const user = {...testingUser};
 
       // Act
-      await sut.createNews(user, newsDetails);
+      // @ts-ignore
+      await sut.createNews(user, newsDetails, {buffer: new Buffer(""), fieldName: "asd"});
 
       // Assert
       expect(mockedNewsService.createNews).toBeCalledWith(user.id, newsDetails);
@@ -173,7 +175,8 @@ describe("NewsController (Unit)", () => {
       const user = {...testingUser};
 
       // Act
-      const result = await sut.createNews(user, newsDetails);
+      // @ts-ignore
+      const result = await sut.createNews(user, newsDetails, {buffer: new Buffer(""), fieldName: "asd"});
 
       // Assert
       expect(result.news).toStrictEqual({...testingNews});
@@ -192,7 +195,7 @@ describe("NewsController (Unit)", () => {
       const newsId = news.id;
 
       // Act
-      await sut.updateNews(user, news, newsId);
+      await sut.updateNews(user, news, newsId, {buffer: new Buffer(""), fieldName: "asd"});
 
       // Assert
       expect(mockedNewsService.updateNews).toBeCalledWith(user.id, newsId, news);
@@ -207,7 +210,8 @@ describe("NewsController (Unit)", () => {
       const newsId = news.id;
 
       // Act
-      const result = await sut.updateNews(user, news, newsId);
+      // @ts-ignore
+      const result = await sut.updateNews(user, news, newsId, {buffer: new Buffer(""), fieldName: "asd"});
 
       // Assert
       expect(result.updatedNews).toStrictEqual(news);

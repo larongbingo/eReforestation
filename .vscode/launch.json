@@ -5,7 +5,22 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug Jest tests",
+      "name": "Debug Nest Framework",
+      "type": "node",
+      "request": "launch",  
+      "runtimeArgs": [
+        "--nolazy",
+        "-r",
+        "ts-node/register"
+      ],
+      "args": [
+        "${workspaceFolder}\\src\\server\\src\\main.ts"
+      ],
+      "autoAttachChildProcesses": true,
+      "cwd": "${workspaceFolder}\\src\\server"
+    },
+    {
+      "name": "Debug Nest tests",
       "type": "node",
       "request": "launch",
       "program": "${workspaceRoot}\\src\\server\\node_modules\\jest\\bin\\jest.js",
