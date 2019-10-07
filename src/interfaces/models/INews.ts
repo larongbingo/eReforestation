@@ -5,6 +5,11 @@ export interface INews {
    */
   id?: string;
 
+  /**
+   * Name of the image from Gallery Model
+   */
+  featureImage?: string;
+
   headline: string;
 
   content: string;

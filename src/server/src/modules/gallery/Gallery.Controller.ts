@@ -6,10 +6,8 @@ import {
   UploadedFile,
   UseInterceptors,
   UseGuards,
-  Param,
   UnauthorizedException,
   BadRequestException,
-  Logger,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { AuthGuard } from "@nestjs/passport";
@@ -22,8 +20,6 @@ import { IUser } from "../../../../interfaces/models/IUser";
 import { UserEntity } from "../../decorators/User-Entity.Decorator";
 import { File } from "../../types";
 import { TEXTS_KEYS } from "../texts/Texts.Key";
-
-import { FILE_EXTENSION_WHITELIST } from "./FileExtension.Whitelist";
 
 @Controller("/gallery")
 export class GalleryController {
@@ -58,39 +54,12 @@ export class GalleryController {
       );
     }
 
-    const extension = this.retrieveExtensionInFilename(file.originalname);
-    Logger.log(extension);
-    this.isFileFormatAllowed(extension);
+    if (!file) {
+      throw new BadRequestException();
+    }
 
-    const fileName = await this.galleryService.storeImage(file.buffer, extension);
+    const fileName = await this.galleryService.storeImage(file.buffer, file.originalname);
     return { iat: Date.now(), fileName };
-  }
-
-  private isFileFormatAllowed(extension: string) {
-    let isExtensionIsInWhitelist = false;
-
-    for(const allowedExtension of FILE_EXTENSION_WHITELIST) {
-      if(allowedExtension === extension.toLowerCase()) {
-        isExtensionIsInWhitelist = true;
-      }
-    }
-
-    let fileExtensionsString = "";
-    FILE_EXTENSION_WHITELIST.forEach(ext => fileExtensionsString += ext + " ");
-
-    if (!isExtensionIsInWhitelist) {
-      throw new BadRequestException(
-        this.texts.getText(
-          TEXTS_KEYS.GALLERY_FILE_NOT_ALLOWED_TEMPLATE.replace("%s", fileExtensionsString),
-        ),
-      );
-    }
-  }
-
-  private retrieveExtensionInFilename(fileName: string) {
-    const fileNameArray = fileName.split(".");
-    const extension = fileNameArray[fileNameArray.length - 1];
-    return extension;
   }
 
 }
