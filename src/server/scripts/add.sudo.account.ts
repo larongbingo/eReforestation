@@ -8,6 +8,7 @@ import { IContactPerson } from "../../interfaces/models/IContactPerson";
 import { IUserDetails } from "../../interfaces/models/IUserDetails";
 import { UserDetails } from "../src/modules/database/models/UserDetails.Model";
 import { ContactPerson } from "../src/modules/database/models/ContactPerson.Model";
+import { AppModule } from "../src/app.module";
 
 (async function() {
   await NestFactory.create(AppModule);
