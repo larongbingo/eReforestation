@@ -1,3 +1,5 @@
+import { NestFactory } from "@nestjs/core";
+
 import "../src/modules/database/DatabaseConnection";
 import { User } from "../src/modules/database/models/User.Model";
 import { Permission } from "../src/modules/database/models/Permission.Model";
@@ -6,8 +8,11 @@ import { IContactPerson } from "../../interfaces/models/IContactPerson";
 import { IUserDetails } from "../../interfaces/models/IUserDetails";
 import { UserDetails } from "../src/modules/database/models/UserDetails.Model";
 import { ContactPerson } from "../src/modules/database/models/ContactPerson.Model";
+import { AppModule } from "../src/app.module";
 
 (async function() {
+  await NestFactory.create(AppModule);
+
   const adm = "Admin";
   const userDetails: IUserDetails = {
     firstName: adm,
