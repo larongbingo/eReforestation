@@ -20,6 +20,8 @@ const testingUser: IUser = {
   password: "testing",
 };
 
+const featureImage = {buffer: new Buffer(""), fieldName: ""};
+
 const mockedIEventService: IEventService = {
   findOneById: jest.fn().mockResolvedValue({...testingEvent}),
   createEvent: jest.fn().mockResolvedValue({...testingEvent}),
@@ -44,6 +46,8 @@ describe("EventController (Unit)", () => {
     mockedIEventService,
     mockedIPermissionService,
     null,
+    // @ts-ignore
+    {storeImage: jest.fn()},
   );
 
   describe("getEvents", () => {
@@ -79,7 +83,7 @@ describe("EventController (Unit)", () => {
       mockedIPermissionService.isUserAdminOrSuperUser = jest.fn().mockResolvedValue(false);
 
       // Act
-      const result = async () => sut.createEvent(event, user);
+      const result = async () => sut.createEvent(event, user, featureImage);
 
       // Assert
       await expect(result()).rejects.toThrow();
@@ -93,7 +97,7 @@ describe("EventController (Unit)", () => {
       mockedIPermissionService.isUserAdminOrSuperUser = jest.fn().mockResolvedValue(true);
 
       // Act
-      const result = await sut.createEvent(event, user);
+      const result = await sut.createEvent(event, user, featureImage);
 
       // Assert
       // @ts-ignore
@@ -109,7 +113,7 @@ describe("EventController (Unit)", () => {
       mockedIPermissionService.isUserAdminOrSuperUser = jest.fn().mockResolvedValue(true);
 
       // Act
-      await sut.createEvent(event, user);
+      await sut.createEvent(event, user, featureImage);
 
       // Assert
       expect(mockedIEventService.createEvent).toBeCalledWith(event);
@@ -124,7 +128,7 @@ describe("EventController (Unit)", () => {
       mockedIPermissionService.isUserAdminOrSuperUser = jest.fn().mockResolvedValue(true);
 
       // Act
-      await sut.createEvent(event, user);
+      await sut.createEvent(event, user, featureImage);
 
       // Assert
       expect(mockedIPermissionService.isUserAdminOrSuperUser).toBeCalled();
@@ -139,7 +143,7 @@ describe("EventController (Unit)", () => {
       mockedIPermissionService.isUserAdminOrSuperUser = jest.fn().mockResolvedValue(true);
 
       // Act
-      await sut.createEvent(event, user);
+      await sut.createEvent(event, user, featureImage);
 
       // Assert
       expect(mockedIEventService.createEvent).toBeCalled();
@@ -158,7 +162,7 @@ describe("EventController (Unit)", () => {
 
       // Act
       // @ts-ignore
-      const result = async () => sut.updateEvent(event.id, event, user);
+      const result = async () => sut.updateEvent(event.id, event, user, featureImage);
 
       // Assert
       await expect(result()).rejects.toThrow();
@@ -172,7 +176,7 @@ describe("EventController (Unit)", () => {
 
       // Act
       // @ts-ignore
-      const result = await sut.updateEvent(event.id, event, user);
+      const result = await sut.updateEvent(event.id, event, user, featureImage);
 
       // Assert
       // @ts-ignore
@@ -188,7 +192,7 @@ describe("EventController (Unit)", () => {
 
       // Act
       // @ts-ignore
-      await sut.updateEvent(event.id, event, user);
+      await sut.updateEvent(event.id, event, user, featureImage);
 
       // Assert
       expect(mockedIEventService.updateEvent).toBeCalledWith(event, event.id);
