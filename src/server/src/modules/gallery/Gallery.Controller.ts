@@ -57,6 +57,10 @@ export class GalleryController {
       );
     }
 
+    if (!file) {
+      throw new BadRequestException();
+    }
+
     const fileName = await this.galleryService.storeImage(file.buffer, file.originalname);
     return { iat: Date.now(), fileName };
   }
