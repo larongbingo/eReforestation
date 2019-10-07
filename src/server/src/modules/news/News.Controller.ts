@@ -23,6 +23,7 @@ import { File } from "../../types";
 import { CreateNewsDto } from "./dto/CreateNews.Dto";
 import { UpdateNewsDto } from "./dto/UpdateNews.Dto";
 
+// TODO: Move CRUD of news as a separate class
 @Controller("/news")
 export class NewsController {
   constructor(
@@ -68,6 +69,10 @@ export class NewsController {
   }
 
   @ApiUseTags("Admin")
+  @ApiConsumes("multipart/form-data")
+  @ApiOperation({title: "Create News"})
+  @ApiImplicitHeader({name: "Authorization", required: true})
+  @ApiImplicitFile({name: "featureImage", required: true, description: "Feature Image of the news"})
   @ApiCreatedResponse({description: "The news details that was created"})
   @ApiUnauthorizedResponse({description: "The account must have an admin or sudo permission"})
   @Post()
@@ -85,6 +90,10 @@ export class NewsController {
   }
 
   @ApiUseTags("Admin")
+  @ApiConsumes("multipart/form-data")
+  @ApiOperation({title: "Update News"})
+  @ApiImplicitHeader({name: "Authorization", required: true})
+  @ApiImplicitFile({name: "featureImage", required: false, description: "Feature Image of the news"})
   @ApiCreatedResponse({description: "The news details that was updated"})
   @ApiUnauthorizedResponse({description: "The account must have an admin or sudo permission"})
   @Put("/:newsId")
@@ -103,6 +112,9 @@ export class NewsController {
   }
 
   @ApiUseTags("Admin")
+  @ApiOperation({title: "Delete News"})
+  @ApiImplicitParam({name: "newsId", required: true})
+  @ApiImplicitHeader({name: "Authorization", required: true})
   @ApiCreatedResponse({description: "The news details that was deleted"})
   @ApiUnauthorizedResponse({description: "The account must have an admin or sudo permission"})
   @Delete("/:newsId")
