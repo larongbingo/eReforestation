@@ -1,6 +1,6 @@
 import { NestFactory } from "@nestjs/core";
 
-import "../src/modules/database/DatabaseConnection";
+import { AppModule } from "../src/app.module";
 import { User } from "../src/modules/database/models/User.Model";
 import { Permission } from "../src/modules/database/models/Permission.Model";
 import { UserPermissions } from "../../interfaces/models/IPermissions";
