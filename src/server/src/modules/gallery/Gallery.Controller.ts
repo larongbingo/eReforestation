@@ -6,10 +6,8 @@ import {
   UploadedFile,
   UseInterceptors,
   UseGuards,
-  Param,
   UnauthorizedException,
   BadRequestException,
-  Logger,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { AuthGuard } from "@nestjs/passport";
@@ -22,8 +20,6 @@ import { IUser } from "../../../../interfaces/models/IUser";
 import { UserEntity } from "../../decorators/User-Entity.Decorator";
 import { File } from "../../types";
 import { TEXTS_KEYS } from "../texts/Texts.Key";
-
-import { FILE_EXTENSION_WHITELIST } from "./FileExtension.Whitelist";
 
 @Controller("/gallery")
 export class GalleryController {
