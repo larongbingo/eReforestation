@@ -1,10 +1,24 @@
-import { Controller, Inject, Query, Get, Body, Post, UseGuards, Put, Param, Delete } from "@nestjs/common";
+import { Controller, Inject, Query, Get, Body, Post, UseGuards, Put, Param, Delete, UploadedFile, UseInterceptors } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
-import { ApiCreatedResponse, ApiUnauthorizedResponse, ApiUseTags, ApiImplicitQuery, ApiOkResponse, ApiImplicitHeader } from "@nestjs/swagger";
+import {
+  ApiCreatedResponse,
+  ApiUnauthorizedResponse,
+  ApiUseTags,
+  ApiImplicitQuery,
+  ApiOkResponse,
+  ApiImplicitHeader,
+  ApiImplicitFile,
+  ApiOperation,
+  ApiImplicitParam,
+  ApiConsumes,
+} from "@nestjs/swagger";
+import { FileInterceptor } from "@nestjs/platform-express";
 
 import { UserEntity } from "../../decorators/User-Entity.Decorator";
 import { INewsService } from "../../../../interfaces/services/INewsService";
+import { IGalleryService } from "../../../../interfaces/services/IGalleryService";
 import { IUser } from "../../../../interfaces/models/IUser";
+import { File } from "../../types";
 
 import { CreateNewsDto } from "./dto/CreateNews.Dto";
 import { UpdateNewsDto } from "./dto/UpdateNews.Dto";
@@ -13,6 +27,7 @@ import { UpdateNewsDto } from "./dto/UpdateNews.Dto";
 export class NewsController {
   constructor(
     @Inject(INewsService) private readonly newsService: INewsService,
+    @Inject(IGalleryService) private readonly galleryService: IGalleryService,
   ) {}
 
   @ApiUseTags("Public")
@@ -56,9 +71,16 @@ export class NewsController {
   @ApiCreatedResponse({description: "The news details that was created"})
   @ApiUnauthorizedResponse({description: "The account must have an admin or sudo permission"})
   @Post()
+  @UseInterceptors(FileInterceptor("featureImage"))
   @UseGuards(AuthGuard("bearer"))
-  public async createNews(@UserEntity() user: IUser, @Body() createNewsDto: CreateNewsDto) {
-    const news = await this.newsService.createNews(user.id, createNewsDto);
+  public async createNews(
+    @UserEntity() user: IUser,
+    @Body() createNewsDto: CreateNewsDto,
+    @UploadedFile() featureImage: File,
+  ) {
+    const fileName = await this.galleryService.storeImage(featureImage.buffer, featureImage.originalname);
+    const details = {...createNewsDto, featureImage: fileName};
+    const news = await this.newsService.createNews(user.id, details);
     return {iat: Date.now(), news};
   }
 
@@ -66,13 +88,17 @@ export class NewsController {
   @ApiCreatedResponse({description: "The news details that was updated"})
   @ApiUnauthorizedResponse({description: "The account must have an admin or sudo permission"})
   @Put("/:newsId")
+  @UseInterceptors(FileInterceptor("featureImage"))
   @UseGuards(AuthGuard("bearer"))
   public async updateNews(
     @UserEntity() user: IUser,
     @Body() updateNewsDto: UpdateNewsDto,
     @Param("newsId") newsId: string,
+    @UploadedFile() featureImage: File,
   ) {
-    const updatedNews = await this.newsService.updateNews(user.id, newsId, updateNewsDto);
+    const fileName = await this.galleryService.storeImage(featureImage.buffer, featureImage.originalname);
+    const newDetails = {...updateNewsDto, fileName};
+    const updatedNews = await this.newsService.updateNews(user.id, newsId, newDetails);
     return {iat: Date.now(), updatedNews};
   }
 
