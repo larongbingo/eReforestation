@@ -36,6 +36,10 @@ export const APIS_ENDPOINTS = {
       route: `${APIS_ENDPOINT_ROOT}/news`,
       method: "POST",
     },
+    updateNews: {
+      route: `${APIS_ENDPOINT_ROOT}/news`,
+      method: "PUT",
+    }
   },
   events: {
     getEvents: {
