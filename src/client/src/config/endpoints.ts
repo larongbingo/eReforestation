@@ -28,7 +28,7 @@ export const APIS_ENDPOINTS = {
       route: `${APIS_ENDPOINT_ROOT}/news/newest`,
       method: "GET",
     },
-    newDetails: {
+    newsDetails: {
       route: `${APIS_ENDPOINT_ROOT}/news/details`,
       method: "GET",
     },
