@@ -17,10 +17,8 @@ export const Index: FunctionComponent = () => (
 
     <h2 className="mt-5">Latest News</h2>
     <NewsCardDeck />
-    <NewsCardDeck />
 
     <h2 className="mt-5">Upcoming Events</h2>
-    <EventsCardDeck />
     <EventsCardDeck />
 
   </Container>
