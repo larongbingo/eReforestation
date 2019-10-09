@@ -1,5 +1,6 @@
 
-export const CLIENT_HOST_NAME = process.env.NODE_ENV === "production" ? "https://ereforestation.ga" : "localhost:3000";
+export const CLIENT_HOST_NAME = process.env.NODE_ENV === "production" ? "https://ereforestation.ga" : 
+  "http://localhost:3000";
 
 export const APIS_ENDPOINT_ROOT = process.env.NODE_ENV === "production" ? 
   "https://ereforestation.tk" : "http://localhost:8080";
@@ -45,6 +46,10 @@ export const APIS_ENDPOINTS = {
     getEvents: {
       route: `${APIS_ENDPOINT_ROOT}/event`,
       method: "GET",
+    },
+    createEvent: {
+      route: `${APIS_ENDPOINT_ROOT}/event`,
+      method: "POST",
     }
   },
   permission: {
