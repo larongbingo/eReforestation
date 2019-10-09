@@ -80,5 +80,9 @@ export const APIS_ENDPOINTS = {
       route: `${APIS_ENDPOINT_ROOT}/user/new`,
       method: "POST",
     }
+  },
+  staticFiles: {
+    route: `${APIS_ENDPOINT_ROOT}/images`,
+    method: "GET",
   }
 };
