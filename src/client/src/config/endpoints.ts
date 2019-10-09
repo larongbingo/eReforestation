@@ -1,4 +1,6 @@
 
+export const CLIENT_HOST_NAME = process.env.NODE_ENV === "production" ? "https://ereforestation.ga" : "localhost:3000";
+
 export const APIS_ENDPOINT_ROOT = process.env.NODE_ENV === "production" ? 
   "https://ereforestation.tk" : "http://localhost:8080";
 
