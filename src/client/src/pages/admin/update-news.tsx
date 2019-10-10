@@ -23,9 +23,14 @@ export const UpdateNews: React.FC<UpdateNewsProps> = ({match}) => {
   const [headline, setHeadline] = useState("");
 
   useEffect(() => {
-    fetch(APIS_ENDPOINTS.news.newsDetails.route, {
-
+    fetch(`${APIS_ENDPOINTS.news.newsDetails.route}?id=${match.params.newsId}`, {
+      method: APIS_ENDPOINTS.news.newsDetails.method
     })
+    .then(res => res.json())
+    .then(res => {
+      setHeadline(res.news.headline);
+      setContent(res.news.content);
+    });
   }, []);
 
   return (
@@ -68,11 +73,15 @@ export type UpdateNewsMatch = {
 
 function updateNews(headline: string, content: string, featureImageRef: HTMLInputElement) {
   const formData = new FormData();
-  formData.append("featureImage", featureImageRef.files![0])
-  formData.append("headline", headline);
-  formData.append("content", content);
 
-  return fetch(APIS_ENDPOINTS.news.updateNews.route, {
+  if (featureImageRef.files![0]) {
+  formData.append("featureImage", featureImageRef.files![0])
+  }
+
+  formData.append("headline", details.headline);
+  formData.append("content", details.content);
+
+  return fetch(`${APIS_ENDPOINTS.news.updateNews.route}/${id}`, {
     method: APIS_ENDPOINTS.news.updateNews.method,
     body: formData,
     headers: {
