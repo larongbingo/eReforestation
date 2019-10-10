@@ -43,7 +43,7 @@ export const UpdateNews: React.FC<UpdateNewsProps> = ({match}) => {
         <Form.Control value={headline} onChange={(e: any) => setHeadline(e.target.value)} type="text" />
       </Form.Group>
       <Form.Group>
-        <Form.Label>Feature Image</Form.Label>
+        <Form.Label>New Feature Image</Form.Label>
         <Form.Control name="featureImage" type="file" ref={(refObject: any) => featureImageRef = refObject} />
       </Form.Group>
       <Form.Group>
