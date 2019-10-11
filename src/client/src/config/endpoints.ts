@@ -40,6 +40,10 @@ export const APIS_ENDPOINTS = {
     updateNews: {
       route: `${APIS_ENDPOINT_ROOT}/news`,
       method: "PUT",
+    },
+    deleteNews: {
+      route: `${APIS_ENDPOINT_ROOT}/news`,
+      method: "DELETE",
     }
   },
   events: {
