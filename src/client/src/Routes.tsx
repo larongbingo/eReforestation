@@ -21,6 +21,8 @@ import { TreePlanting } from "./pages/about/treePlanting";
 import { CreateNews } from "./pages/admin/create-news";
 import { UpdateNews } from "./pages/admin/update-news";
 import { CreateEvent } from "./pages/admin/create-event";
+import { UpdateEvent } from "./pages/admin/update-event";
+import { Testing } from "./pages/superuser/testing";
 
 export const Routes: FunctionComponent = () => (
   <BrowserRouter>
@@ -33,6 +35,8 @@ export const Routes: FunctionComponent = () => (
       <PrivateRoute path="/admin/create-event" component={CreateEvent} exact />
       <PrivateRoute path="/admin/create-news" component={CreateNews} exact />
       <PrivateRoute path="/admin/update-news/:newsId" component={UpdateNews} exact />
+      <PrivateRoute path="/admin/update-event/:eventId" component={UpdateEvent} exact />
+      <PrivateRoute path="/admin/testing" component={Testing} exact />
       <Route path="/about/us" component={AboutUs} exact />
       <Route path="/about/achievements" component={Achievements} exact />
       <Route path="/about/affiliations" component={Affiliations} exact />
