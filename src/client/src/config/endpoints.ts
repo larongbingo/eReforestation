@@ -6,6 +6,12 @@ export const APIS_ENDPOINT_ROOT = process.env.NODE_ENV === "production" ?
   "https://ereforestation.tk" : "http://localhost:8080";
 
 export const APIS_ENDPOINTS = {
+  admin: {
+    testing: {
+      route: `${APIS_ENDPOINT_ROOT}/admin/test`,
+      method: "GET",
+    }
+  },
   auth: {
     login: {
       route: `${APIS_ENDPOINT_ROOT}/auth`,
@@ -54,6 +60,14 @@ export const APIS_ENDPOINTS = {
     createEvent: {
       route: `${APIS_ENDPOINT_ROOT}/event`,
       method: "POST",
+    },
+    getEventDetails: {
+      route: `${APIS_ENDPOINT_ROOT}/event/details`,
+      method: "GET",
+    },
+    updateEvent: {
+      route: `${APIS_ENDPOINT_ROOT}/event`,
+      method: "PUT",
     }
   },
   permission: {
