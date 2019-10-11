@@ -37,10 +37,13 @@ export const UpdateNews: React.FC<UpdateNewsProps> = ({match}) => {
     <Container style={{paddingTop: "20px", paddingBottom: "20px"}}>
       <Row style={{paddingBottom: "10px"}}>
         <Col>
-          <Button variant="success" onClick={() => updateNews(headline, content, featureImageRef)}>Publish</Button>
+          <Button variant="success" onClick={() => updateNews(match.params.newsId, {headline, content}, featureImageRef)}>Publish</Button>
         </Col>
         <Col>
-          <Button variant="danger">Cancel</Button>
+          <Button variant="danger" onClick={() => deleteNews(match.params.newsId)}>Delete</Button>
+        </Col>
+        <Col>
+          <Button>Cancel</Button>
         </Col>
       </Row>
       <Form.Group>
@@ -71,11 +74,20 @@ export type UpdateNewsMatch = {
   newsId: string;
 }
 
-function updateNews(headline: string, content: string, featureImageRef: HTMLInputElement) {
+function deleteNews(id: string) {
+  return fetch(`${APIS_ENDPOINTS.news.deleteNews.route}/${id}`, {
+    method: APIS_ENDPOINTS.news.deleteNews.method,
+    headers: {
+      "Authorization": `Bearer ${getSessionKey()}`,
+    }
+  })
+}
+
+function updateNews(id: string, details: {headline: string, content: string}, featureImageRef: HTMLInputElement) {
   const formData = new FormData();
 
   if (featureImageRef.files![0]) {
-  formData.append("featureImage", featureImageRef.files![0])
+    formData.append("featureImage", featureImageRef.files![0])  
   }
 
   formData.append("headline", details.headline);
