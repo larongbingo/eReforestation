@@ -1,4 +1,4 @@
-import { Injectable, Inject, UnauthorizedException, Provider } from "@nestjs/common";
+import { Injectable, Inject, UnauthorizedException, Provider, Logger } from "@nestjs/common";
 
 import { ITextsService } from "../../../../interfaces/services/ITextsService";
 import { IPermissionService } from "../../../../interfaces/services/IPermissionService";
@@ -25,7 +25,7 @@ export class NewsService implements INewsService {
   }
 
   public async getNews(num?: number): Promise<INews[]> {
-    return News.findAll({limit: num ? num : null});
+    return News.findAll({limit: num ? Number(num) : null});
   }
 
   public async getNewsById(id: string): Promise<INews> {
@@ -51,6 +51,7 @@ export class NewsService implements INewsService {
   }
 
   public async updateNews(userId: string, newsId: string, newDetails: Partial<INews>): Promise<INews> {
+    Logger.log(newDetails);
     await this.checkPermissions(userId);
     const news = await News.findOne({where: {id: newsId}});
     Object.keys(newDetails).forEach(key => news[key] = newDetails[key]);
