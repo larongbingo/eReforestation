@@ -28,7 +28,7 @@ export const TestLogs: React.FC<TestLogsProps> = ({logs}) => {
 
   return (
     <div>
-      {logs.split("\n").map(log => <p style={{margin: "0", padding: "0"}}>{log}</p>)}
+      {logs.split(/\n/g).map(log => <p style={{margin: "0", padding: "0"}}>{log}</p>)}
     </div>
   );
 };

@@ -7,10 +7,26 @@ export const APIS_ENDPOINT_ROOT = process.env.NODE_ENV === "production" ?
 
 export const APIS_ENDPOINTS = {
   admin: {
+    dbBackup: {
+      route: `${APIS_ENDPOINT_ROOT}/admin/db/backup`,
+      method: "GET",
+    },
+    dbRestore: {
+      route: `${APIS_ENDPOINT_ROOT}/admin/db/restore`,
+      method: "POST",
+    },
+    imagesBackup: {
+      route: `${APIS_ENDPOINT_ROOT}/admin/images/backup`,
+      method: "GET",
+    },
+    imagesRestore: {
+      route: `${APIS_ENDPOINT_ROOT}/admin/images/restore`,
+      method: "POST",
+    },
     testing: {
       route: `${APIS_ENDPOINT_ROOT}/admin/test`,
       method: "GET",
-    }
+    },
   },
   auth: {
     login: {

@@ -23,6 +23,7 @@ import { UpdateNews } from "./pages/admin/update-news";
 import { CreateEvent } from "./pages/admin/create-event";
 import { UpdateEvent } from "./pages/admin/update-event";
 import { Testing } from "./pages/superuser/testing";
+import { BackupRestore } from "./pages/superuser/backup-restore";
 
 export const Routes: FunctionComponent = () => (
   <BrowserRouter>
@@ -37,6 +38,7 @@ export const Routes: FunctionComponent = () => (
       <PrivateRoute path="/admin/update-news/:newsId" component={UpdateNews} exact />
       <PrivateRoute path="/admin/update-event/:eventId" component={UpdateEvent} exact />
       <PrivateRoute path="/admin/testing" component={Testing} exact />
+      <PrivateRoute path="/admin/backup" component={BackupRestore} exact />
       <Route path="/about/us" component={AboutUs} exact />
       <Route path="/about/achievements" component={Achievements} exact />
       <Route path="/about/affiliations" component={Affiliations} exact />
