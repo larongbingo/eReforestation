@@ -8,7 +8,6 @@ import { Extract } from "unzip";
 import rimraf from "rimraf";
 import { join } from "path";
 
-import { IConfigService } from "../../../../interfaces/services/IConfigService";
 import { IBackupService } from "../../../../interfaces/services/IBackupService";
 import { DatabaseConnectionConfig } from "../config/configs/database/DatabaseConnectionConfig";
 
@@ -16,7 +15,7 @@ import { DatabaseConnectionConfig } from "../config/configs/database/DatabaseCon
 export class BackupService implements IBackupService {
 
   constructor(
-    @Inject(IConfigService) private readonly dbConfig: DatabaseConnectionConfig,
+    @Inject(DatabaseConnectionConfig) private readonly dbConfig: DatabaseConnectionConfig,
   ) {}
 
   private readonly DUMP_FILENAME = "dump.sql";
