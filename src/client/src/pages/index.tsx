@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from "react";
 import { Container } from "react-bootstrap";
 
-import { IndexCarousel } from "./index/IndexCarousel";
-import { NewsCardDeck } from "./index/NewsCardDeck";
-import { EventsCardDeck } from "./index/EventsCardDeck";
+import { IndexCarousel } from "../components/index/IndexCarousel";
+import { NewsCardDeck } from "../components/index/NewsCardDeck";
+import { EventsCardDeck } from "../components/index/EventsCardDeck";
 
 /**
  * Needs to show
@@ -17,10 +17,8 @@ export const Index: FunctionComponent = () => (
 
     <h2 className="mt-5">Latest News</h2>
     <NewsCardDeck />
-    <NewsCardDeck />
 
     <h2 className="mt-5">Upcoming Events</h2>
-    <EventsCardDeck />
     <EventsCardDeck />
 
   </Container>

@@ -16,16 +16,18 @@ Quill.register("modules/imageCompress", ImageCompress);
 Quill.register("modules/blotFormatter", BlotFormatter);
 Quill.register("modules/imageUploader", ImageUploader);
 
-export const CreateNews: React.FC = () => {
+export const CreateEvent: React.FC = () => {
   let featureImageRef: HTMLInputElement;
-  const [content, setContent] = useState("");
-  const [headline, setHeadline] = useState("");
+  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState("");
+  const [location, setLocation] = useState("");
+  const [date, setDate] = useState("");
 
   return (
     <Container style={{paddingTop: "20px", paddingBottom: "20px"}}>
       <Row style={{paddingBottom: "10px"}}>
         <Col>
-          <Button variant="success" onClick={() => createNews(headline, content, featureImageRef)}>Publish</Button>
+          <Button variant="success" onClick={() => createEvent({title, description, date, location}, featureImageRef)}>Publish</Button>
         </Col>
         <Col>
           <Button variant="danger">Cancel</Button>
@@ -33,7 +35,15 @@ export const CreateNews: React.FC = () => {
       </Row>
       <Form.Group>
         <Form.Label>Title</Form.Label>
-        <Form.Control value={headline} onChange={(e: any) => setHeadline(e.target.value)} type="text" />
+        <Form.Control value={title} onChange={(e: any) => setTitle(e.target.value)} type="text" />
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>Start Date</Form.Label>
+        <Form.Control value={date} onChange={(e: any) => setDate(e.target.value)} type="date" />
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>Location</Form.Label>
+        <Form.Control value={location} onChange={(e: any) => setLocation(e.target.value)} type="text" />
       </Form.Group>
       <Form.Group>
         <Form.Label>Feature Image</Form.Label>
@@ -42,23 +52,24 @@ export const CreateNews: React.FC = () => {
       <Form.Group>
         <Form.Label>Details</Form.Label>
         <ReactQuill
-          value={content}
+          value={description}
           modules={QUILL_MODULES_CONFIG}
-          onChange={setContent}
+          onChange={setDescription}
         />
       </Form.Group>
     </Container>
   );
 };
 
-function createNews(headline: string, content: string, featureImageRef: HTMLInputElement) {
+function createEvent(eventDetails: any, featureImageRef: HTMLInputElement) {
+  console.log(eventDetails);
   const formData = new FormData();
-  formData.append("featureImage", featureImageRef.files![0])
-  formData.append("headline", headline);
-  formData.append("content", content);
+  formData.append("featureImage", featureImageRef.files![0]);
 
-  return fetch(APIS_ENDPOINTS.news.createNews.route, {
-    method: APIS_ENDPOINTS.news.createNews.method,
+  Object.keys(eventDetails).forEach(key => formData.append(key, eventDetails[key]));
+
+  return fetch(APIS_ENDPOINTS.events.createEvent.route, {
+    method: APIS_ENDPOINTS.events.createEvent.method,
     body: formData,
     headers: {
       "Authorization": `Bearer ${getSessionKey()}`,

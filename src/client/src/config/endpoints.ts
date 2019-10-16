@@ -1,8 +1,33 @@
 
+export const CLIENT_HOST_NAME = process.env.NODE_ENV === "production" ? "https://ereforestation.ga" : 
+  "http://localhost:3000";
+
 export const APIS_ENDPOINT_ROOT = process.env.NODE_ENV === "production" ? 
   "https://ereforestation.tk" : "http://localhost:8080";
 
 export const APIS_ENDPOINTS = {
+  admin: {
+    dbBackup: {
+      route: `${APIS_ENDPOINT_ROOT}/admin/db/backup`,
+      method: "GET",
+    },
+    dbRestore: {
+      route: `${APIS_ENDPOINT_ROOT}/admin/db/restore`,
+      method: "POST",
+    },
+    imagesBackup: {
+      route: `${APIS_ENDPOINT_ROOT}/admin/images/backup`,
+      method: "GET",
+    },
+    imagesRestore: {
+      route: `${APIS_ENDPOINT_ROOT}/admin/images/restore`,
+      method: "POST",
+    },
+    testing: {
+      route: `${APIS_ENDPOINT_ROOT}/admin/test`,
+      method: "GET",
+    },
+  },
   auth: {
     login: {
       route: `${APIS_ENDPOINT_ROOT}/auth`,
@@ -26,7 +51,7 @@ export const APIS_ENDPOINTS = {
       route: `${APIS_ENDPOINT_ROOT}/news/newest`,
       method: "GET",
     },
-    newDetails: {
+    newsDetails: {
       route: `${APIS_ENDPOINT_ROOT}/news/details`,
       method: "GET",
     },
@@ -34,11 +59,31 @@ export const APIS_ENDPOINTS = {
       route: `${APIS_ENDPOINT_ROOT}/news`,
       method: "POST",
     },
+    updateNews: {
+      route: `${APIS_ENDPOINT_ROOT}/news`,
+      method: "PUT",
+    },
+    deleteNews: {
+      route: `${APIS_ENDPOINT_ROOT}/news`,
+      method: "DELETE",
+    }
   },
   events: {
     getEvents: {
       route: `${APIS_ENDPOINT_ROOT}/event`,
       method: "GET",
+    },
+    createEvent: {
+      route: `${APIS_ENDPOINT_ROOT}/event`,
+      method: "POST",
+    },
+    getEventDetails: {
+      route: `${APIS_ENDPOINT_ROOT}/event/details`,
+      method: "GET",
+    },
+    updateEvent: {
+      route: `${APIS_ENDPOINT_ROOT}/event`,
+      method: "PUT",
     }
   },
   permission: {
@@ -78,5 +123,9 @@ export const APIS_ENDPOINTS = {
       route: `${APIS_ENDPOINT_ROOT}/user/new`,
       method: "POST",
     }
+  },
+  staticFiles: {
+    route: `${APIS_ENDPOINT_ROOT}/images`,
+    method: "GET",
   }
 };

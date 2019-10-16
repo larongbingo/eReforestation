@@ -4,8 +4,8 @@ import { isDateToday } from "../../libs/dates";
 import { IEvent } from "../../../../interfaces/models/IEvent";
 
 export const EventListEntry: FunctionComponent<EventListEntryProps> = ({event}) => (
-  <tr style={getStyles(event.date)}>
-    <td>{event.date.toUTCString()}</td>
+  <tr style={getStyles(new Date(event.date))}>
+    <td>{new Date(event.date).toUTCString()}</td>
     <td>{event.title}</td>
     <td>{event.location}</td>
   </tr>
