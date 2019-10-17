@@ -6,7 +6,7 @@ import { IEvent } from "../../../../interfaces/models/IEvent";
 export const EventListEntry: FunctionComponent<EventListEntryProps> = ({event}) => (
   <tr style={getStyles(new Date(event.date))}>
     <td>{new Date(event.date).toUTCString()}</td>
-    <td>{event.title}</td>
+    <td><a href={`/events/${event.id}`}>{event.title}</a></td>
     <td>{event.location}</td>
   </tr>
 );
