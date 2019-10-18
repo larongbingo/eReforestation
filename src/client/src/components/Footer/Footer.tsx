@@ -1,6 +1,8 @@
 import React, { FunctionComponent, CSSProperties }  from "react";
 import { Container, Row, Col } from "react-bootstrap";
 
+import PenroLogo from "../../images/penro.png";
+
 import { GovLinks } from "./GovLinks";
 import { Services } from "./Services";
 import { QuickLinks } from "./QuickLinks";
@@ -12,8 +14,8 @@ export const Footer: FunctionComponent = () => (
     <Row className="pt-5">
       <Col lg={3} md={12}>
         <img
-          className="d-box w-100" 
-          data-src="holder.js/300x200"
+          className="d-box w-75" 
+          src={PenroLogo}
         />
       </Col>
       <Col lg={5} md={7} sm={12}>
