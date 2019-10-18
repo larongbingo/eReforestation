@@ -9,7 +9,7 @@ import { Address } from "./Address";
 // TODO: Add other info pertaining to DENR
 export const Footer: FunctionComponent = () => (
   <Container>
-    <Row>
+    <Row className="pt-5">
       <Col lg={3} md={12}>
         <img
           className="d-box w-100" 
