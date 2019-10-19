@@ -19,7 +19,9 @@ export class GalleryService implements IGalleryService {
   ) {}
 
   public async getAllImagesNames(): Promise<string[]> {
-    throw new Error("Method not implemented.");
+    const images = await Image.findAll();
+    const fileNames = images.map(image => image.fileName);
+    return fileNames;
   }
 
   public async storeImage(imageBuffer: Buffer, originalFileName: string): Promise<string> {
