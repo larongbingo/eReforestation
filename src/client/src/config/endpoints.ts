@@ -96,6 +96,10 @@ export const APIS_ENDPOINTS = {
     upload: {
       route: `${APIS_ENDPOINT_ROOT}/gallery/image`,
       method: "POST",
+    },
+    list: {
+      route: `${APIS_ENDPOINT_ROOT}/gallery/image`,
+      method: "GET",
     }
   },
   user: {
