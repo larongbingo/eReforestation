@@ -4,7 +4,7 @@ import { AuthGuard } from "@nestjs/passport";
 
 import { ILogService } from "../../../../interfaces/services/ILogService";
 
-@Controller("/log")
+@Controller("/admin")
 export class LogController {
 
   constructor(
@@ -14,7 +14,7 @@ export class LogController {
   @ApiImplicitHeader({name: "Authorization", required: true})
   @ApiOperation({title: "Get Logs"})
   @UseGuards(AuthGuard("bearer"))
-  @Get()
+  @Get("/logs")
   public async sendLogs() {
     const logs = await this.logService.getLogs();
     return {iat: Date.now(), logs};
