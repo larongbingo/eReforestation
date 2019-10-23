@@ -24,4 +24,6 @@ export interface ILog {
    */
   params?: string;
 
+  createdAt?: number;
+
 }
