@@ -1,6 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 
+import { cleanHTMLString } from "../../libs/string";
 import { APIS_ENDPOINTS, CLIENT_HOST_NAME } from "../../config/endpoints";
 import { INews } from "../../../../interfaces/models/INews";
 
@@ -15,7 +16,7 @@ export const NewsCard: React.FC<NewsCardProps> = ({news}) => (
       <Card.Title>{news.headline}</Card.Title>
       <Card.Subtitle>{new Date(news.createdAt!).toLocaleDateString()}</Card.Subtitle>
       <Card.Text>
-        {news.content.slice(0, 150)}
+        {cleanHTMLString(news.content.slice(0, 150))}
       </Card.Text>
       <Card.Link href={`${CLIENT_HOST_NAME}/news/${news.id}`}>Details</Card.Link>
     </Card.Body>

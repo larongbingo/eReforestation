@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CardDeck, Card } from "react-bootstrap";
 
+import { cleanHTMLString } from "../../libs/string";
 import { APIS_ENDPOINTS } from "../../config/endpoints";
 import { IEvent } from "../../../../interfaces/models/IEvent";
 
@@ -35,7 +36,7 @@ const EventsCard: React.FC<EventsCardProps> = ({event}) => (
       <Card.Subtitle>
         Starts at: {new Date(event.date).toLocaleDateString()}
       </Card.Subtitle>
-      <Card.Text>{event.description}</Card.Text>
+      <Card.Text>{cleanHTMLString(event.description)}</Card.Text>
       <Card.Link href={"/events/" + event.id}>Details</Card.Link>
     </Card.Body>
   </Card>
