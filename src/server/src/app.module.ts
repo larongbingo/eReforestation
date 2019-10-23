@@ -39,7 +39,7 @@ export class AppModule {
 
   constructor() {
     (async function() {
-      checkEnvFile();
+      await checkEnvFile();
     })();
   }
 
