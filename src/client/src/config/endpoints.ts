@@ -8,7 +8,7 @@ export const APIS_ENDPOINT_ROOT = process.env.NODE_ENV === "production" ?
 export const APIS_ENDPOINTS = {
   admin: {
     auditing: {
-      route: `${APIS_ENDPOINT_ROOT}/admin/audit`,
+      route: `${APIS_ENDPOINT_ROOT}/admin/logs`,
       method: "GET",
     },
     dbBackup: {
