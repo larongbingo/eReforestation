@@ -35,12 +35,4 @@ import { GalleryModule } from "./modules/gallery/Gallery.Module";
     AppController,
   ],
 })
-export class AppModule {
-
-  constructor() {
-    (async function() {
-      await checkEnvFile();
-    })();
-  }
-
-}
+export class AppModule {}
