@@ -12,6 +12,8 @@ import { Permission } from "./models/Permission.Model";
 import { User } from "./models/User.Model";
 import { UserConfirmDelete } from "./models/UserConfirmDelete.Model";
 import { UserDetails } from "./models/UserDetails.Model";
+import { File } from "./models/File.Model";
+import { NewsMeta } from "./models/NewsMeta.Model";
 
 @Injectable()
 export class DatabaseConnection {
@@ -29,6 +31,8 @@ export class DatabaseConnection {
       User,
       UserConfirmDelete,
       UserDetails,
+      File,
+      NewsMeta,
     ]);
   }
 
