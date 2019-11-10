@@ -1,9 +1,10 @@
-import { Model, Table, Column, DataType, ForeignKey, BeforeCreate } from "sequelize-typescript";
+import { Model, Table, Column, DataType, HasOne, BeforeCreate } from "sequelize-typescript";
 
 import { INews } from "../../../../../interfaces/models/INews";
 
 import { User } from "./User.Model";
 import { UserDetails } from "./UserDetails.Model";
+import { NewsMeta } from "./NewsMeta.Model";
 
 @Table({
   tableName: "news",
@@ -34,6 +35,9 @@ export class News extends Model<News> implements INews {
 
   @Column(DataType.STRING)
   author?: string;
+
+  @HasOne(() => NewsMeta)
+  newsMeta: NewsMeta;
 }
 
 export default News;

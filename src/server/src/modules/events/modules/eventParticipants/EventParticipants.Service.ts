@@ -8,9 +8,18 @@ import { EventParticipants } from "../../../database/models/EventParticipants.Mo
 
 @Injectable()
 export class EventPartcipationService implements IEventParticipantsService {
+
   constructor(
     @Inject(IEventService) private readonly eventService: IEventService,
   ) {}
+
+  public async findAllByEventId(eventId: string): Promise<IEventParticipants[]> {
+    return EventParticipants.findAll({where: {eventId}});
+  }
+
+  public async findOneByEventIdAndUserId(eventId: string, userId: string): Promise<IEventParticipants> {
+    return EventParticipants.findOne({where: {eventId, userId}});
+  }
 
   public async joinEvent(userId: string, eventId: string): Promise<string> {
     if (!await this.eventService.findOneById(eventId)) { throw new Error("Given event id is invalid"); }

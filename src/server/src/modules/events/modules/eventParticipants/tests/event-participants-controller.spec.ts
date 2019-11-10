@@ -21,6 +21,8 @@ const mockedIEventParticipantsService: IEventParticipantsService = {
   leaveEvent: jest.fn().mockResolvedValue(null),
   findOneById: jest.fn().mockResolvedValue(testingEventParticipation),
   updateOneById: jest.fn().mockResolvedValue(testingEventParticipation),
+  findAllByEventId: null,
+  findOneByEventIdAndUserId: null,
 };
 
 describe("EventParticipantsController (Unit)", () => {

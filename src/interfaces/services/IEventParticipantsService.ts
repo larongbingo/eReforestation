@@ -19,4 +19,9 @@ export interface IEventParticipantsService {
   findOneById(confirmationId: string): Promise<IEventParticipants>;
 
   updateOneById(confirmationId: string, newDetails: Partial<IEventParticipants>): Promise<IEventParticipants>;
+
+  findAllByEventId(eventId: string): Promise<IEventParticipants[]>;
+
+  findOneByEventIdAndUserId(eventId: string, userId: string): Promise<IEventParticipants>;
+
 }

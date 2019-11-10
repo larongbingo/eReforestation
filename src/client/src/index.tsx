@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useEffect } from "react";
 import ReactDOM from 'react-dom';
+import ReactGA from "react-ga";
 
 import { verifySessionKey, destroySessionKey, getSessionKey } from "./libs/session";
 import * as serviceWorker from './serviceWorker';
@@ -18,7 +19,13 @@ export const Root: FunctionComponent = () => {
       if(!obj.isSessionValid && getSessionKey()) {
         destroySessionKey();
       }
-    }); 
+    });
+
+    if(process.env.NODE_ENV === "production") {
+      ReactGA.initialize("G-43Z5QXYQBP");
+    }
+
+    ReactGA.pageview(window.location.pathname + window.location.search)
   }, []);
 
   return (
