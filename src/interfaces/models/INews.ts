@@ -35,3 +35,14 @@ export interface INews {
   author?: string;
 
 }
+
+export interface INewsMeta {
+
+  newsId?: number;
+
+  /**
+   * If empty or null, its a news
+   */
+  origin?: string;
+
+}
