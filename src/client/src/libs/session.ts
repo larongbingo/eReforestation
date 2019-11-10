@@ -1,4 +1,5 @@
 import { APIS_ENDPOINTS } from "../config/endpoints";
+import { deleteUserPermission } from "./permission";
 
 const SESSION_KEY = "SESSION";
 
@@ -18,6 +19,7 @@ export function destroySessionKey() {
     },
   });
   localStorage.removeItem(SESSION_KEY);
+  deleteUserPermission();
 }
 
 export function verifySessionKey() {

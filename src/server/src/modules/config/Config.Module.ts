@@ -1,4 +1,4 @@
-import { Module, Logger } from "@nestjs/common";
+import { Module, Logger, Provider } from "@nestjs/common";
 import { existsSync } from "fs";
 
 import { MailServiceConfig } from "./configs/mail/Mail.Service.Config";
@@ -8,26 +8,27 @@ import { ProcessConfigServiceProvider } from "./Process.Config.Service";
 import { EnvConfigServiceProvider } from "./Env.Config.Service";
 
 const FILE_NAME = `${process.env.NODE_ENV || "development"}.env`;
-let ConfigProvider = EnvConfigServiceProvider;
+const ConfigSource = checkEnvFile();
 
-export async function checkEnvFile() {
+export function checkEnvFile(): Provider<any> {
   if (existsSync(FILE_NAME)) {
-    Logger.log(`File ${FILE_NAME} exists`)
+    Logger.log(`File ${FILE_NAME} exists`);
+    return EnvConfigServiceProvider;
   } else {
     Logger.log(`File ${FILE_NAME} does not exist`);
-    ConfigProvider = ProcessConfigServiceProvider;
+    return ProcessConfigServiceProvider;
   }
 }
 
 @Module({
   providers: [
-    ConfigProvider,
+    ConfigSource,
     DatabaseConnectionConfig,
     ServiceDatabaseConfig,
     MailServiceConfig,
   ],
   exports: [
-    ConfigProvider,
+    ConfigSource,
     DatabaseConnectionConfig,
     ServiceDatabaseConfig,
     MailServiceConfig,

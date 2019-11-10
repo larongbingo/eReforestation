@@ -31,7 +31,7 @@ export class Event extends Model<Event> implements IEvent {
   public date: Date;
 
   @AllowNull(false)
-  @Column(DataType.STRING)
+  @Column(DataType.TEXT("LONG"))
   public description: string;
 
   @Default(EventStatus.Go)

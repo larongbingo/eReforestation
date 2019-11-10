@@ -13,7 +13,7 @@ export async function storeUserPermission() {
 
   const permission = await permissionRes.json();
 
-  localStorage.setItem(PERMISSION_KEY, permission);
+  localStorage.setItem(PERMISSION_KEY, permission.permission);
 
   console.log(permission);
 }

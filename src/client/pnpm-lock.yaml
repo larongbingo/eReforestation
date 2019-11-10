@@ -7,12 +7,11 @@ dependencies:
   quill: 1.3.6
   quill-blot-formatter: 1.0.5_quill@1.3.6
   quill-image-compress: 1.0.1
-  quill-image-drop-module: 1.0.3
-  quill-image-resize-module: 3.0.0
   quill-image-uploader: 1.0.2
   react: 16.8.6
   react-bootstrap: 1.0.0-beta.9_react-dom@16.8.6+react@16.8.6
   react-dom: 16.8.6_react@16.8.6
+  react-loading: 2.0.3_react@16.8.6
   react-quill: 1.3.3_react@16.8.6
   react-router-dom: 5.0.1_react@16.8.6
   react-scripts: 3.0.1_typescript@3.4.5
@@ -9045,20 +9044,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-M7hSNTaI0cDBMfg8si88J7y3ZDi+Kw69/V18wMDFp5Kk3DAzQPU6Lfypv3rdkEWk4XhjFnVBxuhFFw2CSvIKGA==
-  /quill-image-drop-module/1.0.3:
-    dependencies:
-      quill: 1.3.7
-    dev: false
-    resolution:
-      integrity: sha1-Dl7IMp3WehISbxZrGRv2TSBXp9M=
-  /quill-image-resize-module/3.0.0:
-    dependencies:
-      lodash: 4.17.15
-      quill: 1.3.7
-      raw-loader: 0.5.1
-    dev: false
-    resolution:
-      integrity: sha1-D9k3Rqg3M22VsvU2FAQWpiPHF3E=
   /quill-image-uploader/1.0.2:
     dependencies:
       quill: 1.3.7
@@ -9135,10 +9120,6 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha512-4Oz8DUIwdvoa5qMJelxipzi/iJIi40O5cGV1wNYp5hvZP8ZN0T+jiNkL0QepXs+EsQ9XJ8ipEDoiH70ySUJP3Q==
-  /raw-loader/0.5.1:
-    dev: false
-    resolution:
-      integrity: sha1-DD0L6u2KAclm2Xh793goElKpeao=
   /react-app-polyfill/1.0.1:
     dependencies:
       core-js: 3.0.1
@@ -9242,6 +9223,15 @@ packages:
   /react-is/16.9.0:
     resolution:
       integrity: sha512-tJBzzzIgnnRfEm046qRcURvwQnZVXmuCbscxUO5RWrGTXpon2d4c8mI0D8WE6ydVIm29JiLB6+RslkIvym9Rjw==
+  /react-loading/2.0.3_react@16.8.6:
+    dependencies:
+      react: 16.8.6
+    dev: false
+    peerDependencies:
+      prop-types: ^15.6.0
+      react: '>=0.14.0'
+    resolution:
+      integrity: sha512-Vdqy79zq+bpeWJqC+xjltUjuGApyoItPgL0vgVfcJHhqwU7bAMKzysfGW/ADu6i0z0JiOCRJjo+IkFNkRNbA3A==
   /react-overlays/1.2.0_react-dom@16.8.6+react@16.8.6:
     dependencies:
       classnames: 2.2.6
@@ -11556,12 +11546,11 @@ specifiers:
   quill: ^1.3.6
   quill-blot-formatter: ^1.0.5
   quill-image-compress: ^1.0.1
-  quill-image-drop-module: ^1.0.3
-  quill-image-resize-module: ^3.0.0
   quill-image-uploader: ^1.0.2
   react: ^16.8.6
   react-bootstrap: ^1.0.0-beta.9
   react-dom: ^16.8.6
+  react-loading: ^2.0.3
   react-quill: ^1.3.3
   react-router-dom: ^5.0.1
   react-scripts: 3.0.1

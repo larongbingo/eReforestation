@@ -10,5 +10,5 @@ export class ServiceDatabaseConfig extends DatabaseConnectionConfig {
 }
 
 export const SERVICE_DATABASE_ENV_KEYS = {
-  SVC_DB_NAME: "SERVER_HOST_NAME",
+  SVC_DB_NAME: "SERVICE_DB_NAME",
 };
