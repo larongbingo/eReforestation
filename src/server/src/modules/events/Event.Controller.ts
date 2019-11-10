@@ -35,6 +35,15 @@ export class EventController {
     return {iat: Date.now(), events};
   }
 
+  @ApiUseTags("Public")
+  @ApiOperation({title: "Get Event Details", description: "Retrieves the details of the event"})
+  @ApiOkResponse({description: "The details of the event"})
+  @Get("/details/:eventId")
+  public async getEventDetails(@Param("eventId") eventId: string) {
+    const event = await this.eventService.findOneById(eventId);
+    return{iat: Date.now(), event};
+  }
+
   @ApiUseTags("Admin")
   @ApiOperation({title: "Create Event", description: "Creates a new event"})
   @ApiCreatedResponse({description: "The details of the newly created event"})
@@ -86,12 +95,14 @@ export class EventController {
       );
     }
 
-    if (!featureImage) {
-      throw new BadRequestException();
+    let details = {...updateEventDto};
+
+    if (featureImage) {
+      const fileName = await this.galleryService.storeImage(featureImage.buffer, featureImage.originalname);
+      // @ts-ignore
+      details = {...details, featureImage: fileName};
     }
 
-    const fileName = await this.galleryService.storeImage(featureImage.buffer, featureImage.originalname);
-    const details = {...updateEventDto, fileName, featureImage: fileName};
     const updatedEvent = await this.eventService.updateEvent(details, eventId);
     return {iat: Date.now(), updatedEvent};
   }

@@ -8,14 +8,16 @@ import ImageCompress from "quill-image-compress";
 // @ts-ignore
 import ImageUploader from "quill-image-uploader";
 
-import { APIS_ENDPOINTS, APIS_ENDPOINT_ROOT } from "../../config/endpoints";
+import { APIS_ENDPOINTS } from "../../config/endpoints";
 import { getSessionKey } from "../../libs/session";
+import { QUILL_MODULES_CONFIG } from "../../config/quillModulesConfig";
 
 Quill.register("modules/imageCompress", ImageCompress);
 Quill.register("modules/blotFormatter", BlotFormatter);
 Quill.register("modules/imageUploader", ImageUploader);
 
 export const CreateNews: React.FC = () => {
+  let featureImageRef: HTMLInputElement;
   const [content, setContent] = useState("");
   const [headline, setHeadline] = useState("");
 
@@ -23,7 +25,7 @@ export const CreateNews: React.FC = () => {
     <Container style={{paddingTop: "20px", paddingBottom: "20px"}}>
       <Row style={{paddingBottom: "10px"}}>
         <Col>
-          <Button variant="success" onClick={() => createNews(headline, content)}>Publish</Button>
+          <Button variant="success" onClick={() => createNews(headline, content, featureImageRef)}>Publish</Button>
         </Col>
         <Col>
           <Button variant="danger">Cancel</Button>
@@ -34,10 +36,14 @@ export const CreateNews: React.FC = () => {
         <Form.Control value={headline} onChange={(e: any) => setHeadline(e.target.value)} type="text" />
       </Form.Group>
       <Form.Group>
+        <Form.Label>Feature Image</Form.Label>
+        <Form.Control name="featureImage" type="file" ref={(refObject: any) => featureImageRef = refObject} />
+      </Form.Group>
+      <Form.Group>
         <Form.Label>Details</Form.Label>
         <ReactQuill
           value={content}
-          modules={modules}
+          modules={QUILL_MODULES_CONFIG}
           onChange={setContent}
         />
       </Form.Group>
@@ -45,47 +51,17 @@ export const CreateNews: React.FC = () => {
   );
 };
 
-function createNews(headline: string, content: string) {
-  console.log(headline, content);
+function createNews(headline: string, content: string, featureImageRef: HTMLInputElement) {
+  const formData = new FormData();
+  formData.append("featureImage", featureImageRef.files![0])
+  formData.append("headline", headline);
+  formData.append("content", content);
+
   return fetch(APIS_ENDPOINTS.news.createNews.route, {
     method: APIS_ENDPOINTS.news.createNews.method,
-    body: JSON.stringify({ headline, content }),
+    body: formData,
     headers: {
       "Authorization": `Bearer ${getSessionKey()}`,
-      "Content-Type": "application/json",
     },
   });
 }
-
-const modules = {
-  imageCompress: {},
-  imageUploader: {
-    upload: async (file: any) => {
-      const formData = new FormData();
-      formData.append("image", file);
-      const imageUploadRes = await fetch(APIS_ENDPOINTS.gallery.upload.route, {
-        headers: {
-          "Authorization": `Bearer ${getSessionKey()}`
-        },
-        method: APIS_ENDPOINTS.gallery.upload.method,
-        body: formData
-      });
-      const res = await imageUploadRes.json();
-      return `${APIS_ENDPOINT_ROOT}/images/${res.fileName}`;
-    }
-  },
-  blotFormatter: {},
-  toolbar: {
-    container: [
-      [{ 'header': '1'}, {'header': '2'}, {font: []}, {size: []}],
-      [{align: ""}, {align: "center"}, {align: "right"}, {align: "justify"}],
-      [{color: []}, {background: []}],
-      [{script: "sub"}, {script: "super"}],
-      ['bold', 'italic', 'underline', 'strike', 'blockquote', "code-block"],
-      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-      ['link', 'image', 'video'],
-      ['clean']
-    ],
-  },
-  clipboard: { matchVisual: false }
-};

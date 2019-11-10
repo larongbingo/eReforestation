@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from "react";
 import { Container } from "react-bootstrap";
 
-import { IndexCarousel } from "./index/IndexCarousel";
-import { NewsCardDeck } from "./index/NewsCardDeck";
-import { EventsCardDeck } from "./index/EventsCardDeck";
+import DENRPenroVid from "../images/DENR-PENRO.mp4";
+import { NewsCardDeck } from "../components/index/NewsCardDeck";
+import { EventsCardDeck } from "../components/index/EventsCardDeck";
 
 /**
  * Needs to show
@@ -13,14 +13,14 @@ import { EventsCardDeck } from "./index/EventsCardDeck";
  */
 export const Index: FunctionComponent = () => (
   <Container>
-    <IndexCarousel />
+    <video width="100%" autoPlay muted controls>
+      <source src={DENRPenroVid} type="video/mp4" />
+    </video>
 
     <h2 className="mt-5">Latest News</h2>
     <NewsCardDeck />
-    <NewsCardDeck />
 
     <h2 className="mt-5">Upcoming Events</h2>
-    <EventsCardDeck />
     <EventsCardDeck />
 
   </Container>

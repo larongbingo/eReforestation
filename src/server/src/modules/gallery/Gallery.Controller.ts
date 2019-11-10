@@ -34,7 +34,7 @@ export class GalleryController {
   @ApiCreatedResponse({description: "The list of all files stored"})
   @Get("/image")
   public async getAllImages() {
-    const fileNames = this.galleryService.getAllImagesNames();
+    const fileNames = await this.galleryService.getAllImagesNames();
     return { iat: Date.now(), fileNames };
   }
 

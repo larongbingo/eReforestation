@@ -15,10 +15,13 @@ export const LogIn: FunctionComponent = () => {
     logIn(username, password)
     .then(res => res.json())
     .then(val => {
+      console.log(val)
       storeSessionKey(val.token);
-      setTimeout(storeUserPermission, 1000);
-      window.location.replace("/");
     })
+    .then(() => setTimeout(() => {
+      storeUserPermission()
+      .then(() => window.location.replace("/"))
+    }, 1000))
     .catch((err) => {
       console.error(err);
       setShowError(true);
