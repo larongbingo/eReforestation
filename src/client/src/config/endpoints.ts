@@ -88,6 +88,14 @@ export const APIS_ENDPOINTS = {
     updateEvent: {
       route: `${APIS_ENDPOINT_ROOT}/event`,
       method: "PUT",
+    },
+    getConfirmationString: {
+      route: `${APIS_ENDPOINT_ROOT}/event/cofirmationId`,
+      method: "GET",
+    },
+    getParticipatingUsers: {
+      route: `${APIS_ENDPOINT_ROOT}/event/participatingUsers`,
+      method: "GET",
     }
   },
   permission: {

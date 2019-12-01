@@ -4,6 +4,7 @@ dependencies:
   '@types/react': 16.8.22
   '@types/react-dom': 16.8.4
   bootstrap: 4.3.1
+  prop-types: 15.7.2
   quill: 1.3.6
   quill-blot-formatter: 1.0.5_quill@1.3.6
   quill-image-compress: 1.0.1
@@ -11,7 +12,8 @@ dependencies:
   react: 16.8.6
   react-bootstrap: 1.0.0-beta.9_react-dom@16.8.6+react@16.8.6
   react-dom: 16.8.6_react@16.8.6
-  react-loading: 2.0.3_react@16.8.6
+  react-ga: 2.7.0_prop-types@15.7.2+react@16.8.6
+  react-loading: 2.0.3_prop-types@15.7.2+react@16.8.6
   react-quill: 1.3.3_react@16.8.6
   react-router-dom: 5.0.1_react@16.8.6
   react-scripts: 3.0.1_typescript@3.4.5
@@ -8908,7 +8910,7 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
-      react-is: 16.9.0
+      react-is: 16.11.0
     resolution:
       integrity: sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
   /property-information/5.1.0:
@@ -9217,14 +9219,25 @@ packages:
     dev: false
     resolution:
       integrity: sha512-X1Y+0jR47ImDVr54Ab6V9eGk0Hnu7fVWGeHQSOXHf/C2pF9c6uy3gef8QUeuUiWlNb0i08InPSE5a/KJzNzw1Q==
+  /react-ga/2.7.0_prop-types@15.7.2+react@16.8.6:
+    dependencies:
+      prop-types: 15.7.2
+      react: 16.8.6
+    dev: false
+    peerDependencies:
+      prop-types: ^15.6.0
+      react: ^15.6.2 || ^16.0
+    resolution:
+      integrity: sha512-AjC7UOZMvygrWTc2hKxTDvlMXEtbmA0IgJjmkhgmQQ3RkXrWR11xEagLGFGaNyaPnmg24oaIiaNPnEoftUhfXA==
+  /react-is/16.11.0:
+    resolution:
+      integrity: sha512-gbBVYR2p8mnriqAwWx9LbuUrShnAuSCNnuPGyc7GJrMVQtPDAh8iLpv7FRuMPFb56KkaVZIYSz1PrjI9q0QPCw==
   /react-is/16.8.6:
     resolution:
       integrity: sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
-  /react-is/16.9.0:
-    resolution:
-      integrity: sha512-tJBzzzIgnnRfEm046qRcURvwQnZVXmuCbscxUO5RWrGTXpon2d4c8mI0D8WE6ydVIm29JiLB6+RslkIvym9Rjw==
-  /react-loading/2.0.3_react@16.8.6:
+  /react-loading/2.0.3_prop-types@15.7.2+react@16.8.6:
     dependencies:
+      prop-types: 15.7.2
       react: 16.8.6
     dev: false
     peerDependencies:
@@ -11530,19 +11543,20 @@ specifiers:
   '@types/enzyme': ^3.10.3
   '@types/enzyme-adapter-react-16': ^1.0.5
   '@types/holderjs': ^2.9.0
-  '@types/jest': 24.0.15
-  '@types/node': 12.0.10
+  '@types/jest': 24.0.18
+  '@types/node': 12.7.12
   '@types/quill': ^2.0.2
-  '@types/react': 16.8.22
+  '@types/react': 16.9.5
   '@types/react-bootstrap': ^0.32.19
-  '@types/react-dom': 16.8.4
-  '@types/react-router-dom': ^4.3.4
+  '@types/react-dom': 16.9.1
+  '@types/react-router-dom': ^5.1.0
   '@types/react-test-renderer': ^16.8.2
   bootstrap: ^4.3.1
   enzyme: ^3.10.0
   enzyme-adapter-react-16: ^1.14.0
   holderjs: ^2.9.6
   jest-enzyme: ^7.0.2
+  prop-types: ^15.7.2
   quill: ^1.3.6
   quill-blot-formatter: ^1.0.5
   quill-image-compress: ^1.0.1
@@ -11550,9 +11564,10 @@ specifiers:
   react: ^16.8.6
   react-bootstrap: ^1.0.0-beta.9
   react-dom: ^16.8.6
+  react-ga: ^2.7.0
   react-loading: ^2.0.3
   react-quill: ^1.3.3
   react-router-dom: ^5.0.1
-  react-scripts: 3.0.1
+  react-scripts: 3.2.0
   react-test-renderer: ^16.8.6
-  typescript: '3.4'
+  typescript: 3.6.3
