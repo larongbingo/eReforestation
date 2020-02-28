@@ -55,7 +55,7 @@
     "enzyme-adapter-react-16": "^1.14.0",
     "holderjs": "^2.9.6",
     "jest-enzyme": "^7.0.2",
-    "react-test-renderer": "^16.8.6",
+    "react-test-renderer": "^16.13.0",
     "typescript": "3.6.3"
   }
 }
