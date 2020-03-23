@@ -14,7 +14,7 @@
     "quill-image-compress": "^1.0.1",
     "quill-image-uploader": "^1.0.2",
     "react": "^16.8.6",
-    "react-bootstrap": "^1.0.0-beta.9",
+    "react-bootstrap": "^1.0.0",
     "react-dom": "^16.8.6",
     "react-ga": "^2.7.0",
     "react-loading": "^2.0.3",
