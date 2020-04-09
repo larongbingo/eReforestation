@@ -48,7 +48,7 @@
     "@types/enzyme-adapter-react-16": "^1.0.5",
     "@types/holderjs": "^2.9.0",
     "@types/quill": "^2.0.2",
-    "@types/react-bootstrap": "^0.32.19",
+    "@types/react-bootstrap": "^1.0.0",
     "@types/react-router-dom": "^5.1.0",
     "@types/react-test-renderer": "^16.8.2",
     "enzyme": "^3.10.0",
