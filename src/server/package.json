@@ -57,7 +57,7 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "@nestjs/testing": "^6.0.0",
+    "@nestjs/testing": "^7.0.8",
     "@types/archiver": "^3.0.0",
     "@types/bcrypt": "^3.0.0",
     "@types/compression": "^1.0.1",
