@@ -90,7 +90,7 @@
     "tslint": "5.20.0",
     "tslint-config-security": "^1.16.0",
     "typescript": "3.6.3",
-    "wait-on": "^3.2.0"
+    "wait-on": "^5.0.0"
   },
   "jest": {
     "moduleFileExtensions": [
