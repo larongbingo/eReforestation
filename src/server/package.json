@@ -74,7 +74,7 @@
     "@types/randomstring": "^1.1.6",
     "@types/rimraf": "^2.0.2",
     "@types/sequelize": "4.28.6",
-    "@types/sinon": "^7.0.13",
+    "@types/sinon": "^9.0.1",
     "@types/supertest": "^2.0.7",
     "@types/unzip": "^0.1.1",
     "concurrently": "^5.0.0",
